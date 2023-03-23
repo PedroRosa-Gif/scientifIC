@@ -1,8 +1,8 @@
 # ScientifIC
 
-## Projeto criando na disciplina MC426 (Engenharia de Software) na UNICAMP
+### Projeto criando na disciplina MC426 (Engenharia de Software) na UNICAMP
 
-## Autores
+### Autores
 
 - Gabriel Augusto B. Gomes
 - Paulo Victor de Souza Santos
