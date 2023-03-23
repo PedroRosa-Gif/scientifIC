@@ -1,6 +1,6 @@
 # ScientifIC
 
-## Projeto criando na disciplina MC426
+## Projeto criando na disciplina MC426 (Engenharia de Software) na UNICAMP
 
 ## Autores
 
