@@ -4,6 +4,6 @@
 
 ### Autores
 
-- Gabriel Augusto B. Gomes
-- Paulo Victor de Souza Santos
-- Pedro Lucas Lopes Rosa
+- Gabriel Augusto B. Gomes (RA: 248287)
+- Paulo Victor de Souza Santos (RA: 238448)
+- Pedro Lucas Lopes Rosa (RA: 248448)
