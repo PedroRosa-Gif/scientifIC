@@ -1,0 +1,16 @@
+div.container {
+    width: 100%;
+}
+
+nav div.nav-landing-page {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 20px;
+}
+
+nav div.nav-landing-page div.nav-content {
+    display: flex;
+    gap: 10px;
+}
