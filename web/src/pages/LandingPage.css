@@ -1,5 +1,8 @@
-div.container {
+main.container {
     width: 100%;
+    background: linear-gradient(116.82deg, #1582F6 5.63%, #007DFE 13.34%, #0175EE 26.42%, #024DC2 69.3%);
+
+    overflow: hidden;
 }
 
 nav div.nav-landing-page {
@@ -7,10 +10,152 @@ nav div.nav-landing-page {
     display: flex;
     justify-content: space-between;
 
-    padding: 10px 20px;
+    padding: 20px;
 }
 
 nav div.nav-landing-page div.nav-content {
     display: flex;
     gap: 10px;
+}
+
+div.header-brand {
+    height: 500px;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+div.text-brand-landing-area {
+    width: 50%;
+    padding: 50px;
+
+    
+}
+div.text-brand-landing-area h1 {
+    font-weight: 800;
+    font-size: 60px;
+
+    color: #FFF;
+}
+
+div.text-brand-landing-area h3 {
+    font-weight: 700;
+font-size: 20px;
+
+    color: #FFF;
+}
+
+div.images-landing-area {
+    position: absolute;
+    right: -5%;
+    margin-bottom: -3%;
+    z-index: 0;
+
+
+}
+
+img.images-landing {
+    border-radius: 56px; 
+    box-shadow: -4px -4px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+img.images-landing.lamp {
+    transform: rotate(5.41deg);
+}
+
+img.images-landing.ideas {
+    transform: rotate(-4.06deg);
+}
+
+section div.cards-landing-area {
+    z-index: 1000;
+    width: 100%;
+
+    padding: 50px 10%;
+
+    background: #FFF;
+    box-shadow: 0 -1px 4px 4px rgba(0, 0, 0, 0.1), 0 1px 4px 4px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+section div.cards-landing-area h1 {
+    font-weight: 700;
+    font-size: 60px;
+}
+
+section ul.cards-landing-list {
+    width: 100%;
+    height: fit-content;
+
+    list-style: none;
+    
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+section ul.cards-landing-list li {
+    width: 100%;
+    height: fit-content;
+}
+
+section div.cards-see-more-area {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+section button.cards-see-more {
+    cursor: pointer;
+    padding: 15px 20px;
+
+    background: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #FF8762 0.03%, #F85B2A 53.72%, #FF3D00 100%);
+    border: 1px solid #D0E0EF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    font-weight: 700;
+    font-size: 24px;
+    color: #FFF;
+}
+
+section button.cards-see-more:hover {
+    background: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #C76648 0.03%, #A63917 53.72%, #A02600 100%);
+}
+
+footer {
+    width: 100%;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    background: #09090A;
+    color: #FFF;
+}
+
+section.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+div.footer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
