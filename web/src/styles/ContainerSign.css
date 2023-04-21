@@ -1,0 +1,64 @@
+.container-linear {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(116.82deg, #1582F6 5.63%, #007DFE 13.34%, #0175EE 26.42%, #024DC2 69.3%);
+}
+
+.container-sign {
+    background: #F3F4F6;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    min-height: 88vh;
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.header-sign {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+
+.div-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 20%;
+}
+
+.div-logo img {
+    align-self: center;
+}
+
+.div-logo span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    align-self: center;
+}
+
+.div-unicamp {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 3rem;
+}
+
+.div-unicamp img {
+    width: 100%;
+    margin: 0 auto;
+}
