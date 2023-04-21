@@ -3,17 +3,16 @@ import User from '../models/user.model';
 import bcrypt from 'bcrypt';
 
 const create = async (infos:IUser) => {
-    try {
+  try {
+    const password = infos.password;
+    const passwordCrypted = await bcrypt.hash(password, 10);
 
-        const password = infos.password;
-        const passwordCrypted = await bcrypt.hash(password, 10);
+    infos.password = passwordCrypted;
 
-        infos.password = passwordCrypted;
-
-        await User.create(infos);
-    } catch (error) {
-        console.log(error);
-    }
+    await User.create(infos);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const userService = {create}
