@@ -18,7 +18,8 @@ function LandingPage() {
                 <nav>
                     <div className="nav-landing-page">
                         <div className="nav-brand">
-                            ScientifIC
+                            <div className="nav-icon" />
+                            <h1>Scientif<strong>IC</strong></h1>
                         </div>
                         <div className="nav-content">
                             <div className="nav-items">
