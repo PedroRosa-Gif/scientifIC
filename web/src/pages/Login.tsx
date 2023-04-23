@@ -7,6 +7,7 @@ import "../styles/Login.css";
 import ContainerSign from "../components/ContainerSign";
 import TextInput from "../components/TextInput";
 import ForgotPassword from "../components/ForgotPassword";
+import ButtonSign from "../components/ButtonSign";
 
 // Assets Imports
 import UserIcon from "../assets/icons/user_icon.svg";
@@ -37,7 +38,13 @@ export default function Login() {
           />
         </div>
         <div className="div-forgot-password">
-          <ForgotPassword user={user} />
+          <ForgotPassword link={""} />
+        </div>
+        <div className="div-button-login">
+          <ButtonSign title={"Entrar"} />
+        </div>
+        <div className="div_create_account">
+          <span>Não possui conta? <b>Cadastre-se</b></span>
         </div>
       </section>
     </ContainerSign>

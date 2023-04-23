@@ -9,6 +9,7 @@
     border: 2px solid #DAE7F7;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
+    margin-top: 5rem;
 }
 
 .header-login {
@@ -37,4 +38,32 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.div-button-login, .div_create_account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.div_create_account {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.div_create_account span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    text-decoration-line: underline;
+    color: #000000;
+    text-align: center;
+    cursor: pointer;
+}
+
+.div_create_account span b {
+    color: #004FA3;
 }
