@@ -260,6 +260,8 @@ footer {
 
     background: #09090A;
     color: #FFF;
+
+    box-shadow: 0 -4px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 section.footer-column {
@@ -272,8 +274,38 @@ section.footer-column {
     gap: 10px;
 }
 
+section.footer-column h3 {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+section.footer-column.logos {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+section.footer-column.logos a {
+    text-decoration: none;
+}
+
+section.footer-column.logos img:not(img.ic-logo) {
+    width: 80px;
+    object-fit: contain;
+}
+
+section.footer-column.logos img.ic-logo {
+    width: 60px;
+    object-fit: contain;
+}
+
 div.footer-options {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+div.footer-options span {
+    font-weight: 600;
+    font-size: 18px;
 }
