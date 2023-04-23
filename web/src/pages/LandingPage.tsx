@@ -1,5 +1,11 @@
 import ideas from "../assets/ideas.png";
 import lamp from "../assets/lamp.png";
+import unicamp from "../assets/unicamp.png";
+
+import unicampLogo from "../assets/unicamp_logo.jpg";
+import icLogo from "../assets/ic_logo.jpg";
+
+import Authorized from "../components/Authorized/Authorized";
 
 import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingCard/LandingStudyCard";
 
@@ -10,7 +16,9 @@ function LandingPage() {
         { title: "Animais", text: "Aqui tbm vai uma descrição bunita" },
         { title: "Engenharia", text: "Aqui tbm vai uma descrição bunita" },
         { title: "Amigos", text: "Aqui tbm vai uma descrição bunita" }
-    ]
+    ];
+
+    const isAuth: boolean = false;
 
     return (
         <main className="container">
@@ -23,11 +31,31 @@ function LandingPage() {
                         </div>
                         <div className="nav-content">
                             <div className="nav-items">
-                                Estudos
+                                <button>
+                                    Início
+                                </button>
+                                <button>
+                                    Participe
+                                </button>
+                                <button>
+                                    A Ideia
+                                </button>
                             </div>
-                            <div className="nav-user">
-                                User Status
-                            </div>
+                            <Authorized 
+                                isAuthorized={isAuth}
+                                authorize={
+                                    <div className="nav-user">
+                                        <button>Logout</button>
+                                        <button>Perfil</button>
+                                    </div>
+                                }
+                                notAuthorize={
+                                    <div className="nav-user">
+                                        <button>Cadastrar</button>
+                                        <button>Entrar</button>
+                                    </div>
+                                }
+                            />
                         </div>
                     </div>
                 </nav>
@@ -61,7 +89,13 @@ function LandingPage() {
                     </div>
                 </section>
                 <section>
-                    <h1>A Ideia</h1>
+                    <div className="idea-area">
+                        <img src={unicamp} alt="Unicamp" />
+                        <div className="idea-content">
+                            <h1>A Ideia</h1>
+                            <p>Uma ideia criada a partir de alunos do Instituto de Computação (IC), em parceria com a Unicamp.</p>
+                        </div>
+                    </div>
                 </section>
             </div>
             <footer>
@@ -81,7 +115,10 @@ function LandingPage() {
                         <span>Teste</span>
                     </div>
                 </section>
-                <div>Logos</div>
+                <section className="footer-column logos">
+                    <a><img src={icLogo} alt="Logo do IC" /></a>
+                    <a><img src={unicampLogo} alt="Logo da Unicamp" /></a>
+                </section>
             </footer>
         </main>
     );

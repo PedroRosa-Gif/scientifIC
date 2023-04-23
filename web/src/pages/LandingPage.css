@@ -32,9 +32,62 @@ nav div.nav-brand h1 {
     color: #FFF;
 }
 
-nav div.nav-landing-page div.nav-content {
+nav div.nav-content {
     display: flex;
+    gap: 50px;
+}
+
+nav div.nav-items { 
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav div.nav-items button {
+    background: none;
+    border: none;
+
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration-line: underline;
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+nav div.nav-items button:hover {
+    color: #f7f6f6;
+}
+
+nav div.nav-user { 
+    display: flex;
+    align-items: center;
     gap: 10px;
+}
+
+nav div.nav-user button {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    border: none;
+
+    background: #FFF;
+
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+
+    padding: 10px 20px;
+
+    border-radius: 30px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+
+    cursor: pointer;
+}
+
+nav div.nav-user button:hover {
+    background: rgb(243, 234, 234)
 }
 
 div.header-brand {
@@ -96,7 +149,8 @@ img.images-landing.ideas {
     transform: rotate(-4.06deg);
     margin-top: -8%;
 
-    visibility: visible;
+    height: 90%;
+    object-fit: contain;
 }
 
 section div.cards-landing-area {
@@ -163,13 +217,45 @@ section button.cards-see-more:hover {
     background: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #C76648 0.03%, #A63917 53.72%, #A02600 100%);
 }
 
+section div.idea-area {
+    width: 100%;
+    padding: 70px 50px;
+
+    display: flex;
+    gap: 50px;
+}
+
+section div.idea-area img {
+    border: 1px solid #000000;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 4px 0px 0px 4px;
+}
+
+section div.idea-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+section div.idea-content h1 {
+    font-weight: 800;
+    font-size: 60px;    
+    color: #FFF;
+}
+
+section div.idea-content p {
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFF;
+}
+
 footer {
     width: 100%;
 
-    padding: 20px;
+    padding: 40px;
 
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
     gap: 10px;
 
     background: #09090A;
@@ -177,10 +263,13 @@ footer {
 }
 
 section.footer-column {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    gap: 10px;
 }
 
 div.footer-options {
