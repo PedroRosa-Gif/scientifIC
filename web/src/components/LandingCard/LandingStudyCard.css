@@ -2,6 +2,12 @@ main.study-card-container {
     width: 100%;
 }
 
+main.study-card-container:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.1s ease-in-out;
+}
+
 div.study-card-title {
     width: 100%;
     padding: 16px;

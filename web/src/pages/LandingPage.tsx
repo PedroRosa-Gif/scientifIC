@@ -1,5 +1,7 @@
 import { useRef } from "react";
 
+import { NavLink } from "react-router-dom";
+
 import ideas from "../assets/imgs/ideas.png";
 import lamp from "../assets/imgs/lamp.png";
 import unicamp from "../assets/imgs/unicamp.png";
@@ -57,8 +59,8 @@ function LandingPage() {
                                 }
                                 notAuthorize={
                                     <div className="nav-user">
-                                        <button>Cadastrar</button>
-                                        <button>Entrar</button>
+                                        <NavLink to={"/cadastro"} className="link"><button>Cadastrar</button></NavLink>
+                                        <NavLink to={"/login"} className="link"><button>Entrar</button></NavLink>
                                     </div>
                                 }
                             />
@@ -116,9 +118,9 @@ function LandingPage() {
                 <section className="footer-column">
                     <h2>Contribuintes</h2>
                     <div className="footer-options">
-                        <span>Gabriel Gomes</span>
-                        <span>Paulo Santos</span>
-                        <span>Pedro Rosa</span>
+                        <a href="https://github.com/gabriel-a-b-gomes"><span>Gabriel Gomes</span></a>
+                        <a href="https://github.com/PauloVictorSS"><span>Paulo Santos</span></a>
+                        <a href="https://github.com/PedroRosa-Gif"><span>Pedro Rosa</span></a>
                     </div>
                 </section>
                 <section className="footer-column logos">
