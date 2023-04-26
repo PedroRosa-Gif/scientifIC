@@ -21,9 +21,9 @@ function LandingPage() {
     const ideasRef = useRef<HTMLDivElement | null>(null);
 
     const tempDataForCard: ILandingStudyCardProps[] = [
-        { title: "Animais", text: "Aqui tbm vai uma descrição bunita" },
-        { title: "Engenharia", text: "Aqui tbm vai uma descrição bunita" },
-        { title: "Amigos", text: "Aqui tbm vai uma descrição bunita" }
+        { title: "Plantas", text: "Voçê sabia que é possível utilizar a seiva das plantas para produzir remédios. Saiba como uma medicina mais natural ajuda a humanindade." },
+        { title: "Engenharia", text: "Como funciona as asas de um Avião? Quais materiais são usados na sua construção? Conheça você também alguns tópicos sobre aviação." },
+        { title: "Tecnologia", text: "Recursos como Chat GPT estão crescendo e tornando-se mais famosos e usuais. Entenda como seus conceitos ajudam no nosso dia a dia." }
     ];
 
     const isAuth: boolean = false;
@@ -71,7 +71,10 @@ function LandingPage() {
             <div className="header-brand" ref={brandRef}>
                 <div className="text-brand-landing-area">
                     <h1>Divulgue ou participe de uma Iniciação Cientifica</h1>
-                    <h3>Lorem ipsum - aqui vai algum texto bem legal que eu não sei agora, mas sei que vai</h3>
+                    <h3>
+                        Acompanhe aqui os novos estudos e iniciações científicas que estão sendo produzidas.
+                        Contribua e Participe!
+                    </h3>
                 </div>
                 <div className="images-landing-area">
                     <img className="images-landing lamp" src={lamp} alt="lamp" />
@@ -101,7 +104,11 @@ function LandingPage() {
                         <img src={unicamp} alt="Unicamp" />
                         <div className="idea-content">
                             <h1>A Ideia</h1>
-                            <p>Uma ideia criada a partir de alunos do Instituto de Computação (IC), em parceria com a Unicamp.</p>
+                            <p>
+                                Uma ideia criada a partir de alunos do Instituto de Computação (IC), em parceria com a Unicamp. 
+                                O projeto visa ampliar a divulgação das Iniciações Ciêntificas e fornecer aos estutantes um 
+                                canal mais direto para conhecer e participar de novos projetos.
+                            </p>
                         </div>
                     </div>
                 </section>
