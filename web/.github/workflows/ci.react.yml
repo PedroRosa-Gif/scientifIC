@@ -2,7 +2,7 @@ name: Web CI
 
 on:
   push:
-    branches: [ feature/workflow ]
+    branches: [ feature/workflow ] 
   pull_request:
     branches: [ develop ]
 
