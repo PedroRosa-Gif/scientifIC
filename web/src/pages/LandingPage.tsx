@@ -11,7 +11,7 @@ import unicampLogo from "../assets/imgs/logo-unicamp-white.png";
 
 import Authorized from "../components/Authorized/Authorized";
 
-import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingCard/LandingStudyCard";
+import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard/LandingStudyCard";
 
 import "./LandingPage.css";
 
