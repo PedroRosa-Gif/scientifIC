@@ -342,6 +342,10 @@ section.footer-column.logos a, section.footer-column a {
     color: var(--white);
 }
 
+section.footer-column.logos a:hover, section.footer-column a:hover {
+    opacity: 0.85;
+}
+
 section.footer-column.logos img:not(img.ic-logo) {
     width: 80px;
     object-fit: contain;
