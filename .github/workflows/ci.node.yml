@@ -7,18 +7,18 @@ on:
     branches: [ develop ]
 
 jobs: 
-  build: 
+  run-tests: 
     runs-on: ubuntu-latest
 
     strategy:
       matrix: 
         node-version: [12.x, 14.x, 16.x, 18.x]
 
-      steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with: 
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: cd ./server && npm i && npm run test && ls -la
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with: 
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: cd ./server && npm i && npm run test && ls -la
