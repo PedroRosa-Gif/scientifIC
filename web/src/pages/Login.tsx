@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { handleLogin } from "../apis/user.endpoint";
 
 // CSS import
 import "../styles/Login.css";
@@ -12,10 +13,17 @@ import ButtonSign from "../components/ButtonSign";
 // Assets Imports
 import UserIcon from "../assets/icons/user_icon.svg";
 import PassIcon from "../assets/icons/pass_icon.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [user, setUser] = useState("");
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+
+  async function handleLoginUser() {
+    await handleLogin(user, password);
+    navigate("/");
+  }
 
   return (
     <ContainerSign>
@@ -41,7 +49,7 @@ export default function Login() {
           <ForgotPassword link={""} />
         </div>
         <div className="div-button-login">
-          <ButtonSign title={"Entrar"} />
+          <ButtonSign title={"Entrar"} onClick={() => handleLoginUser()}/>
         </div>
         <div className="div_create_account">
           <span>Não possui conta? <b>Cadastre-se</b></span>
