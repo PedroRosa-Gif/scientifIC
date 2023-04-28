@@ -1,0 +1,42 @@
+:root {
+    --card-backgroud: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #FF8762 0.03%, #F85B2A 53.72%, #FF3D00 100%);
+    --dark-ten-percent: rgba(0, 0, 0, 0.1);
+
+    --white: #FFFFFF;
+    --card-title-border: #D0E0EF;
+}
+
+main.study-card-container {
+    width: 100%;
+}
+
+main.study-card-container:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.1s ease-in-out;
+}
+
+div.study-card-title {
+    width: 100%;
+    padding: 16px;
+    background: var(--card-backgroud);
+    border: 1px solid var(--card-title-border);
+    border-radius: 8px 8px 0 0;
+}
+
+div.study-card-title h3 {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--white);
+}
+
+div.study-card-body {
+    width: 100%;
+    height: fit-content;
+    min-height: 150px;
+    padding: 16px;
+
+    border: 1px solid var(--dark-ten-percent);
+    box-shadow: 0px 0 1px 1px var(--dark-ten-percent);
+    border-radius: 0px 0px 3px 3px;
+}
