@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import connectDb from "./app/config/database";
 import userRoutes from "./app/routes/user.routes";
 import { errorHandling } from "./app/middleware/errorHandling";
@@ -12,10 +12,6 @@ const app: Express = express();
 app.use(acessControlOrigin);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("HELLO FROM EXPRESS + TS!!!!");
-});
 
 app.use("/user", userRoutes);
 
