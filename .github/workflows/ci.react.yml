@@ -19,4 +19,4 @@ jobs:
       with: 
         node-version: ${{ matrix.node-version }}
     - run: ls -la
-    - run: cd ./web && npm i && npm run test
+    - run: cd ./web && npm i && npm run test && ls -la
