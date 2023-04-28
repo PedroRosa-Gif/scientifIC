@@ -1,0 +1,371 @@
+:root {
+    --black: #000000;
+
+    --black-ten-percent: rgba(0, 0, 0, 0.1);
+    --black-a-quarter-percent: rgba(0, 0, 0, 0.25);
+    --black-twenty-percent: rgba(0, 0, 0, 0.2);
+    --black-forty-percent: rgba(0, 0, 0, 0.4);
+
+    --white: #FFFFFF;
+
+    --nav-item-hover: #F7F6F6;
+    --nav-user-hover: rgb(243, 234, 234);
+
+    --cards-border: #D8E4F4;
+
+    --see-more-background: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #FF8762 0.03%, #F85B2A 53.72%, #FF3D00 100%);
+    --see-more-hover: linear-gradient(98.75deg, #F5805B 0.01%, #FF6F42 0.02%, #C76648 0.03%, #A63917 53.72%, #A02600 100%);
+    --see-more-border: #D0E0EF;
+
+    --page-background: linear-gradient(116.82deg, #1582F6 5.63%, #007DFE 13.34%, #0175EE 26.42%, #024DC2 69.3%);
+    --footer-background: #09090A;
+}
+
+/* BEGIN: Main Container Styles */
+
+main.container {
+    width: 100%;
+    background: var(--page-background);
+
+    overflow: hidden;
+}
+
+/* END: Main Container Styles */
+
+/* INITIAL: Nav Bar Styles */
+
+nav div.nav-landing-page {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px;
+}
+
+nav div.nav-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+nav div.nav-brand div.nav-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--black);
+}
+
+nav div.nav-brand h1 {
+    font-weight: 600;
+    font-size: 40px;
+    color: var(--white);
+}
+
+nav div.nav-content {
+    display: flex;
+    gap: 50px;
+}
+
+nav div.nav-items { 
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav div.nav-items button {
+    background: none;
+    border: none;
+
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration-line: underline;
+    color: var(--white);
+
+    cursor: pointer;
+}
+
+nav div.nav-items button:hover {
+    color: var(--nav-item-hover);
+}
+
+nav div.nav-user { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+nav div.nav-user .link {
+    text-decoration: none;
+}
+
+nav div.nav-user button {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    border: none;
+
+    background: var(--white);
+
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+
+    padding: 10px 20px;
+
+    border-radius: 30px;
+    box-shadow: 0 0 4px 4px var(--black-ten-percent);
+
+    cursor: pointer;
+}
+
+nav div.nav-user button:hover {
+    background: var(--nav-user-hover);
+}
+
+/* END: Nav Bar Styles */
+
+/* INITIAL: Landing Page Header Styles */
+
+div.header-brand {
+    height: 500px;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+div.text-brand-landing-area {
+    width: 55%;
+    padding: 50px;
+
+    z-index: 100;
+}
+div.text-brand-landing-area h1 {
+    font-weight: 800;
+    font-size: 46px;
+
+    color: var(--white);
+
+    text-shadow: 0 0 10px var(--black-forty-percent);
+}
+
+div.text-brand-landing-area h3 {
+    width: 80%;
+
+    text-shadow: 0 0 5px var(--black-twenty-percent);
+    font-weight: 700;
+    font-size: 16px;
+
+    color: var(--white);
+}
+
+div.images-landing-area {
+    width: 45%;
+
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -5%;
+    margin-bottom: -10%;
+}
+
+img.images-landing {
+    border-radius: 56px; 
+    box-shadow: -4px -4px 4px 4px var(--black-ten-percent);
+}
+
+img.images-landing.lamp {
+    transform: rotate(5.41deg);
+    margin-right: -5%;
+}
+
+img.images-landing.ideas {
+    transform: rotate(-4.06deg);
+    margin-top: -8%;
+
+    height: 90%;
+    object-fit: contain;
+}
+
+/* END: Landing Page Header Styles */
+
+/* INITIAL: Cards Section Styles */
+
+section div.cards-landing-area {
+    width: 100%;
+
+    padding: 50px 10%;
+
+    background: var(--white);
+    border: 1px solid var(--cards-border);
+    box-shadow: 0px 4px 4px var(--black-a-quarter-percent), 0px -4px 4px var(--black-a-quarter-percent);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+section div.cards-landing-area h1 {
+    font-weight: 700;
+    font-size: 60px;
+}
+
+section ul.cards-landing-list {
+    width: 100%;
+    height: fit-content;
+
+    list-style: none;
+    
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    margin-bottom: 30px;
+}
+
+section ul.cards-landing-list li {
+    width: 100%;
+    height: fit-content;
+}
+
+section div.cards-see-more-area {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+section button.cards-see-more {
+    cursor: pointer;
+    padding: 15px 20px;
+
+    background: var(--see-more-background);
+    border: 1px solid var(--see-more-border);
+    box-shadow: 0px 4px 4px var(--black-a-quarter-percent);
+    border-radius: 8px;
+
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+}
+
+section button.cards-see-more:hover {
+    background: var(--see-more-hover);
+}
+
+/* END: Cards Section Styles */
+
+/* INITIAL: Idea Section Styles */
+
+section div.idea-area {
+    width: 100%;
+    padding: 70px 10%;
+
+    display: flex;
+    gap: 50px;
+}
+
+section div.idea-area img {
+    border: 1px solid var(--black);
+    filter: drop-shadow(0px 4px 4px var(--black-a-quarter-percent));
+    border-radius: 4px 0px 0px 4px;
+
+    width: 100%;
+    object-fit: contain;
+}
+
+section div.idea-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+section div.idea-content h1 {
+    font-weight: 800;
+    font-size: 60px;    
+    color: var(--white);
+}
+
+section div.idea-content p {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+}
+
+/* END: Idea Section Styles */
+
+/* INITIAL: Footer Styles */
+
+footer {
+    width: 100%;
+
+    padding: 40px;
+
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
+    gap: 10px;
+
+    background: var(--footer-background);
+    color: var(--white);
+
+    box-shadow: 0 -4px 4px 4px var(--black-ten-percent);
+}
+
+section.footer-column {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+section.footer-column h3 {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+section.footer-column.logos {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+section.footer-column.logos a, section.footer-column a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+section.footer-column.logos a:hover, section.footer-column a:hover {
+    opacity: 0.85;
+}
+
+section.footer-column.logos img:not(img.ic-logo) {
+    width: 80px;
+    object-fit: contain;
+}
+
+section.footer-column.logos img.ic-logo {
+    width: 60px;
+    object-fit: contain;
+}
+
+div.footer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+div.footer-options span {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* END: Footer Styles */

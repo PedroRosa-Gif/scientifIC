@@ -1,0 +1,69 @@
+.login {
+    width: 530px;
+    height: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: #FFFFFF;
+    border: 2px solid #DAE7F7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin-top: 5rem;
+}
+
+.header-login {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 2rem;
+    padding-top: 3rem;
+}
+
+.header-login span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    color: #000000;
+}
+
+.div-fields-login {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.div-button-login, .div_create_account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.div_create_account {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.div_create_account span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    text-decoration-line: underline;
+    color: #000000;
+    text-align: center;
+    cursor: pointer;
+}
+
+.div_create_account span b {
+    color: #004FA3;
+}

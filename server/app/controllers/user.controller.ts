@@ -9,3 +9,13 @@ export const create = async (req: Request, res: Response) => {
     message: "Cadastro realizado com sucesso!"
   });
 }
+
+export const login = async (req:Request, res:Response) => {
+    const { email, password } = req.body;
+    const result = await userService.login(email, password);
+
+    res.status(200).send({
+        token: result.token || "",
+        message: result.message,
+    });
+}
