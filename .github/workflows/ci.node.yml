@@ -22,5 +22,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: ls -la
     - run: cd ./server && npm i
-    - run: npm run build
-    - run: npm run test && ls -la
+    - run: cd ./server && npm run build
+    - run: cd ./server && npm run test && ls -la
