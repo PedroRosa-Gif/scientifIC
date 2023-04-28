@@ -7,6 +7,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const create = async (infos:IUser, UserModel:Model<IUser> = User) => {
+  const user = await UserModel.findOne({ email: infos.email });
+  
+  if (user !== null) {
+    throw new Error("Email já cadastrado");
+  }
+
+  const passwordCrypted = await bcrypt.hash(infos.password, 10);
+  infos.password = passwordCrypted;
+
+  await UserModel.create(infos);
+}
+
 const login = async (email:string, password:string, UserModel:Model<IUser> = User) => {
     const user = await UserModel.findOne({ "email": email });
     
@@ -36,4 +49,4 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
     return {  message: "Login realizado com sucesso!", token: token };
 }
 
-export const userService = {login}
+export const userService = {login, create}
