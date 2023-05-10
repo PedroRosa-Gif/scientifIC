@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { handleLogin } from "../apis/user.endpoint";
 
 // CSS import
@@ -51,7 +51,7 @@ export default function Login() {
         <div className="div-button-login">
           <ButtonSign title={"Entrar"} onClick={() => handleLoginUser()}/>
         </div>
-        <div className="div_create_account">
+        <div className="div-create-account">
           <span>Não possui conta? <b>Cadastre-se</b></span>
         </div>
       </section>
