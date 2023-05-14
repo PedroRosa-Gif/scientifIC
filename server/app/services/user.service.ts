@@ -46,7 +46,7 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
         expiresIn: "1h",
     });
 
-    return {  message: "Login realizado com sucesso!", token: token };
+    return { userInfos: user, message: "Login realizado com sucesso!", token: token };
 }
 
 export const userService = {login, create}

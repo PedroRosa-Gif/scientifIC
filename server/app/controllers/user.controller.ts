@@ -17,5 +17,6 @@ export const login = async (req:Request, res:Response) => {
     res.status(200).send({
         token: result.token || "",
         message: result.message,
+        userInfos: result.userInfos
     });
 }

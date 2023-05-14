@@ -3,25 +3,16 @@ import IUser from "../interfaces/IUser";
 
 export const handleLogin = async (email:string, password:string) => {
 
-    try {
-        const res = await axios.post("http://localhost:8000/user/login", {
-            email: email,
-            password: password,
-        });
+  const res = await axios.post("http://localhost:8000/user/login", {
+    email: email,
+    password: password,
+  });
 
-        return res;
-        
-    } catch (error) {
-       console.log(error);
-    }
+  return res;
 }
 
 export const createUser = async (userInfos:IUser) => {
 
-    try {
-        const res = await axios.post("http://localhost:8000/user/create", userInfos);
-        return res;
-    } catch (error) {
-       console.log(error);
-    }
+  const res = await axios.post("http://localhost:8000/user/create", userInfos);
+  return res;
 }
