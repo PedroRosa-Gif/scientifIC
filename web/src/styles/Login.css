@@ -2,6 +2,7 @@
     width: 530px;
     height: fit-content;
     margin: 0 auto;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -13,14 +14,12 @@
 }
 
 .header-login {
-    height: 150px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    padding: 2rem;
-    padding-top: 3rem;
+    padding: 2rem 0;
 }
 
 .header-login span {
@@ -34,25 +33,24 @@
 
 .div-fields-login {
     width: 100%;
-    height: 200px;
+    gap: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    margin: 20px 0;
 }
 
-.div-button-login, .div_create_account {
+.div-button-login, .div-create-account {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    margin: 20px 0;
 }
 
-.div_create_account {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-.div_create_account span {
+.div-create-account span {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 600;
@@ -64,6 +62,6 @@
     cursor: pointer;
 }
 
-.div_create_account span b {
+.div-create-account span b {
     color: #004FA3;
 }

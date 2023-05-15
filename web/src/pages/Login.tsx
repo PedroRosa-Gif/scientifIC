@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { handleLogin } from "../apis/user.endpoint";
 
 // CSS import
@@ -14,15 +14,23 @@ import ButtonSign from "../components/ButtonSign";
 import UserIcon from "../assets/icons/user_icon.svg";
 import PassIcon from "../assets/icons/pass_icon.svg";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth";
 
 export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
 
+  const { setUserInfos } = useContext(AuthContext);
+
   async function handleLoginUser() {
-    await handleLogin(user, password);
-    navigate("/");
+    try {
+      const result = await handleLogin(user, password);
+      setUserInfos(result.data.userInfos);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -51,7 +59,7 @@ export default function Login() {
         <div className="div-button-login">
           <ButtonSign title={"Entrar"} onClick={() => handleLoginUser()}/>
         </div>
-        <div className="div_create_account">
+        <div className="div-create-account">
           <span>Não possui conta? <b>Cadastre-se</b></span>
         </div>
       </section>
