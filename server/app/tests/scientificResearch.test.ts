@@ -1,10 +1,12 @@
-import mongoose, { Model } from "mongoose";
+import mongoose, { Model, ObjectId } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import IScientificResearch from "../interfaces/IScientificResearch";
 import ScientificResearch, { scientificResearchSchema } from "../models/scientificResearch.model";
 import { scientificResearchService } from "../services/scientificResearch.service";
 import IUser from "../interfaces/IUser";
 import { userSchema } from "../models/user.model";
+import ResearchStatus from "../utils/enums/ResearchStatus";
+import UserType from "../utils/enums/UserType";
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
@@ -33,6 +35,16 @@ describe('Create Scientific Research', () => {
         ra: "123",
         birthdate: new Date(),
         type: UserType.Teacher
+    };
+
+    const student:IUser = {
+        email: "student@gmail.com",
+        password: "senha123",
+        name: "Usuário",
+        lastName: "2",
+        ra: "123",
+        birthdate: new Date(),
+        type: UserType.Student
     };
 
     const scientificResearch: IScientificResearch = {
@@ -66,22 +78,55 @@ describe('Create Scientific Research', () => {
     });
 
     it('Research Without Advisor', async () => {
-        scientificResearch.advisorId = "";
-        await expect(scientificResearchService.create(scientificResearch, ScientificResearchMock)).rejects.toThrowError("Nenhum professor foi assignado a esta IC");
+        let newResearchWithoutAdvisor: IScientificResearch = {
+            ...scientificResearch,
+            advisorId: ""
+        };
+
+        await expect(scientificResearchService.create(newResearchWithoutAdvisor, ScientificResearchMock, UserModelMock)).rejects.toThrowError("Nenhum professor foi assignado a esta IC");
+    })
+
+    it('Research With Invalid User', async () => {
+        let newResearchChangeId: IScientificResearch = {
+            ...scientificResearch,
+            advisorId: mongoose.Types.ObjectId.createFromHexString("64640b6dad525134b38f0293").toString()
+        };
+        
+        await expect(scientificResearchService.create(newResearchChangeId, ScientificResearchMock, UserModelMock)).rejects.toThrowError("O orientador não existe");
+    })
+
+    it('Research Created by Student', async () => {
+        await UserModelMock.create(student);
+
+        let auxAdvisor = await UserModelMock.findOne({ email: student.email });
+
+        let newResearchForTestStudent: IScientificResearch = {
+            ...scientificResearch,
+            advisorId: auxAdvisor?._id.toString()!
+        };
+
+        await expect(scientificResearchService.create(newResearchForTestStudent, ScientificResearchMock, UserModelMock)).rejects.toThrowError("O usuário é um aluno e não pode criar uma IC");
     })
 
     it('Research Without Theme', async () => {
-        scientificResearch.theme = "";
-        await expect(scientificResearchService.create(scientificResearch, ScientificResearchMock)).rejects.toThrowError("É necessário inserir um tema para a pesquisa");
+        let newResearchTheme: IScientificResearch = {
+            ...scientificResearch,
+            theme: ""
+        };
+        await expect(scientificResearchService.create(newResearchTheme, ScientificResearchMock, UserModelMock)).rejects.toThrowError("É necessário inserir um tema para a pesquisa");
     })
 
     it('Research Without Defined ScholarShip', async () => {
-        scientificResearch.scholarShip = 0.0;
-        scientificResearch.isShipToDefine = false;
-        await expect(scientificResearchService.create(scientificResearch, ScientificResearchMock)).rejects.toThrowError("O valor da bolsa deve ser inserido, se não possuir valor definido, selecione A DEFINIR");
+        let newResearchScholarShip: IScientificResearch = {
+            ...scientificResearch,
+            scholarShip: 0.0,
+            isShipToDefine: false
+        };
+        
+        await expect(scientificResearchService.create(newResearchScholarShip, ScientificResearchMock, UserModelMock)).rejects.toThrowError("O valor da bolsa deve ser inserido, se não possuir valor definido, selecione A DEFINIR");
     })
 
     it('Research create successfully', async () => {
-        await expect(scientificResearchService.create(scientificResearch, ScientificResearchMock)).resolves.not.toThrow();
+        await expect(scientificResearchService.create(scientificResearch, ScientificResearchMock, UserModelMock)).resolves.not.toThrow();
     });
 })

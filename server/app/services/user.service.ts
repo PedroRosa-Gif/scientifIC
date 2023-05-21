@@ -21,9 +21,7 @@ const create = async (infos:IUser, UserModel:Model<IUser> = User) => {
 }
 
 const findById = async (id: string, UserModel:Model<IUser> = User): Promise<IUser | null> => {
-  let User = Model<IUser>;
-
-  return await User.findById(id);
+  return await UserModel.findById(id);
 }
 
 const login = async (email:string, password:string, UserModel:Model<IUser> = User) => {
