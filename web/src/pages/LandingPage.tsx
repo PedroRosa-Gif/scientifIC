@@ -15,6 +15,7 @@ import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingS
 
 import "./LandingPage.css";
 import { AuthContext } from "../contexts/auth";
+import Footer from "../components/Footer";
 
 function LandingPage() {
   const brandRef = useRef<HTMLDivElement | null>(null);
@@ -118,28 +119,7 @@ function LandingPage() {
             </div>
           </section>
         </div>
-        <footer>
-          <section className="footer-column">
-            <h2>Navegação</h2>
-            <div className="footer-options">
-              <span>Participe</span>
-              <span>Crie seu estudo</span>
-              <span>Quem Somos?</span>
-            </div>
-          </section>
-          <section className="footer-column">
-            <h2>Contribuintes</h2>
-            <div className="footer-options">
-              <a href="https://github.com/gabriel-a-b-gomes"><span>Gabriel Gomes</span></a>
-              <a href="https://github.com/PauloVictorSS"><span>Paulo Santos</span></a>
-              <a href="https://github.com/PedroRosa-Gif"><span>Pedro Rosa</span></a>
-            </div>
-          </section>
-          <section className="footer-column logos">
-            <a href="https://ic.unicamp.br/"><img className="ic-logo" src={icLogo} alt="Logo do IC" /></a>
-            <a href="https://www.unicamp.br/unicamp/"><img src={unicampLogo} alt="Logo do IC" /></a>
-          </section>
-        </footer>
+        <Footer />
     </main>
   );
 }
