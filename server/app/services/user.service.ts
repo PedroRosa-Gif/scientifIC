@@ -20,6 +20,12 @@ const create = async (infos:IUser, UserModel:Model<IUser> = User) => {
   await UserModel.create(infos);
 }
 
+const findById = async (id: string, UserModel:Model<IUser> = User): Promise<IUser | null> => {
+  let User = Model<IUser>;
+
+  return await User.findById(id);
+}
+
 const login = async (email:string, password:string, UserModel:Model<IUser> = User) => {
     const user = await UserModel.findOne({ "email": email });
     
@@ -49,4 +55,4 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
     return { userInfos: user, message: "Login realizado com sucesso!", token: token };
 }
 
-export const userService = {login, create}
+export const userService = {login, create, findById}

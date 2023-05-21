@@ -2,28 +2,26 @@ import { Decimal128 } from "mongoose";
 
 interface IScientificResearch {
     theme: string;
-    title?: string;
+    title: string;
     linkToMore: string;
-    summary: string;
+    abstract: string;
     status: number; // Pré Cadastrado
-
-    scholarShip?: Decimal128;
+  
+    scholarShip: number;
     isShipToDefine: boolean;
-
+  
     dateToBegin: Date;
     forecastFinish: Date;
-
+  
     desireSkills: string[];
     areas: string[];
-
+  
     createdAt: Date;
-    createdBy: string;
-    updateAt: Date;
-    updateBy: string;
-
+    updatedAt: Date;
+  
     // RelashionShip columns
-    teacherId: number;
-    studentId?: number;
-}
+    advisorId: string;
+    studentId: string;
+};
 
 export default IScientificResearch;
