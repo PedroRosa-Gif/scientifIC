@@ -1,0 +1,18 @@
+div.div-pagination{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+div.div-pagination button{
+  border: none;
+  background: none;
+  padding: 5px;
+
+  cursor: pointer;
+}
+
+div.div-pagination button:hover{
+  font-weight: bold;
+}
