@@ -1,0 +1,36 @@
+:root {
+    --input-color: rgba(0, 0, 0, 0.7);
+    --placeholder-color: rgba(0, 0, 0, 0.4);
+}
+
+div.base-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 200ms ease-in-out;
+}
+
+div.base-text label {
+    font-weight: 700;
+    font-size: 16px;
+    color: black;
+}
+
+input.base-text {
+    width: 100%;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #DAE7F7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--input-color);
+}
+
+input.base-text:focus-within {
+    border-color: #205797;
+}
+
+input.base-text::placeholder {
+    color: var(--placeholder-color);
+}

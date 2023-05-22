@@ -1,0 +1,32 @@
+header.base {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+article.main-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+article.main-title img {
+    width: 70px;
+    object-fit: contain;
+}
+
+article.main-title h1 {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+header.base aside button {
+    border-radius: 10%;
+    padding: 10px 20px;
+    border: none;
+    background: white;
+
+    font-size: 14px;
+    font-weight: 600;
+}

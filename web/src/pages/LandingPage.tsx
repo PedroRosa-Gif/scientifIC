@@ -123,7 +123,7 @@ function LandingPage() {
             <h2>Navegação</h2>
             <div className="footer-options">
               <span>Participe</span>
-              <span>Crie seu estudo</span>
+              <NavLink to={"/ic/criar"} className="link"><span>Crie seu Estudo</span></NavLink>
               <span>Quem Somos?</span>
             </div>
           </section>
