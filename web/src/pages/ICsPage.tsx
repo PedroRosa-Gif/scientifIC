@@ -47,6 +47,23 @@ function ICsPage() {
       isShipToDefine: false
     },
     {
+      title: "Título 1",
+      dateToBegin: new Date(),
+      forecastFinish:  new Date(),
+      areas: ["Área 1", "Área 2"],
+      theme: "Tema 1",
+      advisorId: "Orientadora 1",
+      desireSkills: ["Skill 1", "Skill 2", "Skill 3"],
+      studentId: "",
+      scholarShip: 1500.00,
+      status: 2,
+      abstract: "",
+      linkToMore: "",
+      createdAt: new Date(),
+      updateAt: new Date(),
+      isShipToDefine: false
+    },
+    {
       title: "",
       dateToBegin: new Date(),
       forecastFinish:  new Date(),
