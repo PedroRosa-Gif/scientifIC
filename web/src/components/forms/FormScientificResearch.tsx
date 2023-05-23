@@ -3,6 +3,8 @@ import BaseTextInput from "../BaseTextInput";
 import TextAreaInput from "../TextAreaInput";
 
 import "../../styles/FormScientificResearch.css";
+import SkillList from "../SkillList";
+import { useState } from "react";
 
 interface IFormScientificResearch {
     title: string;
@@ -10,6 +12,8 @@ interface IFormScientificResearch {
 }
 
 function FormScientificResearch(props: IFormScientificResearch) {
+    const [skills, setSkills] = useState<string[]>([]);
+
     return (
         <form className="form-sc-rs">
             <section className="form-title">
@@ -44,7 +48,11 @@ function FormScientificResearch(props: IFormScientificResearch) {
                 </div>
                 <div className="form-row">
                     <article className="skills-container">
-                        Lista de Habilidades
+                        <SkillList label="Habilidade Desejada" 
+                            placeholder="Insira uma habilidade desejada..."
+                            id="desireSkills" baseSkills={skills}
+                            setList={(newSkills) => setSkills(newSkills)}
+                        />
                     </article>
                     <aside className="side-container">
                         <div>

@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/user", userRoutes);
-app.use("/scientificResearch", scientificResearchRoutes);
+app.use("/scientific-research", scientificResearchRoutes);
 
 app.listen(port, () => {
   console.log(`now listening on port ${port}`);

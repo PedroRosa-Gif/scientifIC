@@ -6,7 +6,7 @@ interface IBaseTextInput extends InputHTMLAttributes<HTMLInputElement>{
     label: string
 }
 
-export default function TextInput({ label, ...props }: IBaseTextInput) {
+export default function BaseTextInput({ label, ...props }: IBaseTextInput) {
   return (
     <div className="base-text">
       <label htmlFor={`${props.id}`}>{label}</label>
