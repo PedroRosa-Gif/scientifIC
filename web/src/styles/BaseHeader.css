@@ -19,6 +19,7 @@ article.main-title img {
 article.main-title h1 {
     font-weight: 600;
     font-size: 40px;
+    color: white;
 }
 
 header.base aside button {

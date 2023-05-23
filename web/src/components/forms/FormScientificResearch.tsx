@@ -5,6 +5,7 @@ import TextAreaInput from "../TextAreaInput";
 import "../../styles/FormScientificResearch.css";
 import SkillList from "../SkillList";
 import { useState } from "react";
+import SelectAreas from "../SelectAreas";
 
 interface IFormScientificResearch {
     title: string;
@@ -76,7 +77,7 @@ function FormScientificResearch(props: IFormScientificResearch) {
                                 placeholder="MM/yyyy"
                             />   
                         </div>
-                        <div>Seleção da área</div>
+                        <SelectAreas baseAreas={[]} setSelectedAreas={() => {}} />
                     </aside>
                 </div>
             </section>
