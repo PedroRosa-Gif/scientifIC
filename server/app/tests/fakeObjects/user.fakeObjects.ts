@@ -7,6 +7,7 @@ export const createUser1:IUser = {
   lastName: "1",
   ra: "123",
   birthdate: new Date(),
+  institute: "Instituto de Computação",
   type: 1
 } 
 

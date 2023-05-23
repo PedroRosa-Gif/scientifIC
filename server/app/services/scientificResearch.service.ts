@@ -3,21 +3,18 @@ import IFiltersScientificResearch from "../interfaces/IFiltersScientificResearch
 import IScientificResearch from "../interfaces/IScientificResearch";
 import ScientificResearch from '../models/scientificResearch.model';
 
-const getICs = async (filters:IFiltersScientificResearch, ScientificResearchModel:Model<IScientificResearch> = ScientificResearch) => {
+const getICs = async ({ search, totalPerPage, currentPage, institute, ...filters}:IFiltersScientificResearch,
+                        ScientificResearchModel:Model<IScientificResearch> = ScientificResearch) => {
 
-  const search = filters.search;
-  const totalPerPage = filters.totalPerPage;
-  const currentPage = filters.currentPage;
-
-  const allScientificResearch = await ScientificResearchModel.find({
+  const objectFind = {
     $or: [{title: { $regex: `/${search}/i` }},
           {theme: { $regex: `/${search}/i` }}],
-    institute: filters.institute,
-    status: filters.status,
-    scholarShip: filters.scholarShip,
-    area: filters.area,
-      
-  }).limit(totalPerPage).skip(totalPerPage * (currentPage - 1)).sort( '-createdAt' ).exec();
+    ...filters
+  }
+
+  console.log(objectFind);
+
+  const allScientificResearch = await ScientificResearchModel.find(objectFind).limit(totalPerPage).skip(totalPerPage * (currentPage - 1)).sort( '-createdAt' ).exec();
 
   return allScientificResearch;
 }

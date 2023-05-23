@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 interface IScientificResearch {
   theme: string;
   title: string;
@@ -18,7 +20,7 @@ interface IScientificResearch {
   updatedAt: Date;
 
   // RelashionShip columns
-  advisorId: string;
+  advisorId: mongoose.Schema.Types.ObjectId;
   studentId: string;
 };
 

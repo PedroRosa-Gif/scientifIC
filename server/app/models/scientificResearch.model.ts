@@ -17,11 +17,10 @@ export const scientificResearchSchema = new Schema<IScientificResearch>({
   desireSkills: { type: [String], required: true },
   areas: { type: [String], required: true },
 
-
   createdAt: { type: Date },
   updatedAt: { type: Date },
 
-  advisorId: { type: String, required: true },
+  advisorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   studentId: { type: String }
 });
 
