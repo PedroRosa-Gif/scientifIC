@@ -3,6 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import IUser from '../interfaces/IUser';
 import { userSchema } from '../models/user.model';
 import { userService } from '../services/user.service';
+import { createUser1, createUser2, loginUser1 } from './fakeObjects/user.fakeObjects';
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
@@ -22,53 +23,23 @@ afterAll(async () => {
 
 describe('Create User', () => {
   
-  const user1:IUser = {
-    email: "email@gmail.com",
-    password: "senha123",
-    name: "Usuário",
-    lastName: "1",
-    ra: "123",
-    birthdate: new Date(),
-    type: 1
-  } 
-
-  const user2:IUser = {
-    email: "email@gmail.com",
-    password: "senha123",
-    name: "Usuário",
-    lastName: "2",
-    ra: "123",
-    birthdate: new Date(),
-    type: 1
-  } 
-
   afterEach(async () => {
     await UserModelMock.deleteMany({});
   })
 
   it('E-mail already registered', async () => {
 
-    await UserModelMock.create(user1);
-    await expect(userService.create(user2, UserModelMock)).rejects.toThrowError("Email já cadastrado");
+    await UserModelMock.create(createUser1);
+    await expect(userService.create(createUser2, UserModelMock)).rejects.toThrowError("Email já cadastrado");
   })
 
   it('User created successfully', async () => {
 
-    await expect(userService.create(user1, UserModelMock)).resolves.toEqual(undefined);
+    await expect(userService.create(createUser1, UserModelMock)).resolves.toEqual(undefined);
   })
 })
 
 describe('Login User', () => {
-  
-  const user:IUser = {
-    email: "email@gmail.com",
-    password: "$2b$10$cWerPZquf0hiQR8ZCix8/u75iR2MUVKq.SFPvCywSAljkXj9bWvxy",
-    name: "Usuário",
-    lastName: "1",
-    ra: "123",
-    birthdate: new Date(),
-    type: 1
-  }
 
   afterEach(async () => {
     await UserModelMock.deleteMany({});
@@ -76,19 +47,19 @@ describe('Login User', () => {
 
   it('E-mail not registred', async () => {
 
-    await UserModelMock.create(user);
+    await UserModelMock.create(loginUser1);
     await expect(userService.login("emailNaoexistente", "user.password", UserModelMock)).rejects.toThrowError("Email não cadastrado!");
   })
 
   it('Incorrect password', async () => {
 
-    await UserModelMock.create(user);
-    await expect(userService.login(user.email, "asdasd", UserModelMock)).rejects.toThrowError("Senha incorreta!");
+    await UserModelMock.create(loginUser1);
+    await expect(userService.login(loginUser1.email, "asdasd", UserModelMock)).rejects.toThrowError("Senha incorreta!");
   })
 
   it('Login Success', async () => {
 
-    await UserModelMock.create(user);
-    await expect(userService.login(user.email, "string", UserModelMock)).resolves.not.toThrow();
+    await UserModelMock.create(loginUser1);
+    await expect(userService.login(loginUser1.email, "string", UserModelMock)).resolves.not.toThrow();
   })
 })

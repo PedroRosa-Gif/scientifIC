@@ -22,4 +22,4 @@ interface IScientificResearch {
   studentId: string;
 };
 
-export default IScientificResearch;
+export default IScientificResearch
