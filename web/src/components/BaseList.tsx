@@ -1,8 +1,8 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 interface IList<T> {
     list: T[];
-    children: (list: T[]) => ReactElement;
+    children: ReactElement;
     customLoading?: ReactElement;
     customEmpty?: ReactElement;
 }
@@ -14,7 +14,7 @@ function BaseList<T>(props: IList<T>): ReactElement {
     if (props.list.length === 0) 
         return props.customEmpty ? props.customEmpty : <>Vazio</>;
 
-    return props.children(props.list);
+    return props.children;
 }
 
 export default BaseList;

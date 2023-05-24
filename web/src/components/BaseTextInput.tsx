@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-import "../styles/BaseTextInput.css";
+import "../styles/BaseInput.css";
 
 interface IBaseTextInput extends InputHTMLAttributes<HTMLInputElement>{
     label: string
@@ -8,9 +8,9 @@ interface IBaseTextInput extends InputHTMLAttributes<HTMLInputElement>{
 
 export default function BaseTextInput({ label, ...props }: IBaseTextInput) {
   return (
-    <div className="base-text">
+    <div className="base-input">
       <label htmlFor={`${props.id}`}>{label}</label>
-      <input className="base-text" { ...props } />
+      <input className="base-input" { ...props } />
     </div>
   )
 }

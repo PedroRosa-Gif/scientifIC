@@ -2,6 +2,8 @@ import { InputHTMLAttributes, useEffect, useState } from "react";
 import BaseTextInput from "./BaseTextInput";
 
 import "../styles/SkillList.css";
+import BaseList from "./BaseList";
+import EmptyList from "./EmptyList";
 
 interface ISkillList extends InputHTMLAttributes<HTMLInputElement>{
     label: string;
@@ -77,14 +79,16 @@ function SkillList({ label, baseSkills, setList, ...props }: ISkillList) {
             </div>
             {alert && alert.length > 0 && <span className="alert">{alert}</span>}
             <article>
-                <ul>
-                    {skills.map((skill, index) =>
-                        <li key={skill + index}>
-                            <span>{skill}</span>
-                            <button type="button" onClick={() => removeSkill(index)}>Excluir</button>
-                        </li>    
-                    )}
-                </ul>
+                <BaseList list={skills} customEmpty={<EmptyList message="Sem Habilidades Cadastradas" />}>
+                    <ul>
+                        {skills.map((skill, index) =>
+                            <li key={skill + index}>
+                                <span>{skill}</span>
+                                <button type="button" onClick={() => removeSkill(index)}>Excluir</button>
+                            </li>    
+                        )}
+                    </ul>
+                </BaseList>
             </article>
         </div>
     );

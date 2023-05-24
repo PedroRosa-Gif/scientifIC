@@ -3,6 +3,8 @@ import { allAreas } from "../utils/constants/allAreas.constants";
 import BaseTextInput from "./BaseTextInput";
 
 import "../styles/SelectAreas.css";
+import BaseList from "./BaseList";
+import EmptyList from "./EmptyList";
 
 interface ISelectAreas {
     baseAreas: string[];
@@ -53,6 +55,12 @@ function SelectAreas({ baseAreas, setSelectedAreas }: ISelectAreas) {
                 <BaseTextInput 
                     label="Procure por uma área"
                     list="areaList" id="area"
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            addArea();
+                        }
+                    }}
                     value={newArea}
                     onChange={(e) => setNewArea(e.target.value)}
                     placeholder="Procure pela área..."
@@ -68,12 +76,16 @@ function SelectAreas({ baseAreas, setSelectedAreas }: ISelectAreas) {
             <main className="areas-selected-box">
                 <label>Áreas Relacionadas</label>
                 <div className="areas">
-                    {areas.map((area, index) => 
-                        <span key={index + area} className="area-selected">
-                            {area}
-                            <button type="button" title="Remover Área" onClick={() => removeArea(index)}>&times;</button>
-                        </span>
-                    )}
+                    <BaseList list={areas} customEmpty={<EmptyList message="Ainda não possui área selecionada" />}>
+                        <>
+                        {areas.map((area, index) => 
+                            <span key={index + area} className="area-selected">
+                                {area}
+                                <button type="button" title="Remover Área" onClick={() => removeArea(index)}>&times;</button>
+                            </span>
+                        )}
+                        </>
+                    </BaseList>
                 </div>
             </main>
         </div>

@@ -9,7 +9,9 @@ interface IScientificResearch {
     isShipToDefine: boolean;
   
     dateToBegin: Date;
+    dateToBeginStr: string;
     forecastFinish: Date;
+    forecastFinishStr: string;
   
     desireSkills: string[];
     areas: string[];

@@ -8,10 +8,14 @@ import { useEffect, useState } from "react";
 import SelectAreas from "../SelectAreas";
 import Validate from "../../utils/helpers/Validate";
 import Notifier from "../Notifier";
+import BaseCheckBox from "../BaseCheckBox";
+import BaseSelectInput from "../BaseSelectInput";
+import { allStatus } from "../../utils/constants/allStatus.constants";
 
 interface IFormScientificResearch {
     title: string;
     model?: IScientificResearch;
+    onSubmit: (data: IScientificResearch, reset: () => void) => void;
 }
 
 const baseModel: IScientificResearch = {
@@ -22,9 +26,11 @@ const baseModel: IScientificResearch = {
     areas: [],
     desireSkills: [],
     status: 0,
-    isShipToDefine: false,
+    isShipToDefine: true,
     dateToBegin: new Date(),
+    dateToBeginStr: new Date().toLocaleDateString("sv-SE"),
     forecastFinish: new Date(),
+    forecastFinishStr: new Date().toLocaleDateString("sv-SE"),
     linkToMore: '',
     scholarShip: 0,
     studentId: '',
@@ -40,6 +46,8 @@ function FormScientificResearch(props: IFormScientificResearch) {
     useEffect(() => {
         if (props.model)
             setScifyResearch(props.model);
+
+        console.log("Teste");
     }, [props.model]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -47,23 +55,28 @@ function FormScientificResearch(props: IFormScientificResearch) {
 
         const validator = new Validate();
 
-        validator.validateRequired(scifyResearch.theme, "Tema obrigatório");
-        validator.validateString(scifyResearch.theme, 255, "Tema deve estar entre 2 e 255 caracteres");
-        validator.validateString(scifyResearch.title, 255, "Título deve estar entre 2 e 255 caracteres");
-        validator.validateString(scifyResearch.linkToMore, 500, "Link deve estar entre 2 e 500 caracteres");
-        validator.validateString(scifyResearch.abstract, 1000, "Resumo deve estar entre 2 e 1000 caracteres");
-        if (!scifyResearch.isShipToDefine)
-            validator.validateNumber(scifyResearch.scholarShip, "Deve ser positivo", 0);
+        validator.validateString(scifyResearch.theme, 255, "Tema deve estar entre 2 e 255 caracteres", "Tema Obrigatório", 2);
+        validator.validateString(scifyResearch.title, 255, "Título deve estar entre 2 e 255 caracteres", undefined, 2);
+        validator.validateString(scifyResearch.linkToMore, 500, "Link deve estar entre 2 e 500 caracteres", undefined, 2);
+        validator.validateString(scifyResearch.abstract, 1000, "Resumo deve estar entre 2 e 1000 caracteres", undefined, 2);
+        validator.validateNumber(scifyResearch.scholarShip, "Deve ser positivo", 0, undefined, !scifyResearch.isShipToDefine ? "Valor da Bolsa Obrigatório" : undefined);
 
         if (!validator.isValidOperation()) {
-            console.log(validator.getNotifications())
-
             setNotifications(validator.getNotifications());
             setShowNotifications(true);
+
+            return ;
         }
 
+        props.onSubmit(scifyResearch, () => setScifyResearch(baseModel));
     }  
 
+    const statusOptions = () => {
+        let options: { display: string; value: number; }[] = [];
+        allStatus.map((status, index) => options.push({ display: status, value: index }));
+
+        return options;
+    }
 
     return (
         <>
@@ -104,6 +117,13 @@ function FormScientificResearch(props: IFormScientificResearch) {
                         id="link" name="link"
                         placeholder="Insira um link sobre a ideia da IC..." 
                     />
+                    <BaseSelectInput 
+                        label="Status do Projeto"
+                        id="status" name="status"
+                        options={statusOptions()}
+                        value={scifyResearch.status}
+                        onChange={(e) => setScifyResearch(prev => ({ ...prev, status: parseInt(e.target.value) }))}
+                    />
                 </div>
                 <div className="form-row">
                     <TextAreaInput 
@@ -123,7 +143,7 @@ function FormScientificResearch(props: IFormScientificResearch) {
                         />
                     </article>
                     <aside className="side-container">
-                        <div>
+                        <div className="form-row scholar-ship">
                             <BaseTextInput label="Valor da Bolsa"
                                 type="number" id="scholarship"
                                 name="scholarship"
@@ -131,21 +151,27 @@ function FormScientificResearch(props: IFormScientificResearch) {
                                 value={scifyResearch.scholarShip}
                                 onChange={(e) => setScifyResearch(prev => ({ ...prev, scholarShip: parseFloat(e.target.value) }))} 
                             />
+                            <BaseCheckBox label="A DEFINIR"
+                                id="isToDefine"
+                                name="isToDefine"
+                                checked={scifyResearch.isShipToDefine}
+                                onChange={(e) => setScifyResearch(prev => ({ ...prev, isShipToDefine: !prev.isShipToDefine }))} 
+                            />
                         </div>  
                         <div className="form-row">
                             <BaseTextInput label="Início"
                                 type="date" id="dateToBegin"
                                 name="dateToBegin"
                                 placeholder="MM/yyyy"
-                                value={scifyResearch.dateToBegin.toLocaleDateString('sv-SE')}
-                                onChange={(e) => setScifyResearch(prev => ({ ...prev, dateToBegin: new Date(e.target.value) }))} 
+                                value={scifyResearch.dateToBeginStr}
+                                onChange={(e) => setScifyResearch(prev => ({ ...prev, dateToBeginStr: e.target.value }))} 
                             />
                             <BaseTextInput label="Previsão de Finalização"
                                 type="date" id="forecastFinish"
                                 name="forecastFinish"
                                 placeholder="MM/yyyy"
-                                value={scifyResearch.forecastFinish.toLocaleDateString('sv-SE')}
-                                onChange={(e) => setScifyResearch(prev => ({ ...prev, forecastFinish: new Date(e.target.value) }))} 
+                                value={scifyResearch.forecastFinishStr}
+                                onChange={(e) => setScifyResearch(prev => ({ ...prev, forecastFinishStr: e.target.value }))} 
                             />   
                         </div>
                         <SelectAreas

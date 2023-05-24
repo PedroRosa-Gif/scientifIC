@@ -4,7 +4,13 @@ import FormScientificResearch from "../../components/forms/FormScientificResearc
 function CreateScientificResearch() {
     return (
         <ContainerResearch>
-            <FormScientificResearch title="Cadastrar Oportunidade de IC" />
+            <FormScientificResearch 
+                title="Cadastrar Oportunidade de IC"
+                onSubmit={(data, reset) => {
+                    console.log(data);
+                    reset();
+                }}    
+            />
         </ContainerResearch>
     );
 }

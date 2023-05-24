@@ -14,8 +14,14 @@ class Validate extends Notificator {
         return "";
     }
 
-    validateString(value: string, maxLength: number, message: string, minLenght?: number): string {
-        if ((minLenght && value.length < minLenght) || value.length > maxLength) {
+    validateString(value: string, maxLength: number, message: string, required?: string, minLenght?: number): string {
+        if (required && value.length <= 0) {
+            this.notificate(required);
+            return required;
+        }
+
+        // Se o campo não é requerido e é vazio, passa
+        if (!(!required && value.length <= 0) && ((minLenght && value.length < minLenght) || value.length > maxLength)) {
             this.notificate(message);
             return message;
         };
@@ -23,7 +29,12 @@ class Validate extends Notificator {
         return "";
     }
 
-    validateNumber(value: number, message: string, min?: number, max?: number): string {
+    validateNumber(value: number, message: string, min?: number, max?: number, required?: string): string {
+        if (required && (isNaN(value) || value === 0)) {
+            this.notificate(required);
+            return required;
+        }
+
         if (min) {
             if (value < min) {
                 this.notificate(message);

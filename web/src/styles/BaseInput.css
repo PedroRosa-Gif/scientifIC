@@ -3,20 +3,25 @@
     --placeholder-color: rgba(0, 0, 0, 0.4);
 }
 
-div.base-text {
+div.base-input {
     width: 100%;
     display: flex;
     flex-direction: column;
     transition: all 200ms ease-in-out;
 }
 
-div.base-text label {
+div.base-input.select {
+    width: fit-content;
+}
+
+div.base-input label {
     font-weight: 700;
     font-size: 16px;
     color: black;
 }
 
-input.base-text {
+input.base-input, select.base-input {
+    height: 40px;
     width: 100%;
     border-radius: 4px;
     padding: 10px;
@@ -27,10 +32,15 @@ input.base-text {
     color: var(--input-color);
 }
 
-input.base-text:focus-within {
+select.base-input {
+    padding-right: 50px;
+    width: fit-content;
+}
+
+input.base-input:focus-within {
     border-color: #205797;
 }
 
-input.base-text::placeholder {
+input.base-input::placeholder {
     color: var(--placeholder-color);
 }
