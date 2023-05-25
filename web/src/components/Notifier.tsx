@@ -19,7 +19,7 @@ function Notifier(props: INotifier) {
             setTimeout(function () {
                 setShowNotifications(false);
                 props.setShow(false);
-            }, 3000);
+            }, 5000);
     }, [showNotifications]);
 
     return (

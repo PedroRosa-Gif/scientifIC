@@ -21,7 +21,7 @@ const create = async (
     newResearch.createdAt = new Date();
     newResearch.updatedAt = new Date();
 
-    await ScientificResearchModel.create(newResearch);
+    return await ScientificResearchModel.create(newResearch);
 }
 
 const validateResearch = async (
@@ -39,7 +39,7 @@ const validateResearch = async (
     }
 
     if (advisor.type != Number(UserType.Teacher)) {
-        return "O usuário é um aluno e não pode criar uma IC " + advisor.email;
+        return "O usuário é um ALUNO e não pode criar uma IC";
     }
 
     if (newResearch.theme == null || newResearch.theme.length <= 0) {
@@ -53,4 +53,8 @@ const validateResearch = async (
     return "";
 }
 
-export const scientificResearchService = {create};
+const researches = (ScientificResearchModel: Model<IScientificResearch> = ScientificResearch) => {
+    return ScientificResearchModel.find();
+}
+
+export const scientificResearchService = {create, researches};

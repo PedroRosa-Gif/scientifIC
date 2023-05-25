@@ -11,11 +11,12 @@ import Notifier from "../Notifier";
 import BaseCheckBox from "../BaseCheckBox";
 import BaseSelectInput from "../BaseSelectInput";
 import { allStatus } from "../../utils/constants/allStatus.constants";
+import { useNavigate } from "react-router-dom";
 
 interface IFormScientificResearch {
     title: string;
     model?: IScientificResearch;
-    onSubmit: (data: IScientificResearch, reset: () => void) => void;
+    onSubmit: (data: IScientificResearch, reset: () => void, notify: (message: string) => void) => void;
 }
 
 const baseModel: IScientificResearch = {
@@ -26,7 +27,7 @@ const baseModel: IScientificResearch = {
     areas: [],
     desireSkills: [],
     status: 0,
-    isShipToDefine: true,
+    isShipToDefine: false,
     dateToBegin: new Date(),
     dateToBeginStr: new Date().toLocaleDateString("sv-SE"),
     forecastFinish: new Date(),
@@ -43,11 +44,11 @@ function FormScientificResearch(props: IFormScientificResearch) {
     const [showNotifications, setShowNotifications] = useState<boolean>(false);
     const [notifications, setNotifications] = useState<string[]>([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (props.model)
             setScifyResearch(props.model);
-
-        console.log("Teste");
     }, [props.model]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,8 +68,12 @@ function FormScientificResearch(props: IFormScientificResearch) {
 
             return ;
         }
-
-        props.onSubmit(scifyResearch, () => setScifyResearch(baseModel));
+        
+        props.onSubmit(scifyResearch, () => setScifyResearch(baseModel), (message: string) => { 
+            validator.notificate(message);
+            setNotifications(validator.getNotifications());
+            setShowNotifications(true);
+        });
     }  
 
     const statusOptions = () => {
@@ -76,6 +81,10 @@ function FormScientificResearch(props: IFormScientificResearch) {
         allStatus.map((status, index) => options.push({ display: status, value: index }));
 
         return options;
+    }
+
+    const backPage = () => {
+        navigate(-1);
     }
 
     return (
@@ -87,7 +96,7 @@ function FormScientificResearch(props: IFormScientificResearch) {
                     <h1>{props.title}</h1>
                     <div className="dash-under" />
                 </article>
-                <button type="button">CANCELAR</button>
+                <button type="button" onClick={backPage}>CANCELAR</button>
             </section>
             <section className="form-body">
                 <div className="form-row">

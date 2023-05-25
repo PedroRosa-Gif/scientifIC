@@ -1,9 +1,10 @@
 import express from "express";
 import { resolver } from "../adapters/route.adapters";
-import { create } from "../controllers/user.controller";
+import { index, create } from "../controllers/scientificResearch.controller";
 
 const scientificResearchRoutes = express.Router();
 
-scientificResearchRoutes.post("/create", resolver(create));
+scientificResearchRoutes.get("/", resolver(index));
+scientificResearchRoutes.post("/", resolver(create));
 
 export default scientificResearchRoutes;
