@@ -20,7 +20,7 @@ function Notifier({ show, setShow, ...props}: INotifier) {
 				setShowNotifications(false);
 				setShow(false);
 			}, 5000);
-	}, [showNotifications]);
+	}, [showNotifications, setShow]);
 
 	return (
 		<div className="toast-notification">
