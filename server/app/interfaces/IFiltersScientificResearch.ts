@@ -2,8 +2,8 @@ interface IFiltersScientificResearch {
   search: string,
   institute?: string,
   status?: number,
-  scholarShip?: number,
-  area?: string[],
+  isShipToDefine?: boolean,
+  area: string[],
   totalPerPage: number,
   currentPage: number
 };

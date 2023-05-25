@@ -20,7 +20,7 @@ export const scientificResearchSchema = new Schema<IScientificResearch>({
   createdAt: { type: Date },
   updatedAt: { type: Date },
 
-  advisorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  advisorId: { type: String, ref: 'User', required: true },
   studentId: { type: String }
 });
 

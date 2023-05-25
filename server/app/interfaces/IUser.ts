@@ -5,7 +5,7 @@ interface IUser {
   lastName: string,
   ra: string,
   birthdate: Date,
-  institute?: string,
+  institute: string,
   type: number,
 };
 

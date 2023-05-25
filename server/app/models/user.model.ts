@@ -8,6 +8,7 @@ export const userSchema = new Schema<IUser>({
     lastName: { type: String, required: true },
     ra: { type: String, required: true },
     birthdate: { type: Date, required: true },
+    institute: { type: String, required: false },
     type: { type: Number, required: true },
 });
 

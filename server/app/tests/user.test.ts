@@ -3,7 +3,6 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import IUser from '../interfaces/IUser';
 import { userSchema } from '../models/user.model';
 import { userService } from '../services/user.service';
-import { createUser1, createUser2, loginUser1 } from './fakeObjects/user.fakeObjects';
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
@@ -20,6 +19,39 @@ afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
 });
+
+const createUser1:IUser = {
+  email: "email@gmail.com",
+  password: "senha123",
+  name: "Usuário",
+  lastName: "1",
+  ra: "123",
+  birthdate: new Date(),
+  institute: "Instituto de Computação",
+  type: 1
+} 
+
+const createUser2:IUser = {
+  email: "email@gmail.com",
+  password: "senha123",
+  name: "Usuário",
+  lastName: "2",
+  ra: "123",
+  birthdate: new Date(),
+  type: 1,
+  institute: ""
+} 
+
+const loginUser1:IUser = {
+  email: "email@gmail.com",
+  password: "$2b$10$cWerPZquf0hiQR8ZCix8/u75iR2MUVKq.SFPvCywSAljkXj9bWvxy",
+  name: "Usuário",
+  lastName: "1",
+  ra: "123",
+  birthdate: new Date(),
+  type: 1,
+  institute: ""
+}
 
 describe('Create User', () => {
   
