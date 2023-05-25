@@ -1,5 +1,3 @@
-import mongoose, { ObjectId } from "mongoose";
-
 interface IScientificResearch {
   theme: string;
   title: string;
@@ -24,4 +22,4 @@ interface IScientificResearch {
   studentId: string;
 };
 
-export default IScientificResearch
+export default IScientificResearch;

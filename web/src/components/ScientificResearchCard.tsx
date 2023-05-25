@@ -19,7 +19,7 @@ function ScientificResearchCard({ic}: ScientificResearchCardProps) {
       }
       <div className="flex">
         <div className="infos">
-          <p>{ic.advisorId}</p>
+          <p>{ic.advisorId.name + " " + ic.advisorId.lastName}</p>
           <p> | </p>
           <p>{ic.status}</p>
           <p> | </p>

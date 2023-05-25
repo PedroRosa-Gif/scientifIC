@@ -40,6 +40,7 @@ export default function SignUp() {
       lastName,
       ra,
       birthdate: new Date(birthdate),
+      institute: "",
       type: userType,
     }
     

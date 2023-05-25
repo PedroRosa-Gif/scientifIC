@@ -18,7 +18,7 @@ interface IScientificResearch {
   updatedAt: Date;
 
   // RelashionShip columns
-  advisorId: string;
+  advisorId: any;
   studentId: string;
 };
 

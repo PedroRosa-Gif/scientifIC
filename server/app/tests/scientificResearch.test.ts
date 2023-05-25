@@ -123,7 +123,10 @@ describe('Get ICs', () => {
     search: "",
     area: [],
     totalPerPage: 6,
-    currentPage: 1
+    currentPage: 1,
+    institute: '',
+    status: 0,
+    isShipToDefine: ''
   };
 
   const filtersGetICsFromIC:IFiltersScientificResearch =  {
@@ -131,23 +134,29 @@ describe('Get ICs', () => {
     institute: "Instituto de Computação",
     area: [],
     totalPerPage: 6,
-    currentPage: 1
+    currentPage: 1,
+    status: 0,
+    isShipToDefine: ''
   };
 
   const filtersGetICsWithSomeAreas:IFiltersScientificResearch =  {
     search: "",
     totalPerPage: 6,
     area: ["Sociedade", "Area 2"],
-    currentPage: 1
+    currentPage: 1,
+    institute: '',
+    status: 0,
+    isShipToDefine: ''
   };
 
   const filtersGetICsWithScholarShip:IFiltersScientificResearch =  {
     search: "",
     area: [],
     totalPerPage: 6,
-    isShipToDefine: true,
+    isShipToDefine: "true",
     currentPage: 1,
-    institute: ""
+    institute: "",
+    status: 0
   };
 
   const filtersGetICsWithSomeAreasFromIC:IFiltersScientificResearch =  {
@@ -155,7 +164,9 @@ describe('Get ICs', () => {
     totalPerPage: 6,
     institute: "Instituto de Computação",
     area: ["Engenharia", "Area 2"],
-    currentPage: 1
+    currentPage: 1,
+    status: 0,
+    isShipToDefine: ''
   };
 
   it('Get all created ICs without filters (3)', async () => {

@@ -3,10 +3,11 @@ import "../styles/DivPagination.css"
 interface IDivPaginationProps{
   functionToBack: () => void,
   functionToNext: () => void,
-  currentPage: number
+  currentPage: number,
+  totalThisPage: number
 }
 
-function DivPagination({functionToBack, functionToNext, currentPage}:IDivPaginationProps){
+function DivPagination({functionToBack, functionToNext, currentPage, totalThisPage}:IDivPaginationProps){
 
   return(
     <div className="div-pagination">
@@ -17,10 +18,15 @@ function DivPagination({functionToBack, functionToNext, currentPage}:IDivPaginat
         </button>
         :
         <></>
+      } 
+      {
+        (totalThisPage == 6) ?
+        <button onClick={functionToNext}>
+          Próxima &gt;&gt;&gt;
+        </button>
+        :
+        <></>
       }
-      <button onClick={functionToNext}>
-        Próxima &gt;&gt;&gt;
-      </button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import Authorized from "../components/Authorized/Authorized";
@@ -19,8 +19,16 @@ import DatalistInput from "../components/DatalistInput";
 import { allInstitutes } from "../utils/constants/allInstitutes.constants";
 import ButtonOrange from "../components/ButtonOrange";
 import { allAreas } from "../utils/constants/allAreas.constants";
+import SelectInput from "../components/SelectInput";
+import { getICs } from "../apis/scientificResearch.endpoint";
 
 function ICsPage() {
+
+  const [search, setSearch] = useState("");
+  const [institute, setInstitute] = useState("");
+  const [status, setStatus] = useState(0);
+  const [isShipToDefine, setIsShipToDefine] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
   const [allAreasSelected, setAllAreasSelected] = useState<string[]>([]);
   const [areaSelected, setAreaSelected] = useState("");
@@ -28,59 +36,7 @@ function ICsPage() {
   const { signed, setUserInfos } = useContext(AuthContext);
   const navigate = useNavigate()
 
-  const allICs:IScientificResearch[] = [
-    {
-      title: "Título 1",
-      dateToBegin: new Date(),
-      forecastFinish:  new Date(),
-      areas: ["Área 1", "Área 2"],
-      theme: "Tema 1",
-      advisorId: "Orientadora 1",
-      desireSkills: ["Skill 1", "Skill 2", "Skill 3"],
-      studentId: "",
-      scholarShip: 1500.00,
-      status: 2,
-      abstract: "",
-      linkToMore: "",
-      createdAt: new Date(),
-      updateAt: new Date(),
-      isShipToDefine: false
-    },
-    {
-      title: "Título 1",
-      dateToBegin: new Date(),
-      forecastFinish:  new Date(),
-      areas: ["Área 1", "Área 2"],
-      theme: "Tema 1",
-      advisorId: "Orientadora 1",
-      desireSkills: ["Skill 1", "Skill 2", "Skill 3"],
-      studentId: "",
-      scholarShip: 1500.00,
-      status: 2,
-      abstract: "",
-      linkToMore: "",
-      createdAt: new Date(),
-      updateAt: new Date(),
-      isShipToDefine: false
-    },
-    {
-      title: "",
-      dateToBegin: new Date(),
-      forecastFinish:  new Date(),
-      areas: ["Área 2", "Área 4"],
-      theme: "Tema 2",
-      advisorId: "Orientador 2",
-      desireSkills: ["Skill 1", "Skill 2", "Skill 3"],
-      studentId: "",
-      scholarShip: 950.60,
-      status: 1,
-      abstract: "",
-      linkToMore: "",
-      createdAt: new Date(),
-      updateAt: new Date(),
-      isShipToDefine: true
-    },
-  ]
+  const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
 
   function previousPage() {
     setCurrentPage(currentPage - 1)
@@ -91,6 +47,22 @@ function ICsPage() {
     setCurrentPage(currentPage + 1)
     console.log(currentPage + 1);
   }
+
+  function resetFilters(){
+    setCurrentPage(1)
+    getFiltedICs("", [], "", 0, "", 1)
+  }
+
+  async function getFiltedICs(search:string, area:string[], institute:string, status:number, isShipToDefine:string, currentPage:number) {
+    const result = await getICs(search, area, institute, status, isShipToDefine, currentPage);
+    const allICs = result.data.allScientificResearch;
+    
+    setAllFiltedICs(allICs);
+  }
+
+  useEffect(() => {
+    getFiltedICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
+  }, [currentPage])
 
   return (
     <main className="container">
@@ -131,37 +103,43 @@ function ICsPage() {
           <h1>Iniciações e Estudos</h1>
           <div className="container-filters-results">
             <div className="container-filters">
+              <SelectInput
+                id="status"
+                placeholder="Status"
+                icon={""}
+                value={status}
+                onChange={(e) => {setStatus(parseInt(e.target.value))}}
+              >
+                <option value={0}>Status</option>
+                <option value={1}>Estudante não escolhido</option>
+                <option value={2}>Projeto não iniciado</option>
+                <option value={3}>Em fase inicial</option>
+                <option value={4}>Em andamento</option>
+                <option value={5}>Em fase de finalização</option>
+                <option value={6}>Finalizado</option>
+              </SelectInput>
+              <SelectInput
+                id="scholarShip"
+                placeholder="Bolsa definida"
+                icon={""}
+                value={isShipToDefine}
+                onChange={(e) => {setIsShipToDefine(e.target.value)}}
+              >
+                <option value="">Bolsa definida?</option>
+                <option value="true">Não</option>
+                <option value="false">Sim</option>
+              </SelectInput>
               <DatalistInput
                 id="institute"
                 placeholder="Instituto"
+                value={institute}
+                onChange={(e) => {setInstitute(e.target.value)}}
               >
                 {
                   allInstitutes.map((institute, index) => {
                     return <option key={index} value={institute}/>
                   })
                 }
-              </DatalistInput>
-              <DatalistInput
-                id="status"
-                placeholder="Status"
-              >
-                <option value="Estudante não escolhido" />
-                <option value="Projeto não iniciado" />
-                <option value="Em fase inicial" />
-                <option value="Em andamento" />
-                <option value="Em fase de finalização" />
-                <option value="Finalizado" />
-              </DatalistInput>
-              <DatalistInput
-                id="scholarShip"
-                placeholder="Valor da bolsa"
-              >
-                <option value="A definir" />
-                <option value="Abaixo de R$300,00" />
-                <option value="Entre R$300,00 e R$500,00" />
-                <option value="Entre R$500,00 e R$1000,00" />
-                <option value="Entre R$1000,00 e R$2000,00" />
-                <option value="Acima de R$2000,00" />
               </DatalistInput>
               <div className="filter-area">
                 <DatalistInput
@@ -217,9 +195,13 @@ function ICsPage() {
                 <div>
                   <ButtonOrange 
                     title={"Remover filtros"} 
+                    onClick={() => resetFilters()}
                   />
                   <ButtonOrange 
-                    title={"Aplicar filtros"} 
+                    title={"Aplicar filtros"}
+                    onClick={() => 
+                      getFiltedICs(search, allAreasSelected, institute, status, isShipToDefine, 1)
+                    } 
                   />
                 </div>
               </div>
@@ -230,15 +212,17 @@ function ICsPage() {
                 placeholder="Pesquisar"
                 type="text"
                 className="search-input"
+                value={search}
+                onChange={(e) => {setSearch(e.target.value)}}
               />
               <div className="ics-cards">
                 {
-                  allICs.map((ic, index) => {
+                  allFiltedICs.map((ic, index) => {
                     return <ScientificResearchCard key={index} ic={ic}/>
                   })
                 }
               </div>
-              <DivPagination functionToBack={previousPage} functionToNext={nextPage} currentPage={currentPage}/>
+              <DivPagination functionToBack={previousPage} functionToNext={nextPage} totalThisPage={allFiltedICs.length} currentPage={currentPage}/>
             </div>
           </div>
         </div>
