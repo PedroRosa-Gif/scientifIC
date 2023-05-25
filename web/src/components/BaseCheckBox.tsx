@@ -7,10 +7,10 @@ interface IBaseCheckBox extends InputHTMLAttributes<HTMLInputElement>{
 }
 
 export default function BaseCheckBox({ label, ...props }: IBaseCheckBox) {
-    return (
-      <div className="base-check">
-        <input className="base-check" type="checkbox" { ...props } />
-				<label htmlFor={props.id}>{label}</label>
-      </div>
-    )
-  }
+  return (
+    <div className="base-check">
+      <input className="base-check" type="checkbox" { ...props } />
+      <label htmlFor={props.id}>{label}</label>
+    </div>
+  );
+}

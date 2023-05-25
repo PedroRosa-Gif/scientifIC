@@ -2,36 +2,36 @@ import { useEffect, useState } from "react";
 import "../styles/Notifier.css";
 
 interface INotifier {
-    show: boolean;
-    setShow: (b: boolean) => void;
-    notifications: string[]
+	show: boolean;
+	setShow: (b: boolean) => void;
+	notifications: string[]
 }
 
-function Notifier(props: INotifier) {
-    const [showNotifications, setShowNotifications] = useState<boolean>();
+function Notifier({ show, setShow, ...props}: INotifier) {
+	const [showNotifications, setShowNotifications] = useState<boolean>();
 
-    useEffect(() => {
-        setShowNotifications(props.show);
-    }, [props.show]);
+	useEffect(() => {
+		setShowNotifications(show);
+	}, [show]); 
 
-    useEffect(() => {
-        if (showNotifications)
-            setTimeout(function () {
-                setShowNotifications(false);
-                props.setShow(false);
-            }, 5000);
-    }, [showNotifications]);
+	useEffect(() => {
+		if (showNotifications)
+			setTimeout(function () {
+				setShowNotifications(false);
+				setShow(false);
+			}, 5000);
+	}, [showNotifications]);
 
-    return (
-        <div className="toast-notification">
-            <h3>Notificações</h3>
-            <ul>
-                {props.notifications.map((notification, index) => 
-                    <li key={notification + index}>{notification}</li>
-                )}
-            </ul>
-        </div>
-    );
+	return (
+		<div className="toast-notification">
+			<h3>Notificações</h3>
+			<ul>
+				{props.notifications.map((notification, index) => 
+						<li key={notification + index}>{notification}</li>
+				)}
+			</ul>
+		</div>
+	);
 }
 
 export default Notifier;

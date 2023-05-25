@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from "react";
 import "../styles/BaseInput.css";
 
 interface IBaseTextInput extends InputHTMLAttributes<HTMLInputElement>{
-    label: string
+  label: string
 }
 
 export default function BaseTextInput({ label, ...props }: IBaseTextInput) {

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import IScientificResearch from "../interfaces/IScientificResearch";
 
 export const createScientificResearch = async (research: IScientificResearch) => {

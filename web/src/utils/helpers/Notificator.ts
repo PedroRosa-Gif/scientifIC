@@ -1,21 +1,21 @@
 class Notificator {
-    notifications: string[];
+	notifications: string[];
 
-    constructor() {
-        this.notifications = [];
-    }
+	constructor() {
+		this.notifications = [];
+	}
 
-    notificate(message: string): void {
-        this.notifications.push(message);
-    }
+	notificate(message: string): void {
+		this.notifications.push(message);
+	}
 
-    getNotifications(): string[] {
-        return this.notifications;
-    }
+	getNotifications(): string[] {
+		return this.notifications;
+	}
 
-    isValidOperation(): boolean {
-        return this.notifications.length === 0;
-    }
+	isValidOperation(): boolean {
+		return this.notifications.length === 0;
+	}
 }
 
 export default Notificator;

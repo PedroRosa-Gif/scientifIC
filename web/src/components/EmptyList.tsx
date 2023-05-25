@@ -1,15 +1,15 @@
 import "../styles/Empty.css";
 
 interface IEmptyList {
-    message: string;
+	message: string;
 }
 
 function EmptyList({ message }: IEmptyList) {
-    return (
-        <div className="empty-list">
-            {message}
-        </div>
-    );
+	return (
+		<div className="empty-list">
+			{message}
+		</div>
+	);
 }
 
 export default EmptyList;
