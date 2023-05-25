@@ -15,7 +15,7 @@ interface IBaseSelect extends SelectHTMLAttributes<HTMLSelectElement>{
 export default function BaseSelectInput({ label, options, ...props }:IBaseSelect) {
 	return (
 		<div className="base-input select">
-			<label htmlFor={`${props.id}`}>{label}</label>
+			<label htmlFor={props.id}>{label}</label>
 			<select className="base-input" { ...props } >
 					{options && options.map((opt, index) => 
 						<option key={opt.display + index} value={opt.value}>{opt.display}</option>

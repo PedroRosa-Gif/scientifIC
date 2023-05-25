@@ -9,11 +9,11 @@ import unicamp from "../assets/imgs/unicamp.png";
 import icLogo from "../assets/imgs/ic_logo.jpg";
 import unicampLogo from "../assets/imgs/logo-unicamp-white.png";
 
-import Authorized from "../components/Authorized/Authorized";
+import Authorized from "../components/Authorized";
 
-import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard/LandingStudyCard";
+import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard";
 
-import "./LandingPage.css";
+import "../styles/LandingPage.css";
 import { AuthContext } from "../contexts/auth";
 
 function LandingPage() {
@@ -123,7 +123,7 @@ function LandingPage() {
             <h2>Navegação</h2>
             <div className="footer-options">
               <span>Participe</span>
-              <NavLink to={"/ic/criar"} className="link"><span>Crie seu Estudo</span></NavLink>
+              <NavLink to={"/iniciacoes-cientificas/criar"} className="link"><span>Crie seu Estudo</span></NavLink>
               <span>Quem Somos?</span>
             </div>
           </section>

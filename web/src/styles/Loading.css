@@ -1,0 +1,15 @@
+.loading-form {
+    display: grid;
+    gap: 50px;
+
+    padding: 30px 50px 80px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 4px 4px 0px 0px;
+
+    height: 100vh;
+
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.4)
+}

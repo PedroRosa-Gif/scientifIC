@@ -9,7 +9,7 @@ interface IBaseTextInput extends InputHTMLAttributes<HTMLInputElement>{
 export default function BaseTextInput({ label, ...props }: IBaseTextInput) {
   return (
     <div className="base-input">
-      <label htmlFor={`${props.id}`}>{label}</label>
+      <label htmlFor={props.id}>{label}</label>
       <input className="base-input" { ...props } />
     </div>
   )

@@ -5,6 +5,7 @@ import BaseTextInput from "./BaseTextInput";
 import "../styles/SelectAreas.css";
 import BaseList from "./BaseList";
 import EmptyList from "./EmptyList";
+import BaseDataList from "./BaseDataList";
 
 interface ISelectAreas {
     baseAreas: string[];
@@ -52,7 +53,7 @@ function SelectAreas({ baseAreas, setSelectedAreas }: ISelectAreas) {
     return (
         <div className="areas-select-container">
             <div className="areas-actions">
-                <BaseTextInput 
+                <BaseDataList 
                     label="Procure por uma área"
                     list="areaList" id="area"
                     onKeyDown={(e) => {
@@ -64,12 +65,8 @@ function SelectAreas({ baseAreas, setSelectedAreas }: ISelectAreas) {
                     value={newArea}
                     onChange={(e) => setNewArea(e.target.value)}
                     placeholder="Procure pela área..."
+                    options={allAreas}
                 />
-                <datalist id="areaList" onSelect={addArea}>
-                    {allAreas.map((area, index) => (
-                        <option key={index} value={area} />
-                    ))}
-                </datalist>
                 <button type="button" onClick={addArea}>+</button>
             </div>
             {alert && alert.length > 0 && <span className="alert-areas">{alert}</span>}

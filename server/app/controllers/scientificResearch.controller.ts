@@ -4,12 +4,10 @@ import { scientificResearchService } from "../services/scientificResearch.servic
 import { userService } from "../services/user.service";
 import IUser from "../interfaces/IUser";
 
-export const index = async (req: Request, res: Response) => {
-    const reseaches = await scientificResearchService.researches();
+export const getThemes = async (req: Request, res: Response) => {
+    const themes = await scientificResearchService.getThemes();
 
-    res.status(201).send({
-        researches: reseaches
-    });
+    res.status(201).send(themes);
 }
 
 export const create = async (req: Request, res: Response) => {

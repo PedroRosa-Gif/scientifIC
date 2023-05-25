@@ -53,8 +53,8 @@ const validateResearch = async (
     return "";
 }
 
-const researches = (ScientificResearchModel: Model<IScientificResearch> = ScientificResearch) => {
-    return ScientificResearchModel.find();
+const getThemes = (ScientificResearchModel: Model<IScientificResearch> = ScientificResearch) => {
+    return ScientificResearchModel.find({}, { theme: 1, _id: 0 }).distinct('theme');
 }
 
-export const scientificResearchService = {create, researches};
+export const scientificResearchService = {create, getThemes};
