@@ -1,11 +1,12 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { resolver } from "../adapters/route.adapters";
+import { getThemes, create } from "../controllers/scientificResearch.controller";
 import { getICs } from "../controllers/scientificResearch.controller";
 
-const scientificResearch = express.Router();
+const scientificResearchRoutes = express.Router();
 
-scientificResearch.get("/", resolver(getICs));
+scientificResearchRoutes.post("/", resolver(create));
+scientificResearchRoutes.get("/themes", resolver(getThemes));
+scientificResearchRoutes.get("/", resolver(getICs));
 
-export default scientificResearch;
-
-
+export default scientificResearchRoutes;

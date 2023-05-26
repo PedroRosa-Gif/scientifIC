@@ -9,7 +9,7 @@ export default function ButtonSign({ title, ...props }:IButton) {
   return (
     <button className="btn_form_sign" { ...props } >
       <span>
-      { title }
+        { title }
       </span>
     </button>
   );

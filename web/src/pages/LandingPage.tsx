@@ -9,11 +9,11 @@ import unicamp from "../assets/imgs/unicamp.png";
 import icLogo from "../assets/imgs/ic_logo.jpg";
 import unicampLogo from "../assets/imgs/logo-unicamp-white.png";
 
-import Authorized from "../components/Authorized/Authorized";
+import Authorized from "../components/Authorized";
 
-import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard/LandingStudyCard";
+import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard";
 
-import "./LandingPage.css";
+import "../styles/LandingPage.css";
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
 

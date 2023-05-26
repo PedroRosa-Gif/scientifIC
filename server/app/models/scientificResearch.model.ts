@@ -27,4 +27,3 @@ export const scientificResearchSchema = new Schema<IScientificResearch>({
 const ScientificResearch = mongoose.model<IScientificResearch>("ScientificResearch", scientificResearchSchema);
 
 export default ScientificResearch;
- 

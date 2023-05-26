@@ -1,0 +1,84 @@
+div.areas-select-container {
+    width: 100%;
+    display: grid;
+    gap: 10px;
+}
+
+div.areas-select-container div.areas-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+div.areas-select-container div.areas-actions button {
+    cursor: pointer;
+    padding: 0 12px 5px;
+    background: white;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    font-weight: 700;
+    font-size: 28px;
+    color: #0e4176;
+}
+
+div.areas-select-container div.areas-actions button:hover {
+    background: rgb(245, 242, 242);
+}
+
+div.areas-select-container span.alert-areas {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FF0000;
+}
+
+main.areas-selected-box {
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 2px solid #F14436;
+    border-radius: 4px;
+    padding: 15px 20px 10px;
+}
+
+main.areas-selected-box label {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -30px;
+    padding: 4px 10px;
+    background: white;
+    font-weight: 700;
+    font-size: 14px;
+    color: #F14436;
+}
+
+main.areas-selected-box div.areas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+main.areas-selected-box span.area-selected {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #0e4176;
+    background: #0e40768d;
+    border-radius: 30px;
+
+    padding: 1px 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+}
+
+main.areas-selected-box span.area-selected button {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    background: none;
+    padding-bottom: 1px;
+    cursor: pointer;
+}

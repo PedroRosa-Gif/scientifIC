@@ -16,5 +16,5 @@ export default function SelectInput({ icon, children, className, ...props }:ILog
         {children}
       </select>
     </div>
-  )
+  );
 }

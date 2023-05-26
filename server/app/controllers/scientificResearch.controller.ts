@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import IFiltersScientificResearch from "../interfaces/IFiltersScientificResearch";
-import { scientificResearchServices } from "../services/scientificResearch.service";
+import { scientificResearchService } from "../services/scientificResearch.service";
+import IScientificResearch from "../interfaces/IScientificResearch";
+import { userService } from "../services/user.service";
 
 export const getICs = async (req:Request, res:Response) => {
 
@@ -17,12 +19,29 @@ export const getICs = async (req:Request, res:Response) => {
     currentPage: parseInt(query.currentPage as string)
   }
 
-  console.log(filters);
-  
-
-  const allScientificResearch = await scientificResearchServices.getICs(filters);
+  const allScientificResearch = await scientificResearchService.getICs(filters);
 
   res.status(200).send({
     allScientificResearch
   });
+}
+
+export const getThemes = async (req: Request, res: Response) => {
+	const themes = await scientificResearchService.getThemes();
+
+	res.status(201).send(themes);
+}
+
+export const create = async (req: Request, res: Response) => {
+	const newResearch = req.body as IScientificResearch;
+
+	const user = await userService.findByEmail(newResearch.advisorId);
+
+	newResearch.advisorId = user?._id.toString()!;
+
+	const createdResearch = await scientificResearchService.create(newResearch);
+
+	res.status(201).send({
+			researchId: createdResearch._id.toString()
+	});
 }

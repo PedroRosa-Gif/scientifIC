@@ -2,10 +2,12 @@ import mongoose, { Model } from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { scientificResearchSchema } from '../models/scientificResearch.model';
 import IScientificResearch from '../interfaces/IScientificResearch';
-import { scientificResearchServices } from '../services/scientificResearch.service';
 import IUser from '../interfaces/IUser';
 import { userSchema } from '../models/user.model';
 import IFiltersScientificResearch from '../interfaces/IFiltersScientificResearch';
+import { scientificResearchService } from "../services/scientificResearch.service";
+import UserType from '../utils/enums/UserType';
+import ResearchStatus from '../utils/enums/ResearchStatus';
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
@@ -171,26 +173,133 @@ describe('Get ICs', () => {
 
   it('Get all created ICs without filters (3)', async () => {
 
-    await expect(scientificResearchServices.getICs(filtersGetAllICs, ScientificResearchModelMock)).resolves.toHaveLength(3);
+    await expect(scientificResearchService.getICs(filtersGetAllICs, ScientificResearchModelMock)).resolves.toHaveLength(3);
   });
   
   it('Get ICs from IC (2)', async () => {
 
-    await expect(scientificResearchServices.getICs(filtersGetICsFromIC, ScientificResearchModelMock)).resolves.toHaveLength(2);
+    await expect(scientificResearchService.getICs(filtersGetICsFromIC, ScientificResearchModelMock)).resolves.toHaveLength(2);
   });
   
   it('Get ICs with Area "Sociedade" (2)', async () => {
 
-    await expect(scientificResearchServices.getICs(filtersGetICsWithSomeAreas, ScientificResearchModelMock)).resolves.toHaveLength(2);
+    await expect(scientificResearchService.getICs(filtersGetICsWithSomeAreas, ScientificResearchModelMock)).resolves.toHaveLength(2);
   });
   
   it('Get ICs with ScholarShip not defined', async () => {
 
-    await expect(scientificResearchServices.getICs(filtersGetICsWithScholarShip, ScientificResearchModelMock)).resolves.toHaveLength(1);
+    await expect(scientificResearchService.getICs(filtersGetICsWithScholarShip, ScientificResearchModelMock)).resolves.toHaveLength(1);
   });
 
   it('Get ICs with Area "Sociedade" (1) and from IC', async () => {
 
-    await expect(scientificResearchServices.getICs(filtersGetICsWithSomeAreasFromIC, ScientificResearchModelMock)).resolves.toHaveLength(1);
+    await expect(scientificResearchService.getICs(filtersGetICsWithSomeAreasFromIC, ScientificResearchModelMock)).resolves.toHaveLength(1);
   });
-})
+});
+
+describe('Create Scientific Research', () => {
+	const teacher:IUser = {
+    email: "teacher@gmail.com",
+    password: "senha123",
+    name: "Usuário",
+    lastName: "2",
+    ra: "123",
+    birthdate: new Date(),
+    type: UserType.Teacher,
+    institute: ''
+  };
+
+	const student:IUser = {
+    email: "student@gmail.com",
+    password: "senha123",
+    name: "Usuário",
+    lastName: "2",
+    ra: "123",
+    birthdate: new Date(),
+    type: UserType.Student,
+    institute: ''
+  };
+
+	const scientificResearch: IScientificResearch = {
+		theme: 'Economia de pequeno comercio',
+		title: 'Economics',
+		abstract: 'Uma pequena pesquisa de como funciona...',
+		status: ResearchStatus.acceptingStudents,
+		dateToBegin: new Date(),
+		forecastFinish: new Date(),
+		desireSkills: ["ChatGPT"],
+		areas: ["Sociedade", "Economia"],
+		linkToMore: "",
+		scholarShip: 2040.98,
+		isShipToDefine: false,
+		advisorId: "",
+		studentId: "",
+		createdAt: new Date(),
+		updatedAt: new Date()
+	}
+
+	beforeEach(async () => {
+		await UserModelMock.create(teacher);
+
+		let advisor = await UserModelMock.findOne({ email: teacher.email });
+		scientificResearch.advisorId = advisor?._id.toString()!;
+	})
+
+	afterEach(async () => {
+		await UserModelMock.deleteMany({});
+		await ScientificResearchModelMock.deleteMany({});
+	});
+
+	it('Research Without Advisor', async () => {
+		let newResearchWithoutAdvisor: IScientificResearch = {
+				...scientificResearch,
+				advisorId: ""
+		};
+
+		await expect(scientificResearchService.create(newResearchWithoutAdvisor, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("Nenhum professor foi assignado a esta IC");
+	})
+
+	it('Research With Invalid User', async () => {
+		let newResearchChangeId: IScientificResearch = {
+				...scientificResearch,
+				advisorId: mongoose.Types.ObjectId.createFromHexString("64640b6dad525134b38f0293").toString()
+		};
+		
+		await expect(scientificResearchService.create(newResearchChangeId, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O orientador não existe");
+	})
+
+	it('Research Created by Student', async () => {
+		await UserModelMock.create(student);
+
+		let auxAdvisor = await UserModelMock.findOne({ email: student.email });
+
+		let newResearchForTestStudent: IScientificResearch = {
+				...scientificResearch,
+				advisorId: auxAdvisor?._id.toString()!
+		};
+
+		await expect(scientificResearchService.create(newResearchForTestStudent, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O usuário é um ALUNO e não pode criar uma IC");
+	})
+
+	it('Research Without Theme', async () => {
+		let newResearchTheme: IScientificResearch = {
+				...scientificResearch,
+				theme: ""
+		};
+		await expect(scientificResearchService.create(newResearchTheme, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("É necessário inserir um tema para a pesquisa");
+	})
+
+	it('Research Without Defined ScholarShip', async () => {
+		let newResearchScholarShip: IScientificResearch = {
+				...scientificResearch,
+				scholarShip: 0.0,
+				isShipToDefine: false
+		};
+		
+		await expect(scientificResearchService.create(newResearchScholarShip, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O valor da bolsa deve ser inserido, se não possuir valor definido, selecione A DEFINIR");
+	})
+
+	it('Research create successfully', async () => {
+		await expect(scientificResearchService.create(scientificResearch, ScientificResearchModelMock, UserModelMock)).resolves.not.toThrow();
+	});
+});
