@@ -10,6 +10,8 @@ interface IScientificResearch {
 
   dateToBegin: Date;
   forecastFinish: Date;
+  dateToBeginStr: string;
+  forecastFinishStr: string;
 
   desireSkills: string[];
   areas: string[];

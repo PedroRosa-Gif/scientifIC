@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import Authorized from "../components/Authorized/Authorized";
+import Authorized from "../components/Authorized";
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
 import TextInput from "../components/TextInput";
 
-import "./LandingPage.css";
+import "../styles/LandingPage.css";
 import "../styles/ICsPage.css";
 
 import logoAzul from "../assets/imgs/logo-azul.png";

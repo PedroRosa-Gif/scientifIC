@@ -1,7 +1,7 @@
 import icLogo from "../assets/imgs/ic_logo.jpg";
 import unicampLogo from "../assets/imgs/logo-unicamp-white.png";
 
-import "../pages/LandingPage.css";
+import "../styles/LandingPage.css";
 
 function Footer() {
 
