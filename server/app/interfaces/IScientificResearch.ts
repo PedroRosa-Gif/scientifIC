@@ -1,5 +1,3 @@
-import { Decimal128 } from "mongoose";
-
 interface IScientificResearch {
   theme: string;
   title: string;

@@ -17,7 +17,7 @@ function CreateScientificResearch() {
 				title="Cadastrar Oportunidade de IC"
 				onSubmit={(data, reset, notify) => {
 					let research: IScientificResearch = ({ ...data });
-					research.dateToBegin = new Date(data.dateToBeginStr);
+					research.dateToBegin = new Date(data.dateToBeginStr!);
 					research.forecastFinish = new Date(data.forecastFinish);
 					
 					if (userInfos === null) 

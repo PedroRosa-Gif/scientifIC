@@ -45,7 +45,6 @@ nav div.nav-landing-page {
 nav div.nav-brand {
     display: flex;
     align-items: center;
-
     gap: 10px;
 }
 
@@ -59,6 +58,7 @@ nav div.nav-brand h1 {
     font-weight: 600;
     font-size: 40px;
     color: var(--white);
+    text-decoration: none;
 }
 
 nav div.nav-content {
@@ -212,7 +212,7 @@ section div.cards-landing-area {
 
 section div.cards-landing-area h1 {
     font-weight: 700;
-    font-size: 60px;
+    font-size: 50px;
 }
 
 section ul.cards-landing-list {

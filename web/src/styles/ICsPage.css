@@ -1,0 +1,92 @@
+section div.cards-landing-area.ics{
+  padding: 50px 0;
+  box-shadow: none;
+}
+
+div.container-filters-results{
+  display: flex;
+  gap: 100px;
+  width: 100vw;
+  max-width: 1280px;
+
+  padding: 0 40px;
+  margin: 0 auto;
+}
+
+div.container-filters-results .container-filters{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+div.container-filters div.filter-area button{
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  padding: 5px 0;
+  margin: 2px 0;
+}
+
+div.filter-area button.add-area{
+  color: rgb(138, 138, 138);
+  width: 100%;
+  text-align: right;
+}
+
+div.filter-area div.areas-selected{
+  max-height: 175px;
+  overflow-y: auto;
+}
+
+div.areas-selected div.area-selected{
+  width: 100%;
+}
+
+div.filter-area div.area-selected button{
+  margin-right: 5px;
+}
+div.filter-area div.area-selected button:hover{
+  font-weight: bold;
+}
+
+div.areas-selected::-webkit-scrollbar { width: 8px; }
+div.areas-selected::-webkit-scrollbar-track { background-color: transparent; }
+div.areas-selected::-webkit-scrollbar-thumb:hover { background-color: #aaa; }
+div.areas-selected::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+div.container-filters-results .container-results{
+  width: 100%;
+  max-width: 800px;
+}
+
+div.container-results .search-input{
+  max-width: 800px;
+  width: 100%;
+}
+
+div.container-results .ics-cards{
+  margin: 60px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+div.container-filters div.buttons{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+div.container-filters div.buttons div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+div.container-filters div.buttons div button{
+  min-width: 130px;
+}

@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import IScientificResearch from "../interfaces/IScientificResearch";
-import { Decimal128 } from "mongodb";
 
 export const scientificResearchSchema = new Schema<IScientificResearch>({
   theme: { type: String, required: true },
@@ -21,7 +20,7 @@ export const scientificResearchSchema = new Schema<IScientificResearch>({
   createdAt: { type: Date },
   updatedAt: { type: Date },
 
-  advisorId: { type: String, required: true },
+  advisorId: { type: String, ref: 'User', required: true },
   studentId: { type: String }
 });
 

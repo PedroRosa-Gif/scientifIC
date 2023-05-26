@@ -37,7 +37,7 @@ const baseModel: IScientificResearch = {
 	scholarShip: 0,
 	studentId: '',
 	createdAt: new Date(),
-	updateAt: new Date()
+	updatedAt: new Date()
 }
 
 function FormScientificResearch(props: IFormScientificResearch) {

@@ -47,6 +47,7 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
         lastName: user.lastName,
         ra: user.ra,
         birthdate: user.birthdate,
+        institute: user.institute,
         type: user.type,
     },
     process.env.JWT_KEY || "senha123",

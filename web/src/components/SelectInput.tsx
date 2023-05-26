@@ -11,7 +11,7 @@ interface ILogin extends SelectHTMLAttributes<HTMLSelectElement>{
 export default function SelectInput({ icon, children, className, ...props }:ILogin) {
   return (
     <div className="div-input-text">
-      <img src={icon} alt="Ícone de Login" />
+      {(icon !== "") ? <img src={icon} alt="Ícone de Login" /> : <></>}
       <select className={"input-text " + className} { ...props } >
         {children}
       </select>
