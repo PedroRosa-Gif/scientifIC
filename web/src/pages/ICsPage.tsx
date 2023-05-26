@@ -62,7 +62,7 @@ function ICsPage() {
 
   useEffect(() => {
     getFiltedICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
-  }, [currentPage])
+  }, [search, allAreasSelected, institute, status, isShipToDefine, currentPage])
 
   return (
     <main className="container">

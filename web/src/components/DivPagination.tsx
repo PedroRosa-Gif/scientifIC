@@ -20,7 +20,7 @@ function DivPagination({functionToBack, functionToNext, currentPage, totalThisPa
         <></>
       } 
       {
-        (totalThisPage == 6) ?
+        (totalThisPage === 6) ?
         <button onClick={functionToNext}>
           Próxima &gt;&gt;&gt;
         </button>
