@@ -1,0 +1,111 @@
+:root {
+    --under-bg: rgba(241, 68, 54, 1);
+    --submit-bg: #F14436;
+    --submit-hover-bg: #BF2619;
+}
+
+form.form-sc-rs {
+    display: grid;
+    gap: 50px;
+
+    padding: 30px 50px 80px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 4px 4px 0px 0px;
+}
+
+form.form-sc-rs * {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+section.form-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+section.form-title article {
+    display: grid;
+    gap: 5px;
+}
+
+section.form-title article h1 {
+    font-weight: 700;
+    font-size: 32px;
+    color: black;
+}
+
+section.form-title button {
+    border: none;
+    background: black;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section.form-title button:hover {
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+section.form-title article div.dash-under {
+    width: 15%;
+    height: 4px;
+    background: var(--under-bg);
+}
+
+section.form-body {
+    display: grid;
+    gap: 30px;
+}
+
+section.form-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+section.form-submit button {
+    border: none;
+    background: var(--submit-bg);
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section.form-submit button:hover {
+    background: var(--submit-hover-bg);
+}
+
+div.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+div.form-row.scholar-ship {
+    align-items: flex-end;
+    gap: 0;
+}
+
+div.form-row.scholar-ship input {
+    border-radius: 4px 0 0 4px;
+}
+
+article.skills-container {
+    width: 100%;
+}
+
+aside.side-container {
+    width: 100%;
+    display: grid;
+    gap: 10px;
+}

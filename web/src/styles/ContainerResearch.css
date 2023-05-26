@@ -1,0 +1,8 @@
+main.scientific-research {
+    width: 100%;
+    display: grid;
+    gap: 30px;
+
+    background: linear-gradient(116.82deg, #1582F6 5.63%, #007DFE 13.34%, #0175EE 26.42%, #024DC2 69.3%);
+    padding: 30px 100px 0;
+}

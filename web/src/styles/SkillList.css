@@ -1,0 +1,89 @@
+div.desire-skills-container {
+    display: grid;
+    gap: 5px;
+}
+
+div.skills-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+div.skills-actions button {
+    cursor: pointer;
+    padding: 0 12px 5px;
+    background: #F14436;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    font-weight: 700;
+    font-size: 27px;
+    color: white;
+}
+
+div.skills-actions button:hover {
+    background: #cf281c;
+}
+
+div.desire-skills-container span.alert {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FF0000;
+}
+
+div.desire-skills-container article {
+    margin-top: 12px;
+}
+
+div.desire-skills-container article ul {
+    list-style: none;
+    display: grid;
+    gap: 15px;
+    width: 100%;
+}
+
+div.desire-skills-container article ul li {
+    background: #d0dceb;
+    border: 1px solid #d0dceb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 10px;
+
+    cursor: pointer;
+}
+
+div.desire-skills-container article ul li span {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+div.desire-skills-container article ul li button {
+    display: none;
+
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e60d0d;
+    cursor: pointer;
+}
+
+div.desire-skills-container article ul li:hover {
+    background: #B6C3D5;
+    border-color: #B6C3D5;
+}
+
+div.desire-skills-container article ul li:hover button {
+    display: block;
+}
+
+div.desire-skills-container article ul li:hover button:hover {
+    opacity: 0.9;
+}
