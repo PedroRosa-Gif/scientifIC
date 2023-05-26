@@ -28,7 +28,7 @@ function CreateScientificResearch() {
 					createScientificResearch(research)
 						.then((res: any) => {
 							reset();
-							navigate("/");
+							navigate("/iniciacoes-cientificas/candidaturas/23", { replace: true });
 						})
 						.catch(function(errors) {
 							notify(errors.response.data.message);
