@@ -4,6 +4,7 @@ import IScientificResearch from '../interfaces/IScientificResearch';
 import "../styles/ScientificResearchCard.css"
 import ButtonOrange from './ButtonOrange';
 import { ResearchStatusEnum } from '../utils/enums/ResearchStatus';
+import UserType from '../utils/enums/UserType';
 
 interface ScientificResearchCardProps{
   ic: IScientificResearch,
@@ -15,12 +16,16 @@ interface ScientificResearchCardProps{
 
 function ScientificResearchCard({ic, setNotifications, setShowNotifications, setShowApplicationCard, setICSelected}: ScientificResearchCardProps) {
 
-  const { signed } = useContext(AuthContext);
+  const { signed, userInfos } = useContext(AuthContext);
   
   function applyToAScientifResearch(){
 
     if(signed == false){
       setNotifications(["Você precisa estar logado para se candidatar"]);
+      setShowNotifications(true)
+    }
+    else if(userInfos && userInfos.type == UserType.Teacher){
+      setNotifications(["Você precisa ser um estudante para se candidatar"]);
       setShowNotifications(true)
     }
     else{
