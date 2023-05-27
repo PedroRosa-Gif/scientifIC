@@ -23,6 +23,7 @@ import SelectInput from "../components/SelectInput";
 import { getICs } from "../apis/scientificResearch.endpoint";
 import Notifier from "../components/Notifier";
 import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
+import { allStatus } from "../utils/constants/allStatus.constants";
 
 function ICsPage() {
 
@@ -39,7 +40,9 @@ function ICsPage() {
 	const [notifications, setNotifications] = useState<string[]>([]);
 
   const [showApplicationCard, setShowApplicationCard] = useState<boolean>(false);
-  const [icSelected, setICSelected] = useState<IScientificResearch>()
+  const [icSelected, setICSelected] = useState<IScientificResearch>();
+
+  const [refresh, setRefresh] = useState(true);
 
   const { signed, setUserInfos } = useContext(AuthContext);
   const navigate = useNavigate()
@@ -57,20 +60,28 @@ function ICsPage() {
   }
 
   function resetFilters(){
+    setSearch("")
+    setInstitute("")
+    setStatus(0)
+    setIsShipToDefine("")
+
+    setAreaSelected("")
+    setAllAreasSelected([])
+
     setCurrentPage(1)
-    getFiltedICs("", [], "", 0, "", 1)
+    setRefresh(!refresh)
   }
 
-  async function getFiltedICs(search:string, area:string[], institute:string, status:number, isShipToDefine:string, currentPage:number) {
-    const result = await getICs(search, area, institute, status, isShipToDefine, currentPage);
+  async function getFiltedICs() {
+    const result = await getICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
     const allICs = result.data.allScientificResearch;
     
     setAllFiltedICs(allICs);
   }
 
   useEffect(() => {
-    getFiltedICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
-  }, [search, allAreasSelected, institute, status, isShipToDefine, currentPage])
+    getFiltedICs();
+  }, [currentPage, refresh])
 
   return (
     <main className="container">
@@ -126,13 +137,12 @@ function ICsPage() {
                 value={status}
                 onChange={(e) => {setStatus(parseInt(e.target.value))}}
               >
-                <option value={0}>Status</option>
-                <option value={1}>Estudante não escolhido</option>
-                <option value={2}>Projeto não iniciado</option>
-                <option value={3}>Em fase inicial</option>
-                <option value={4}>Em andamento</option>
-                <option value={5}>Em fase de finalização</option>
-                <option value={6}>Finalizado</option>
+                <option value="">Status</option>
+                {
+                  allStatus.map((status, index) => {
+                    return <option value={index + 1}>{status}</option>
+                  })
+                }
               </SelectInput>
               <SelectInput
                 id="scholarShip"
@@ -173,8 +183,9 @@ function ICsPage() {
                 <button 
                   className="add-area"
                   onClick={() => {
-                    if(areaSelected !== "")
+                    if(areaSelected !== "" && !allAreasSelected.includes(areaSelected))
                       setAllAreasSelected([...allAreasSelected, areaSelected])
+                      setAreaSelected("")
                   }}
                 >
                   <p>[+] Adicionar área</p>
@@ -215,9 +226,10 @@ function ICsPage() {
                   />
                   <ButtonOrange 
                     title={"Aplicar filtros"}
-                    onClick={() => 
-                      getFiltedICs(search, allAreasSelected, institute, status, isShipToDefine, 1)
-                    } 
+                    onClick={() => {
+                      setCurrentPage(1)
+                      setRefresh(!refresh)
+                    }} 
                   />
                 </div>
               </div>

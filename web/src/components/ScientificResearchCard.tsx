@@ -3,6 +3,7 @@ import { AuthContext } from '../contexts/auth';
 import IScientificResearch from '../interfaces/IScientificResearch';
 import "../styles/ScientificResearchCard.css"
 import ButtonOrange from './ButtonOrange';
+import { ResearchStatusEnum } from '../utils/enums/ResearchStatus';
 
 interface ScientificResearchCardProps{
   ic: IScientificResearch,
@@ -41,9 +42,9 @@ function ScientificResearchCard({ic, setNotifications, setShowNotifications, set
       <div className="flex">
         <div className="infos">
           <p>{ic.advisorId.name + " " + ic.advisorId.lastName}</p>
-          <p> | </p>
-          <p>{ic.status}</p>
-          <p> | </p>
+          <span> | </span>
+          <p>{ResearchStatusEnum.getStatusString(ic.status)}</p>
+          <span> | </span>
           <p>Valor da bolsa: {ic.isShipToDefine ? <>A definir</> : <>R$ {ic.scholarShip}</>}</p>
         </div>
         {(ic.status === 1) ? <ButtonOrange title="Candidatar-se" onClick={applyToAScientifResearch}/> : <></>}

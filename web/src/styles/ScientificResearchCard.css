@@ -13,3 +13,9 @@ div.flex div.infos{
   display: flex;
   gap: 15px;
 }
+
+div.flex div.infos p{
+  background-color: rgb(235, 235, 235);
+  padding: 2px;
+  border-radius: 4px;
+}
