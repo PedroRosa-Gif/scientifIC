@@ -10,8 +10,15 @@ import ButtonProfile from "../ButtonProfile";
 import AddIcon from "../../assets/icons/add_icon.svg";
 import ExitIcon from "../../assets/icons/back_icon.svg";
 import EditIcon from "../../assets/icons/edit_icon.svg";
+import IUser from "../../interfaces/IUser";
 
-export default function ListAreas() {
+interface IProfile {
+	user: IUser;
+	setUser: Function;
+  }
+  
+
+export default function ListAreas({ user, setUser }:IProfile) {
 	const [areas, setAreas] = useState<string[]>([]);
 	const [search, setSearch] = useState<string>("");
 
@@ -48,9 +55,9 @@ export default function ListAreas() {
 						<input list="browsers" name="browser" id="browser" placeholder="Escreva alguma área..." onChange={(e) => setSearch(e.target.value)} value={search} />
 						<datalist id="browsers">
 							{
-								allAreas.map((area) => {
+								allAreas.map((area, index) => {
 									return(
-										<option>{area}</option>
+										<option key={"option-" + area + index}>{area}</option>
 									);
 								})
 							}
@@ -64,9 +71,9 @@ export default function ListAreas() {
 				</div>
 				<div className="div-align-areas">
 					{
-						areas.map((area) => {
+						areas.map((area, index) => {
 							return(
-								<Topic title={area} removeArea={removeArea} />
+								<Topic title={area} removeArea={removeArea} key={"areas-profile" + index} />
 							)
 						})
 					}

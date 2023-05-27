@@ -27,7 +27,7 @@ export default function Login() {
     try {
       const result = await handleLogin(user, password);
       setUserInfos(result.data.userInfos);
-      navigate("/");
+      navigate("/perfil");
     } catch (error) {
       console.log(error);
     }

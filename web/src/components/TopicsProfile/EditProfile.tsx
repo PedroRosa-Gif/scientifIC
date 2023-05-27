@@ -5,36 +5,31 @@ import ButtonProfile from "../ButtonProfile";
 import ExitIcon from "../../assets/icons/back_icon.svg";
 import EditIcon from "../../assets/icons/edit_icon.svg";
 
-interface IUser {
-  user: object;
+import IUser from "../../interfaces/IUser";
+import { fieldsProfile } from "../../utils/constants/fieldsProfile.constants";
+
+interface IProfile {
+  user: IUser;
   setUser: Function;
 }
 
-export default function EditProfile({ user, setUser }:IUser) {
-  const fields = [
-    { title: "Nome", field: "name", type: "text" },
-    { title: "Sobrenome", field: "lastName", type: "text" },
-    { title: "Email", field: "email", type: "email" },
-    { title: "Data de Nascimento", field: "birthDate", type: "date" },
-    { title: "RA", field: "ra", type: "number" },
-  ];
-
+export default function EditProfile({ user, setUser }:IProfile) {
   return (
     <div className="EditProfile">
       <div className="div-align-fields-edit-profile">
         {
-          fields.map((fil) => {
+          fieldsProfile.map((fil, index) => {
             return (
-              <div className="text-profile-input">
+              <div className="text-profile-input" key={"field-profile-" + fil.field + index}>
                 <label htmlFor={"input-profile" + fil.title}>{fil.title}:</label>
-                <input type={fil.type} onChange={(e) => setUser({ ...user, [fil.field]: e.target.value })} id={"input-profile" + fil.title} />
+                <input type={fil.type} onChange={(e) => setUser({ ...user, [fil.field]: e.target.value })} id={"input-profile" + fil.title} value={user[fil.field]} />
               </div>
             )
           })
         }
       </div>
       <div className="div-align-buttons-profile">
-        <ButtonProfile 
+        <ButtonProfile
           typeStyle={false}
           title={"Sair"}
           alt={"Ícone de sair"}

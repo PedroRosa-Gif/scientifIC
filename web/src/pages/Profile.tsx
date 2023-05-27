@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 // Components imports
 import Logo from "../components/Logo";
@@ -16,15 +16,19 @@ import ICIcon from "../assets/icons/ic_icon.svg";
 import UnicampIcon from "../assets/icons/unicamp_icon.svg";
 
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../contexts/auth";
 
+import IUser from '../interfaces/IUser';
+import { stringToDateInput } from '../utils/handleFormatString';
 
 export default function Profile() {
-  const [user, setUser] = useState({});
+  const { userInfos, setUserInfos } = useContext(AuthContext);
+  const [user, setUser] = useState<IUser>({ ...userInfos, birthdate: stringToDateInput(userInfos!.birthdate) } as IUser);
   const [index, setIndex] = useState(0);
   const topics = [
     <EditProfile user={user} setUser={setUser} />,
-    <ListCandidacy />,
-    <ListAreas />
+    <ListCandidacy user={user} />,
+    <ListAreas user={user} setUser={setUser} />
   ];
 
   useEffect(() => {
@@ -39,17 +43,17 @@ export default function Profile() {
         <Logo namePlanet={"greenPlanet"} colorFont={true} />
         <IconProfile />
       </header>
-      <body className="container-profile">
+      <div className="container-profile">
         <div className="div-align-photo-profile">
           <div className="div-photo-profile">
             <img src={PhotoProfile} alt="Foto de perfil" className="photo-profile" />
           </div>
           <div className="div-info-user-profile">
             <span className="name-user-profile">
-              Olá Pedro!
+              Olá {user.name} {user.lastName}!
             </span>
             <span className="email-user-profile">
-              pedrolucaslr01@gmail.com
+              {user.email}
             </span>
           </div>
         </div>
@@ -70,7 +74,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-      </body>
+      </div>
       <div className="div-rodape-profile">
           <div className="div-links-rodape">
             <NavLink to={"/"} className="link-profile"><button>Pagina inicial</button></NavLink>

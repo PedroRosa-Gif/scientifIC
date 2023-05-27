@@ -1,8 +1,15 @@
 import "../../styles/ListCandidacy.css";
+
 import CancelIcon from "../../assets/icons/cancel_icon.svg";
 import ExpandIcon from "../../assets/icons/expand_icon.svg";
 
-export default function ListCandidacy() {
+import IUser from "../../interfaces/IUser";
+
+interface IProfile {
+  user: IUser;
+}
+
+export default function ListCandidacy({ user }:IProfile) {
   return (
     <div className="ListCandidacy">
       <div className="body-list-candidacy">
@@ -14,9 +21,9 @@ export default function ListCandidacy() {
         </div>
         <div className="div-align-row-table-list-candidacy">
           {
-            [1, 1, 2, 5, 6, 7, 4, 2, 5, 6].map(() => {
+            [1, 1, 2, 5, 6, 7, 4, 2, 5, 6].map((a, index) => {
               return(
-                <div className="row-table-list-candidacy">
+                <div className="row-table-list-candidacy" key={"candidacy-profile" + index}>
                   <div className="div-align-info-list-candidacy info-first-list-candidacy">
                     <span className="title-ic-list-candidacy">{'<Titulo da IC>'}</span>
                     <span>{'<status>'}</span>

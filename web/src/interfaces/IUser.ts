@@ -4,7 +4,7 @@ interface IUser {
   name: string,
   lastName: string,
   ra: string,
-  birthdate: Date,
+  birthdate: string,
   type: number,
 };
 
