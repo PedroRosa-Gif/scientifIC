@@ -55,7 +55,10 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
         expiresIn: "1h",
     });
 
-    return { userInfos: user, message: "Login realizado com sucesso!", token: token };
+    let userInfos = JSON.parse(JSON.stringify(user));
+    delete userInfos.password;
+  
+    return { userInfos: userInfos, message: "Login realizado com sucesso!", token: token };
 }
 
 export const userService = {login, create, findById, findByEmail};
