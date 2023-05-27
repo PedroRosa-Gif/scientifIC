@@ -72,14 +72,14 @@ function ICsPage() {
     setRefresh(!refresh)
   }
 
-  useEffect(() => {
-    async function getFiltedICs() {
-      const result = await getICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
-      const allICs = result.data.allScientificResearch;
-      
-      setAllFiltedICs(allICs);
-    }
+  async function getFiltedICs() {
+    const result = await getICs(search, allAreasSelected, institute, status, isShipToDefine, currentPage);
+    const allICs = result.data.allScientificResearch;
+    
+    setAllFiltedICs(allICs);
+  }
 
+  useEffect(() => {
     getFiltedICs()
   }, [currentPage, refresh])
 
