@@ -13,12 +13,11 @@ import EditIcon from "../../assets/icons/edit_icon.svg";
 import IUser from "../../interfaces/IUser";
 
 interface IProfile {
-	user: IUser;
-	setUser: Function;
-  }
-  
+	userInfos: IUser | null;
+	setUserInfos: Function;  
+}
 
-export default function ListAreas({ user, setUser }:IProfile) {
+export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
 	const [areas, setAreas] = useState<string[]>([]);
 	const [search, setSearch] = useState<string>("");
 

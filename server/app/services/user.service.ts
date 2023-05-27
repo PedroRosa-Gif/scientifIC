@@ -49,4 +49,19 @@ const login = async (email:string, password:string, UserModel:Model<IUser> = Use
     return { userInfos: user, message: "Login realizado com sucesso!", token: token };
 }
 
-export const userService = {login, create}
+const edit = async (id:string, usersInfo:IUser, UserModel:Model<IUser> = User) => {
+  
+  if (id !== usersInfo.email) {
+    const user = await UserModel.findOne({ "email": usersInfo.email });
+  
+    if (user !== null)
+      throw new Error("Email inválido!");
+  }
+
+  console.log(id);
+  console.log(usersInfo);
+
+  await UserModel.updateOne({ "email": id }, usersInfo);
+}
+
+export const userService = {login, create, edit}

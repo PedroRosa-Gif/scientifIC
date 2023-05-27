@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import "../../styles/EditProfile.css";
 
 import ButtonProfile from "../ButtonProfile";
@@ -7,13 +9,22 @@ import EditIcon from "../../assets/icons/edit_icon.svg";
 
 import IUser from "../../interfaces/IUser";
 import { fieldsProfile } from "../../utils/constants/fieldsProfile.constants";
+import { editUser } from "../../apis/user.endpoint";
+import { stringToDateInput } from "../../utils/handleFormatString";
 
 interface IProfile {
-  user: IUser;
-  setUser: Function;
+  userInfos: IUser | null;
+  setUserInfos: Function;  
 }
 
-export default function EditProfile({ user, setUser }:IProfile) {
+export default function EditProfile({ userInfos, setUserInfos }:IProfile) {
+  const [user, setUser] = useState<IUser>({ ...userInfos, birthdate: stringToDateInput(userInfos!.birthdate) } as IUser);
+
+  async function handleEditUser() {
+    await editUser(userInfos!.email, user);
+    setUserInfos(user);
+  }
+
   return (
     <div className="EditProfile">
       <div className="div-align-fields-edit-profile">
@@ -41,7 +52,7 @@ export default function EditProfile({ user, setUser }:IProfile) {
           title={"Editar"}
           alt={"Ícone de editar"}
           src={EditIcon}
-          onClick={() => alert('WhiteButton')}
+          onClick={() => handleEditUser()}
         />
       </div>
     </div>

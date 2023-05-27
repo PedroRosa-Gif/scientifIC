@@ -18,17 +18,13 @@ import UnicampIcon from "../assets/icons/unicamp_icon.svg";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
 
-import IUser from '../interfaces/IUser';
-import { stringToDateInput } from '../utils/handleFormatString';
-
 export default function Profile() {
   const { userInfos, setUserInfos } = useContext(AuthContext);
-  const [user, setUser] = useState<IUser>({ ...userInfos, birthdate: stringToDateInput(userInfos!.birthdate) } as IUser);
   const [index, setIndex] = useState(0);
   const topics = [
-    <EditProfile user={user} setUser={setUser} />,
-    <ListCandidacy user={user} />,
-    <ListAreas user={user} setUser={setUser} />
+    <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} />,
+    <ListCandidacy userInfos={userInfos} setUserInfos={setUserInfos} />,
+    <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} />
   ];
 
   useEffect(() => {
@@ -50,10 +46,10 @@ export default function Profile() {
           </div>
           <div className="div-info-user-profile">
             <span className="name-user-profile">
-              Olá {user.name} {user.lastName}!
+              Olá {userInfos!.name} {userInfos!.lastName}!
             </span>
             <span className="email-user-profile">
-              {user.email}
+              {userInfos!.email}
             </span>
           </div>
         </div>

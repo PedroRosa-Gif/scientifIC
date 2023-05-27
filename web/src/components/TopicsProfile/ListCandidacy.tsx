@@ -6,10 +6,11 @@ import ExpandIcon from "../../assets/icons/expand_icon.svg";
 import IUser from "../../interfaces/IUser";
 
 interface IProfile {
-  user: IUser;
+  userInfos: IUser | null;
+  setUserInfos: Function;  
 }
 
-export default function ListCandidacy({ user }:IProfile) {
+export default function ListCandidacy({ userInfos, setUserInfos }:IProfile) {
   return (
     <div className="ListCandidacy">
       <div className="body-list-candidacy">
