@@ -14,7 +14,7 @@
     justify-content: flex-start;
     margin: 0 auto;
     position: relative;
-    min-height: 1330px;
+    min-height: 1230px;
 }
 
 .div-align-photo-profile {
@@ -44,7 +44,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    min-height: 100px;
 }
 
 .name-user-profile {
@@ -69,7 +69,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: calc(100% - 115px);
+    min-height: calc(100% - 115px);
     top: 115px;
     position: absolute;
     z-index: 0;
@@ -140,7 +140,7 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 400px;
-    padding-top: 100px;
+    padding-top: 50px;
     gap: 100px
 }
 
@@ -191,56 +191,6 @@
     outline: none;
     background-color: none;
 }
-
-.div-align-buttons-profile {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 30px;
-}
-
-.btn-profile {
-    box-sizing: border-box;
-    width: 217px;
-    height: 63px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    outline-offset: 4px;
-    cursor: pointer;
-}
-
-.button-logout-profile {
-    background: #F14436;
-    border: 1px solid #000000;
-    outline: #000000 solid 1px;
-}
-
-.button-edit-profile {
-    background: white;
-    border: 1px solid #1582F6;
-    outline: #1582F6 solid 1px;
-}
-
-
-.btn-profile img{
-    align-self: center;
-}
-
-.btn-profile span {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
-    align-self: center;
-    margin: 0;
-    padding: 0;
-}
-
 
 .div-rodape-profile {
     width: 1280px;

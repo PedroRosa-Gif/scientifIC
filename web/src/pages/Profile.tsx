@@ -5,14 +5,13 @@ import Logo from "../components/Logo";
 import IconProfile from "../components/IconProfile";
 import EditProfile from '../components/TopicsProfile/EditProfile';
 import ListCandidacy from '../components/TopicsProfile/ListCandidacy';
+import ListAreas from '../components/TopicsProfile/ListAreas';
 
 // CSS import
 import "../styles/Profile.css";
 
 // Assets imports
 import PhotoProfile from "../assets/imgs/photo_profile.svg";
-import LogoutIcon from "../assets/icons/logout_icon.svg";
-import EditIcon from "../assets/icons/edit_icon.svg";
 import ICIcon from "../assets/icons/ic_icon.svg";
 import UnicampIcon from "../assets/icons/unicamp_icon.svg";
 
@@ -25,6 +24,7 @@ export default function Profile() {
   const topics = [
     <EditProfile user={user} setUser={setUser} />,
     <ListCandidacy />,
+    <ListAreas />
   ];
 
   useEffect(() => {
@@ -67,16 +67,6 @@ export default function Profile() {
           <div className="div-align-content-profile">
             <div className="div-content-profile">
               { topics[index] }
-            </div>
-            <div className="div-align-buttons-profile">
-              <button className="btn-profile button-logout-profile">
-                <img src={LogoutIcon} alt="Ícone de sair"/>
-                <span>Sair</span>
-              </button>
-              <button className="btn-profile button-edit-profile">
-                <img src={EditIcon} alt="Ícone de editar"/>
-                <span>Editar</span>
-              </button>
             </div>
           </div>
         </div>

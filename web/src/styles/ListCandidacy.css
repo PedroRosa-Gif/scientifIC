@@ -1,5 +1,4 @@
 .ListCandidacy {
-    box-sizing: border-box;
     width: 1104px;
     height: 528px;
     background: #FDFEFF;
@@ -10,26 +9,140 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    padding-bottom: 40px;
+    overflow-y: auto;
 }
 
 .body-list-candidacy {
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.header-table-list-candidacy {
+    width: 92%;
+    height: 99px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     margin: 0 auto;
-    border-collapse: separate;
 }
 
-.body-list-candidacy tr {
-    border: 1px solid black;
-}
-
-.headear-table-list-candidacy th {
+.header-table-list-candidacy span {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    color: #363636;
+    align-self: flex-end;
+    padding: 10px;
+    text-align: center;
     width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.div-align-row-table-list-candidacy {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
 
 .row-table-list-candidacy {
     box-sizing: border-box;
+    width: 92%;
     height: 79px;
-    border-radius: 15px;
-    border: 1px solid black;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    text-align: center;
+    transition: all 100ms ease-in-out;
 }
 
+.row-table-list-candidacy:hover {
+    scale: 1.01;
+}
+
+.div-align-info-list-candidacy {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.title-first-list-candidacy {
+    width: 30% !important;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    padding-left: 40px !important;
+}
+
+.info-first-list-candidacy {
+    width: 30% !important;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.title-ic-list-candidacy {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.last-list-candidacy {
+    width: 20% !important;
+    text-align: right;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.last-list-candidacy button {
+    width: 47px;
+    height: 43px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 5px;
+    outline-offset: 2px;
+    cursor: pointer;
+    transition: 100ms ease-in-out;
+}
+
+.last-list-candidacy button:hover {
+    background-color: #D9D9D9;
+}
+
+
+.expand-btn-profile {
+    border: 1px solid #1582F6;
+    outline: #1582F6 solid 1px;
+}
+
+.cancel-btn-profile {
+    border: 1px solid #F14436;
+    outline: #F14436 solid 1px;
+}
+
+.last-list-candidacy button img {
+    width: 100%;
+    margin: 0 auto;
+}
