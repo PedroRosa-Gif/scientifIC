@@ -1,31 +1,62 @@
-import { ReactNode, SetStateAction, createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import IUser from "../interfaces/IUser";
 
-export interface IAuthContext {
+
+interface UserContextProps {
   userInfos: IUser | null;
-  setUserInfos: React.Dispatch<SetStateAction<IUser | null>>;
   signed: boolean;
+  setUserInfos: (newUser: IUser | null) => void;
+  signIn: () => void;
+  signOut: () => void;
 }
 
-export const AuthContext = createContext<IAuthContext>({
+export const AuthContext = createContext<UserContextProps>({
   userInfos: null,
-  setUserInfos: () => null,
-  signed: false
+  signed: false,
+  setUserInfos: () => {},
+  signIn: () => {},
+  signOut: () => {},
 });
-
-interface AuthProviderProps {
-  children: ReactNode
+interface UserProviderProps {
+  children: React.ReactNode;
 }
 
-export const AuthProvider = ({children}: AuthProviderProps) => {
+export const AuthProvider: React.FC<UserProviderProps> = ({ children }) => {
+  const [userInfos, setUser] = useState<IUser | null>(() => {
+    const storedUser = localStorage.getItem("userInfos");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  const [signed, setSigned] = useState<boolean>(false);
 
-  const [userInfos, setUserInfos] = useState<IUser | null>(null);
+  const setUserInfos = (newUser: IUser | null) => {
+    setUser(newUser);
+  };
+
+  const signIn = () => {
+    setSigned(true);
+  };
+
+  const signOut = () => {
+    setUser(null);
+    setSigned(false);
+  };
+
+  useEffect(() => {
+    if (userInfos) {
+      setSigned(true);
+    } else {
+      setSigned(false);
+    }
+  }, [userInfos]);
+
+  useEffect(() => {
+    localStorage.setItem("userInfos", JSON.stringify(userInfos));
+  }, [userInfos]);
 
   return (
-    <AuthContext.Provider
-      value={{ userInfos, setUserInfos, signed: !!userInfos }}
-    >
+    <AuthContext.Provider value={{ userInfos, signed, setUserInfos, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
-}
+};
+
