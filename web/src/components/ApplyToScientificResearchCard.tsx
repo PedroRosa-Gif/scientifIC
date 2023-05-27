@@ -36,7 +36,7 @@ export default function ApplyToAScientifResearchCard({icSelected, setShowsetShow
   return (
     <>
       {
-        (icSelected != undefined) ?
+        (icSelected !== undefined) ?
           <CardContainerBlack closeCard={() => {setShowsetShowApplicationCard(false)}}>
             <div className="container-apply" onClick={handleClickInner}>
               <h1>Candidatar-se a uma IC</h1>

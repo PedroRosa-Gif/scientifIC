@@ -81,7 +81,7 @@ function ICsPage() {
 
   useEffect(() => {
     getFiltedICs()
-  }, [currentPage, refresh])
+  }, [currentPage, refresh, getFiltedICs])
 
   return (
     <main className="container">
