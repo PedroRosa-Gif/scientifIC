@@ -1,12 +1,33 @@
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { AuthContext } from '../contexts/auth';
 import IScientificResearch from '../interfaces/IScientificResearch';
 import "../styles/ScientificResearchCard.css"
 import ButtonOrange from './ButtonOrange';
 
 interface ScientificResearchCardProps{
-  ic: IScientificResearch
+  ic: IScientificResearch,
+  setNotifications: Dispatch<SetStateAction<string[]>>,
+  setShowNotifications: Dispatch<SetStateAction<boolean>>,
+  setShowApplicationCard: Dispatch<SetStateAction<boolean>>,
+  setICSelected: Dispatch<SetStateAction<IScientificResearch | undefined>>
 }
 
-function ScientificResearchCard({ic}: ScientificResearchCardProps) {
+function ScientificResearchCard({ic, setNotifications, setShowNotifications, setShowApplicationCard, setICSelected}: ScientificResearchCardProps) {
+
+  const { signed } = useContext(AuthContext);
+  
+  function applyToAScientifResearch(){
+
+    if(signed == false){
+      setNotifications(["Você precisa estar logado para se candidatar"]);
+      setShowNotifications(true)
+    }
+    else{
+      setICSelected(ic)
+      setShowApplicationCard(true)
+    }
+  }
+
   return (
     <div>
       <h2>{(ic.title !== "") ? ic.title : ic.theme}</h2>
@@ -25,7 +46,7 @@ function ScientificResearchCard({ic}: ScientificResearchCardProps) {
           <p> | </p>
           <p>Valor da bolsa: {ic.isShipToDefine ? <>A definir</> : <>R$ {ic.scholarShip}</>}</p>
         </div>
-        {(ic.status === 1) ? <ButtonOrange title="Candidatar-se"/> : <></>}
+        {(ic.status === 1) ? <ButtonOrange title="Candidatar-se" onClick={applyToAScientifResearch}/> : <></>}
       </div>
       <hr />
     </div>

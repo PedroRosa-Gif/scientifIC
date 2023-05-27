@@ -21,6 +21,8 @@ import ButtonOrange from "../components/ButtonOrange";
 import { allAreas } from "../utils/constants/allAreas.constants";
 import SelectInput from "../components/SelectInput";
 import { getICs } from "../apis/scientificResearch.endpoint";
+import Notifier from "../components/Notifier";
+import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
 
 function ICsPage() {
 
@@ -32,6 +34,12 @@ function ICsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [allAreasSelected, setAllAreasSelected] = useState<string[]>([]);
   const [areaSelected, setAreaSelected] = useState("");
+  
+	const [showNotifications, setShowNotifications] = useState<boolean>(false);
+	const [notifications, setNotifications] = useState<string[]>([]);
+
+  const [showApplicationCard, setShowApplicationCard] = useState<boolean>(false);
+  const [icSelected, setICSelected] = useState<IScientificResearch>()
 
   const { signed, setUserInfos } = useContext(AuthContext);
   const navigate = useNavigate()
@@ -98,6 +106,14 @@ function ICsPage() {
           </div>
         </nav>
       </header>
+      {showApplicationCard && 
+      <ApplyToAScientifResearchCard 
+        icSelected={icSelected} 
+        setNotifications={setNotifications}
+        setShowsetShowApplicationCard={setShowApplicationCard}
+        setShowNotifications={setShowNotifications}
+      />}
+      {showNotifications && <Notifier notifications={notifications} show={showNotifications} setShow={setShowNotifications} />}
       <section>
         <div className="cards-landing-area ics">
           <h1>Iniciações e Estudos</h1>
@@ -218,7 +234,14 @@ function ICsPage() {
               <div className="ics-cards">
                 {
                   allFiltedICs.map((ic, index) => {
-                    return <ScientificResearchCard key={index} ic={ic}/>
+                    return <ScientificResearchCard 
+                              key={index} 
+                              ic={ic}
+                              setNotifications={setNotifications}
+                              setShowNotifications={setShowNotifications}
+                              setShowApplicationCard={setShowApplicationCard}
+                              setICSelected={setICSelected}
+                            />
                   })
                 }
               </div>
