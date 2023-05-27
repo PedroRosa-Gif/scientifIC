@@ -117,7 +117,7 @@ describe('Apply to a Scientific Research', () => {
 
     const scientificResearchInfos = await ScientificResearchModelMock.create({
       ...scientificResearch,
-      status: ResearchStatus.notStarted
+      status: ResearchStatus.initialStep
     });
     newApplication.scientificResearchId = scientificResearchInfos._id.toString();
 
