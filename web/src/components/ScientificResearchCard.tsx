@@ -20,11 +20,11 @@ function ScientificResearchCard({ic, setNotifications, setShowNotifications, set
   
   function applyToAScientifResearch(){
 
-    if(signed == false){
+    if(signed === false){
       setNotifications(["Você precisa estar logado para se candidatar"]);
       setShowNotifications(true)
     }
-    else if(userInfos && userInfos.type == UserType.Teacher){
+    else if(userInfos && userInfos.type === UserType.Teacher){
       setNotifications(["Você precisa ser um estudante para se candidatar"]);
       setShowNotifications(true)
     }

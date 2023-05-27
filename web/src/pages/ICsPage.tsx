@@ -80,7 +80,7 @@ function ICsPage() {
   }
 
   useEffect(() => {
-    getFiltedICs();
+    getFiltedICs()
   }, [currentPage, refresh])
 
   return (

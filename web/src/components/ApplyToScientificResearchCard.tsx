@@ -22,10 +22,10 @@ export default function ApplyToAScientifResearchCard({icSelected, setShowsetShow
   const handleClickInner = (event: { stopPropagation: () => void; }) => { event.stopPropagation() };
 
   async function applyToAScientifResearch(){
-    if(icSelected !== undefined && userInfos != null){
+    if(icSelected !== undefined && userInfos !== null){
       const result = await applyToAScientificResearch(icSelected._id!, userInfos._id!, motivation);
       
-      if(result.status == 201){
+      if(result.status === 201){
         setShowsetShowApplicationCard(false);
         setNotifications(["Aplicação para a IC feita com sucesso!"]);
         setShowNotifications(true);
