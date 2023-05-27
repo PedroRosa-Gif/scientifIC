@@ -91,4 +91,8 @@ const getThemes = (ScientificResearchModel: Model<IScientificResearch> = Scienti
 	return ScientificResearchModel.find({}, { theme: 1, _id: 0 }).distinct('theme');
 }
 
-export const scientificResearchService = {create, getThemes, getICs};
+const findById = async (id: string, ScientificResearchModel: Model<IScientificResearch> = ScientificResearch) => {
+  return await ScientificResearchModel.findById(id);
+}
+
+export const scientificResearchService = {create, getThemes, getICs, findById};

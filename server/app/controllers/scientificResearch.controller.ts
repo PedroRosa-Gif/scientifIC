@@ -42,6 +42,6 @@ export const create = async (req: Request, res: Response) => {
 	const createdResearch = await scientificResearchService.create(newResearch);
 
 	res.status(201).send({
-			researchId: createdResearch._id.toString()
+		researchId: createdResearch._id.toString()
 	});
 }

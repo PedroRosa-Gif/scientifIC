@@ -1,5 +1,6 @@
 enum ResearchStatus {
-    acceptingStudents = 0
+    acceptingStudents = 1,
+    notStarted = 2
 }
 
 export default ResearchStatus;
