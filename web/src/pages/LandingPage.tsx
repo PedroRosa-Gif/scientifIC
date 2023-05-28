@@ -96,9 +96,11 @@ function LandingPage() {
                 ))}
               </ul>
               <div className="cards-see-more-area">
-                <button className="cards-see-more">
-                  Veja Mais
-                </button>
+                <NavLink to={"/iniciacoes-cientificas"} className="link">
+                  <button className="cards-see-more">
+                    Veja Mais
+                  </button>
+                </NavLink>
               </div>
             </div>
           </section>

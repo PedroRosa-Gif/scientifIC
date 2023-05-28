@@ -25,7 +25,7 @@ function PostLoadScientificResearch({ children }: IPostLoad) {
 					let themes: string[] = response.data;
 
 					let options: { display: string; value: number; }[] = [];
-					allStatus.map((status, index) => options.push({ display: status, value: index }));
+					allStatus.map((status, index) => options.push({ display: status, value: index + 1 }));
 			
 					setLoad({ themes: themes, statusOpts: options });
 				})

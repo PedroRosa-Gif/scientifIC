@@ -198,7 +198,8 @@ describe('Get ICs', () => {
 });
 
 describe('Create Scientific Research', () => {
-	const teacher:IUser = {
+
+  const teacher:IUser = {
     email: "teacher@gmail.com",
     password: "senha123",
     name: "Usuário",
@@ -208,8 +209,8 @@ describe('Create Scientific Research', () => {
     type: UserType.Teacher,
     institute: ''
   };
-
-	const student:IUser = {
+  
+  const student:IUser = {
     email: "student@gmail.com",
     password: "senha123",
     name: "Usuário",
@@ -219,25 +220,25 @@ describe('Create Scientific Research', () => {
     type: UserType.Student,
     institute: ''
   };
-
-	const scientificResearch: IScientificResearch = {
-		theme: 'Economia de pequeno comercio',
-		title: 'Economics',
-		abstract: 'Uma pequena pesquisa de como funciona...',
-		status: ResearchStatus.acceptingStudents,
-		dateToBegin: new Date(),
-		forecastFinish: new Date(),
-		desireSkills: ["ChatGPT"],
-		areas: ["Sociedade", "Economia"],
-		linkToMore: "",
-		scholarShip: 2040.98,
-		isShipToDefine: false,
-		advisorId: "",
-		studentId: "",
-		createdAt: new Date(),
-		updatedAt: new Date()
-	}
-
+  
+  const scientificResearch: IScientificResearch = {
+    theme: 'Economia de pequeno comercio',
+    title: 'Economics',
+    abstract: 'Uma pequena pesquisa de como funciona...',
+    status: ResearchStatus.acceptingStudents,
+    dateToBegin: new Date(),
+    forecastFinish: new Date(),
+    desireSkills: ["ChatGPT"],
+    areas: ["Sociedade", "Economia"],
+    linkToMore: "",
+    scholarShip: 2040.98,
+    isShipToDefine: false,
+    advisorId: "",
+    studentId: "",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+  
 	beforeEach(async () => {
 		await UserModelMock.create(teacher);
 
@@ -252,8 +253,8 @@ describe('Create Scientific Research', () => {
 
 	it('Research Without Advisor', async () => {
 		let newResearchWithoutAdvisor: IScientificResearch = {
-				...scientificResearch,
-				advisorId: ""
+      ...scientificResearch,
+      advisorId: ""
 		};
 
 		await expect(scientificResearchService.create(newResearchWithoutAdvisor, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("Nenhum professor foi assignado a esta IC");
@@ -261,8 +262,8 @@ describe('Create Scientific Research', () => {
 
 	it('Research With Invalid User', async () => {
 		let newResearchChangeId: IScientificResearch = {
-				...scientificResearch,
-				advisorId: mongoose.Types.ObjectId.createFromHexString("64640b6dad525134b38f0293").toString()
+      ...scientificResearch,
+      advisorId: mongoose.Types.ObjectId.createFromHexString("64640b6dad525134b38f0293").toString()
 		};
 		
 		await expect(scientificResearchService.create(newResearchChangeId, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O orientador não existe");
@@ -274,8 +275,8 @@ describe('Create Scientific Research', () => {
 		let auxAdvisor = await UserModelMock.findOne({ email: student.email });
 
 		let newResearchForTestStudent: IScientificResearch = {
-				...scientificResearch,
-				advisorId: auxAdvisor?._id.toString()!
+      ...scientificResearch,
+      advisorId: auxAdvisor?._id.toString()!
 		};
 
 		await expect(scientificResearchService.create(newResearchForTestStudent, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O usuário é um ALUNO e não pode criar uma IC");
@@ -291,9 +292,9 @@ describe('Create Scientific Research', () => {
 
 	it('Research Without Defined ScholarShip', async () => {
 		let newResearchScholarShip: IScientificResearch = {
-				...scientificResearch,
-				scholarShip: 0.0,
-				isShipToDefine: false
+      ...scientificResearch,
+      scholarShip: 0.0,
+      isShipToDefine: false
 		};
 		
 		await expect(scientificResearchService.create(newResearchScholarShip, ScientificResearchModelMock, UserModelMock)).rejects.toThrowError("O valor da bolsa deve ser inserido, se não possuir valor definido, selecione A DEFINIR");

@@ -1,4 +1,6 @@
 interface IScientificResearch {
+  _id?:string;
+  
   theme: string;
   title: string;
   linkToMore: string;
