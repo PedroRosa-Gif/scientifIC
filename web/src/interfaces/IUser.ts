@@ -8,7 +8,7 @@ interface IUser {
   ra: string,
   birthdate: Date,
   institute: string,
-  areasOfInterest: string[],
+  interestAreas?: string[],
   type: number,
 };
 
