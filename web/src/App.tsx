@@ -16,7 +16,7 @@ function App() {
         <Route path='/cadastro' element={<SignUp />} />
         <Route path='/iniciacoes-cientificas' element={<ICsPage />} />
         <Route path='/iniciacoes-cientificas/criar' element={<CreateScientificResearch />} />
-        <Route path='/iniciacoes-cientificas/candidaturas/:idReseach' element={<ScientificResearchApplications />} />
+        <Route path='/iniciacoes-cientificas/candidaturas/:idResearch' element={<ScientificResearchApplications />} />
       </Routes>
     </Router>
   );

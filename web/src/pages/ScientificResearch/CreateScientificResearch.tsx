@@ -6,6 +6,7 @@ import IScientificResearch from "../../interfaces/IScientificResearch";
 import { AuthContext } from "../../contexts/auth";
 import { useNavigate } from "react-router-dom";
 import { createScientificResearch } from "../../apis/scientificResearch.endpoint";
+import { AxiosResponse } from "axios";
 
 function CreateScientificResearch() {
 	const { userInfos } = useContext(AuthContext);
@@ -26,9 +27,9 @@ function CreateScientificResearch() {
 					research.advisorId = userInfos.email;
 
 					createScientificResearch(research)
-						.then((res: any) => {
+						.then((res: AxiosResponse) => {
 							reset();
-							navigate("/iniciacoes-cientificas/candidaturas/23", { replace: true });
+							navigate(`/iniciacoes-cientificas/candidaturas/${res.data.researchId}`, { replace: true });
 						})
 						.catch(function(errors) {
 							notify(errors.response.data.message);

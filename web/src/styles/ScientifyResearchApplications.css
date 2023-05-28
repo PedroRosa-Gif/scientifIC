@@ -88,6 +88,12 @@ section.applications-area article.applications-list {
     width: 70%;
 }
 
+section.applications-area article.applications-list ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
 div.applications-list-title {
     display: grid;
     gap: 5px;
