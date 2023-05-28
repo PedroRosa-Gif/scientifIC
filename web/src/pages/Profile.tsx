@@ -23,7 +23,7 @@ export default function Profile() {
   const [index, setIndex] = useState(0);
   const topics = [
     <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} />,
-    <ListCandidacy userInfos={userInfos} setUserInfos={setUserInfos} />,
+    <ListCandidacy userInfos={userInfos} />,
     <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} />
   ];
 

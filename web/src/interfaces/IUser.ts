@@ -1,4 +1,6 @@
 interface IUser {
+  _id?:string,
+
   email: string,
   password?: string,
   name: string,
@@ -6,6 +8,8 @@ interface IUser {
   ra: string,
   birthdate: string,
   type: number,
+
+  interestAreas: string[],
 };
 
 export default IUser;

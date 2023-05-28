@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const getApplications = async (email:string) => {
+export const getApplications = async (id:string) => {
 
   const res = await axios.post("http://localhost:8000/scientific-research-application/getApplications", {
-    email: email,
+    id: id,
   });
 
   return res;

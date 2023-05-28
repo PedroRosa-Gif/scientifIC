@@ -40,6 +40,7 @@ export default function SignUp() {
       lastName,
       ra,
       birthdate: birthdate,
+      interestAreas: [""],
       type: userType,
     }
     

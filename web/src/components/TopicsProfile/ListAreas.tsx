@@ -12,13 +12,15 @@ import ExitIcon from "../../assets/icons/back_icon.svg";
 import EditIcon from "../../assets/icons/edit_icon.svg";
 import IUser from "../../interfaces/IUser";
 
+import { editUser } from "../../apis/user.endpoint";
+
 interface IProfile {
 	userInfos: IUser | null;
 	setUserInfos: Function;  
 }
 
 export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
-	const [areas, setAreas] = useState<string[]>([]);
+	const [areas, setAreas] = useState<string[]>(userInfos?.interestAreas || []);
 	const [search, setSearch] = useState<string>("");
 
 	function addArea() {
@@ -34,6 +36,12 @@ export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
 		setAreas(filAreas.sort());
 	}
 
+  async function saveAreas() {
+    const newInfoData = { ...userInfos, interestAreas: areas } as IUser;
+    await editUser(userInfos!.email, newInfoData);
+    setUserInfos(newInfoData);
+  }
+
   return (
     <div className="ListAreas">
 			<div className="body-list-areas">
@@ -45,7 +53,7 @@ export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
 						title={"Salvar"}
 						alt={"Ícone de salvar"}
 						src={EditIcon}
-						onClick={() => alert('SaveButton')}
+						onClick={() => saveAreas()}
 					/>
 				</div>
 				</div>
