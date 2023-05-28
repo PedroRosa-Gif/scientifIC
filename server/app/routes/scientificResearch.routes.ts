@@ -1,7 +1,6 @@
 import express from "express";
 import { resolver } from "../adapters/route.adapters";
-import { getThemes, create } from "../controllers/scientificResearch.controller";
-import { getICs } from "../controllers/scientificResearch.controller";
+import { getThemes, create, getICs } from "../controllers/scientificResearch.controller";
 
 const scientificResearchRoutes = express.Router();
 

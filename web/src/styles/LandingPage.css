@@ -27,6 +27,8 @@ main.container {
     width: 100%;
     background: var(--page-background);
 
+    position: relative;
+
     overflow: hidden;
 }
 

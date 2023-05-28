@@ -1,6 +1,6 @@
 export const allStatus = [
-    "Aberto para Candidaturas",
-    "Etapa inicial",
-    "Em desenvolvimento",
-    "Finalizado"
+  "Aberto para candidaturas",
+  "Etapa inicial",
+  "Em desenvolvimento",
+  "Finalizado"
 ]
