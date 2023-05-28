@@ -8,12 +8,14 @@ import mongoose, { Model } from "mongoose";
 import { userSchema } from "../models/user.model";
 import { scientificResearchSchema } from "../models/scientificResearch.model";
 import { scientificResearchApplicationSchema } from "../models/scientificResearchApplication.model";
-import { scientificResearchApplicationService } from "../services/scientificResearchApplication.service";
+import ScientificResearchApplicationService from "../services/ScientificResearchApplicationService";
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
 let ScientificResearchModelMock: Model<IScientificResearch>;
 let ScientificResearchApplicationModelMock: Model<IScientificResearchApplication>;
+
+let scientificResearchApplicationService: ScientificResearchApplicationService;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -23,6 +25,8 @@ beforeAll(async () => {
   UserModelMock = mongoose.model<IUser>("User", userSchema);
   ScientificResearchModelMock = mongoose.model("ScientificResearch", scientificResearchSchema);
   ScientificResearchApplicationModelMock = mongoose.model("ScientificResearchApplication", scientificResearchApplicationSchema);
+
+  scientificResearchApplicationService = ScientificResearchApplicationService.getInstance(ScientificResearchApplicationModelMock, UserModelMock, ScientificResearchModelMock);
 });
 
 afterAll(async () => {
@@ -101,7 +105,7 @@ describe('Apply to a Scientific Research', () => {
       scientificResearchId: "644297a14c4aaac33ca2daff"
 		};
 
-		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplicationWithoutScientificResearch, ScientificResearchApplicationModelMock)).rejects.toThrowError("A iniciação científica não existe");
+		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplicationWithoutScientificResearch)).rejects.toThrowError("A iniciação científica não existe");
 	});
 
   it('Application Without Student', async () => {
@@ -110,7 +114,7 @@ describe('Apply to a Scientific Research', () => {
       studentId: "644297a14c4aaac33ca2daff"
 		};
 
-		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplicationWithoutStudent, ScientificResearchApplicationModelMock)).rejects.toThrowError("O estudante não existe");
+		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplicationWithoutStudent)).rejects.toThrowError("O estudante não existe");
 	});
   
   it('Application with Scientific Research not accpetion new students', async () => {
@@ -121,11 +125,11 @@ describe('Apply to a Scientific Research', () => {
     });
     newApplication.scientificResearchId = scientificResearchInfos._id.toString();
 
-		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplication, ScientificResearchApplicationModelMock)).rejects.toThrowError("A iniciação científica não está mais aceitando estudantes");
+		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplication)).rejects.toThrowError("A iniciação científica não está mais aceitando estudantes");
 	});
 
   it('Application created sucess', async () => {
 
-		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplication, ScientificResearchApplicationModelMock)).resolves.not.toThrow();
+		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplication)).resolves.not.toThrow();
 	});
 });
