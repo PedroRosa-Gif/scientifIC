@@ -44,7 +44,7 @@ function ICsPage() {
 
   const [refresh, setRefresh] = useState(true);
 
-  const { signed, setUserInfos } = useContext(AuthContext);
+  const { signed, setUserInfos, userInfos } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
@@ -70,6 +70,26 @@ function ICsPage() {
 
     setCurrentPage(1)
     setRefresh(!refresh)
+  }
+
+  function applyMyInterestAreas() {
+    
+    if(userInfos.interestAreas === undefined || userInfos.interestAreas.length === 0){
+      setNotifications(["Você precisa primeiro setar suas áreas de interesse em seu perfil"]);
+      setShowNotifications(true);
+    }
+    else{
+      setSearch("")
+      setInstitute("")
+      setStatus(1)
+      setIsShipToDefine("")
+
+      setAreaSelected("")
+      setAllAreasSelected(userInfos.interestAreas)
+
+      setCurrentPage(1)
+      setRefresh(!refresh)
+    }
   }
 
   async function getFiltedICs() {
@@ -140,7 +160,7 @@ function ICsPage() {
                 <option value="">Status</option>
                 {
                   allStatus.map((status, index) => {
-                    return <option value={index + 1}>{status}</option>
+                    return <option key={index} value={index + 1}>{status}</option>
                   })
                 }
               </SelectInput>
@@ -216,6 +236,7 @@ function ICsPage() {
                 { signed ? 
                   <ButtonOrange 
                     title={"Filtrar por minhas áreas de interesse"}
+                    onClick={applyMyInterestAreas}
                   /> 
                   : <></>
                 }

@@ -1,6 +1,6 @@
 import { Model } from "mongoose";
 import IScientificResearchApplication from "../interfaces/IScientificResearchApplication";
-import ScientificResearchService from "./scientificResearch.service";
+import ScientificResearchService from "./ScientificResearchService";
 import UserService from "./UserService";
 import IUser from "../interfaces/IUser";
 import IScientificResearch from "../interfaces/IScientificResearch";

@@ -42,7 +42,7 @@ export default function SignUp() {
       ra,
       birthdate: new Date(birthdate),
       institute: "",
-      areasOfInterest: [""],
+      interestAreas: [""],
       type: userType,
     }
     

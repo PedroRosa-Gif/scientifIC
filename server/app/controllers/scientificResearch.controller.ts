@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import IFiltersScientificResearch from "../interfaces/IFiltersScientificResearch";
-import ScientificResearchService from "../services/scientificResearch.service";
+import ScientificResearchService from "../services/ScientificResearchService";
 import IScientificResearch from "../interfaces/IScientificResearch";
 import ScientificResearch from '../models/scientificResearch.model';
 import User from "../models/user.model";

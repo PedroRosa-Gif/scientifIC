@@ -50,7 +50,7 @@ function ScientificResearchCard({ic, setNotifications, setShowNotifications, set
           <span> | </span>
           <p>{ResearchStatusEnum.getStatusString(ic.status)}</p>
           <span> | </span>
-          <p>Valor da bolsa: {ic.isShipToDefine ? <>A definir</> : <>R$ {ic.scholarShip}</>}</p>
+          <p>Bolsa: {ic.isShipToDefine ? <>A definir</> : <>R$ {ic.scholarShip}</>}</p>
         </div>
         {(ic.status === 1) ? <ButtonOrange title="Candidatar-se" onClick={applyToAScientifResearch}/> : <></>}
       </div>
