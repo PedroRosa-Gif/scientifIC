@@ -58,9 +58,6 @@ const edit = async (id:string, usersInfo:IUser, UserModel:Model<IUser> = User) =
       throw new Error("Email inválido!");
   }
 
-  console.log(id);
-  console.log(usersInfo);
-
   await UserModel.updateOne({ "email": id }, usersInfo);
 }
 
