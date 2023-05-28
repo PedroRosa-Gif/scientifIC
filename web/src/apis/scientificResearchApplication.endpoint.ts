@@ -25,6 +25,11 @@ export const cancelCandidacy = async (id:string) => {
   const res = await axios.post("http://localhost:8000/scientific-research-application/cancelCandidacy", {
     id: id,
   });
+  return res;
+}
+
+export const getApplicationsByResearchQuery = async (idResearch: string, search: string) => {
+  const res = await axios.get(`http://localhost:8000/scientific-research-application/byResearch?idResearch=${idResearch}&search=${search}`);
 
   return res;
 }

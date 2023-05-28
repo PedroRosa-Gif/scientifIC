@@ -40,9 +40,9 @@ export default function SignUp() {
       name,
       lastName,
       ra,
-      interestAreas: [""],
       birthdate: birthdate,
       institute: "",
+      interestAreas: [""],
       type: userType,
     }
     

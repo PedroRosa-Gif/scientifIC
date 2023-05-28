@@ -5,6 +5,8 @@ import IScientificResearch from "../interfaces/IScientificResearch";
 import ScientificResearch from '../models/scientificResearch.model';
 import User from "../models/user.model";
 import UserService from "../services/UserService";
+import ScientificResearchApplicationService from "../services/ScientificResearchApplicationService";
+import ScientificResearchApplication from "../models/scientificResearchApplication.model";
 
 export const getICs = async (req:Request, res:Response) => {
 
@@ -34,7 +36,27 @@ export const getThemes = async (req: Request, res: Response) => {
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
 	const themes = await scientificResearchService.getThemes();
 
-	res.status(201).send(themes);
+	res.status(200).send(themes);
+}
+
+export const getResearchApplications = async (req: Request, res: Response) => {
+  const idResearch = req.query["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
+  const search = req.query["search"] as string;
+ 
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const research = await scientificResearchService.findByIdOnlyTeacher(idResearch, idUser);
+
+  const applicationsService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
+
+  const applications = await applicationsService.getApplicationsOfResearch(idResearch, search);
+
+  res.status(200).send({
+		research: research,
+    applications: applications, 
+    count: applications.length
+	});
 }
 
 export const create = async (req: Request, res: Response) => {
