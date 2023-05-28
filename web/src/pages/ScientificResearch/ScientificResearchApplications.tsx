@@ -84,7 +84,7 @@ function ScientificResearchApplications() {
 					</section>
 					<section className="overview-applications">
 						<span>Criado em: {research ? new Date(research.createdAt).toLocaleDateString("pt-br") : "-"}</span>
-						<span>Candidados: {count}</span>
+						<span>Candidatos: {count}</span>
 					</section>
 					<section className="applications-area">
 						<article className="applications-list">
