@@ -9,6 +9,7 @@ export const userSchema = new Schema<IUser>({
     ra: { type: String, required: true },
     birthdate: { type: Date, required: true },
     institute: { type: String, required: false },
+    interestAreas: { type: [String], required: false },
     type: { type: Number, required: true },
 });
 
