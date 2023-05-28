@@ -5,7 +5,7 @@ import IScientificResearch from '../interfaces/IScientificResearch';
 import IUser from '../interfaces/IUser';
 import { userSchema } from '../models/user.model';
 import IFiltersScientificResearch from '../interfaces/IFiltersScientificResearch';
-import ScientificResearchService from "../services/scientificResearch.service";
+import ScientificResearchService from "../services/ScientificResearchService";
 import UserType from '../utils/enums/UserType';
 import ResearchStatus from '../utils/enums/ResearchStatus';
 
