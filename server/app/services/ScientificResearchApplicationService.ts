@@ -4,6 +4,7 @@ import ScientificResearchService from "./ScientificResearchService";
 import UserService from "./UserService";
 import IUser from "../interfaces/IUser";
 import IScientificResearch from "../interfaces/IScientificResearch";
+import User from "../models/user.model";
 
 class ScientificResearchApplicationService {
 
@@ -47,6 +48,20 @@ class ScientificResearchApplicationService {
   
     return await this.ApplicationModel.create(newApplication);
   }
+
+  async getApplicationsOfResearch(idResearch: string, search: string) {
+    const populate = {
+			path: 'studentId',
+			select: 'name lastName email institute'
+		};
+
+    return await this.ApplicationModel.find(
+      {
+        scientificResearchId: idResearch,
+        studentId: { $in: (await User.find({ $or: [{ name: new RegExp(search, "i") }, { lastName: new RegExp(search, "i") }]})).map(u => u._id) } 
+      }
+    ).populate(populate).sort("-createdAt").exec();
+  }
 }
 
-export default ScientificResearchApplicationService
+export default ScientificResearchApplicationService;

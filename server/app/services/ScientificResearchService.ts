@@ -107,6 +107,15 @@ class ScientificResearchService {
 	async findById(id: string){
 		return await this.scientificResearchModel.findById(id);
 	}
+
+	async findByIdOnlyTeacher(id: string, advisorId: string) {
+		const research = await this.findById(id);
+
+		if (research?.advisorId.toString() !== advisorId) 
+			throw new Error("Você não possui acesso a essa IC");
+		
+		return research;
+	}
 }
 
-export default ScientificResearchService
+export default ScientificResearchService;

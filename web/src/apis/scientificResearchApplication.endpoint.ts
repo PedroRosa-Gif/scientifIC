@@ -11,3 +11,9 @@ export const applyToAScientificResearch = async (scientificResearchId:string, st
 
   return res;
 }
+
+export const getApplicationsByResearchQuery = async (idResearch: string, search: string) => {
+  const res = await axios.get(`http://localhost:8000/scientific-research-application/byResearch?idResearch=${idResearch}&search=${search}`);
+
+  return res;
+}

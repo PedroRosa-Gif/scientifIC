@@ -1,14 +1,17 @@
 # ScientifIC
 
 ## Sobre o projeto
-### Projeto criando na disciplina MC426 (Engenharia de Software) na UNICAMP
+Projeto criando na disciplina MC426 (Engenharia de Software) na UNICAMP
 
-### Autores
+Autores
 
 - Gabriel Augusto B. Gomes
 - Paulo Victor de Souza Santos
 - Pedro Lucas Lopes Rosa
 
+## Sobre a ideia e o levantamento de requisitos
+
+Para o levantamento de requisitos, usamos algumas técnicas como Benchmarking e Brainstorm, e vocês pode ler mais sobre [aqui](https://github.com/PedroRosa-Gif/scientifIC/blob/develop/REQUIREMENTS.md).
 
 ## Sobre a arquitetura
 
@@ -24,3 +27,5 @@ Com relação aos principais componentes de nosso sistema, existe uma relação 
 - Gerenciamento de ICs: Principal componente para o professor, onde ele consegue cadastrar/alterar ICs, além de aprovar algum aluno que tenha se candidatado e atualizar o status do desenvolvimento dessas ICs;
 - Listagem de ICs: Onde todos os usuários conseguem visualizar as ICs criadas, acompanhando o status de cada uma delas e filtrando de acordo com suas preferências;
 - Candidatura a uma IC: Principal componente para o Aluno, onde ele consegue visualizar as ICs de seu interesse para se candidatar-se a elas e possivelmente ser escolhido;
+
+Dentro do backend, escolhemos aplicar o padrão de projeto Singleton dentro das classes do Service, com a ideia de somente ter um único ponto de acesso para as funções que acessam o backend.
