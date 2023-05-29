@@ -48,6 +48,12 @@ export const getResearchApplications = async (req: Request, res: Response) => {
 
   const research = await scientificResearchService.findByIdOnlyTeacher(idResearch, idUser);
 
+  if (research.studentId !== null && research.studentId.length > 0) {
+    return res.status(409).send({
+      message: "Está IC já tem um aluno assignado"
+    });
+  }
+
   const applicationsService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
 
   const applications = await applicationsService.getApplicationsOfResearch(idResearch, search);
@@ -74,5 +80,19 @@ export const create = async (req: Request, res: Response) => {
 
 	res.status(201).send({
 		researchId: createdResearch._id.toString()
+	});
+}
+
+export const assignStudent = async (req: Request, res: Response) => {
+  const idResearch = req.params["idResearch"] as string;
+  const idAdvisor = req.query["idAdvisor"] as string;
+  const idStudent = req.query["idStudent"] as string;
+
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  await scientificResearchService.assignStudent(idResearch, idStudent, idAdvisor);
+
+  res.status(201).send({
+		message: "IC assignada com sucesso ao aluno"
 	});
 }

@@ -16,13 +16,18 @@ import IUser from "../../interfaces/IUser";
 import IScientificResearchApplication from "../../interfaces/IScientificResearchApplication";
 import ApplicationResearchCard from "../../components/ApplicationResearchCard";
 import { getApplicationsByResearchQuery } from "../../apis/scientificResearchApplication.endpoint";
+import Notifier from "../../components/Notifier";
+import ApplicationApprove from "../../components/ApplicationApprove";
 
 function ScientificResearchApplications() {
 	const { userInfos } = useContext(AuthContext);
 
 	const [errors, setErrors] = useState<string>();
 	const [research, setResearch] = useState<IScientificResearch>();
-	const [search, setSearch] = useState<string>();
+	const [showCard, setShowCard] = useState<boolean>(false);
+	const [showNotify, setShowNotify] = useState<boolean>(false);
+	const [selectedStudent, setSelectedStudent] = useState<IUser>();
+	const [notifications, setNotifications] = useState<string[]>();
 	const [applications, setApplications] = useState<IScientificResearchApplication[]>();
 	const [count, setCount] = useState<number>(0);
 
@@ -33,11 +38,6 @@ function ScientificResearchApplications() {
 	useEffect(() => {
 		populateResearchApplications();
 	}, []);
-
-	useEffect(() => {
-		
-	}, [search]);
-
 
 	const populateResearchApplications = async () => {
 		if (userInfos === null) 
@@ -53,7 +53,7 @@ function ScientificResearchApplications() {
 				setErrors(undefined);
 			})
 			.catch(function (errors) {
-				setErrors(errors.response.data.message);
+				setErrors("Sem permissão: " + errors.response.data.message);
 			});
 	}
 
@@ -63,7 +63,8 @@ function ScientificResearchApplications() {
 				setApplications(response.data);
 			})
 			.catch(function (errors) {
-				setErrors(errors.response.data.message);
+				setNotifications([errors.response.data.message]);
+				setShowNotify(true);
 			});
 	}
 
@@ -98,7 +99,10 @@ function ScientificResearchApplications() {
 										<>
 										{typeof application.studentId !== "string" &&
 											<li key={application.studentId._id + index}>
-												<ApplicationResearchCard application={application} />
+												<ApplicationResearchCard 
+													application={application} 
+													setInfoToConfirm={(student) => { setSelectedStudent(student); setShowCard(true); }} 
+												/>
 											</li>
 										}
 										</>
@@ -120,10 +124,21 @@ function ScientificResearchApplications() {
 							</div>
 						</aside>
 					</section> 
+
+					{showCard && 
+						<ApplicationApprove 
+							idResearch={idResearch}
+							research={research}
+							student={selectedStudent}
+							setNotifications={setNotifications}
+							setShowConfirmation={setShowCard}
+						/>
+					}
+					{showNotify && <Notifier notifications={notifications} show={showNotify} setShow={setShowNotify} />}
 				</main>
 				:
 				<main className="applications-container">
-					<h1>405 : {errors}</h1>
+					<h1>{errors}</h1>
 				</main>
 			}
 		</ContainerResearch>

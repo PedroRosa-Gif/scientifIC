@@ -123,7 +123,7 @@ function ICsPage() {
                       setUserInfos(null);
                       navigate("/");
                     }}>Logout</button>
-                    <button>Perfil</button>
+                    <button onClick={() => navigate("/perfil")}>Perfil</button>
                   </div>
                 }
                 notAuthorize={
