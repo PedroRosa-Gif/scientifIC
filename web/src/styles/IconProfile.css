@@ -1,0 +1,12 @@
+.div_img_profile {
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+}
+
+.div_img_profile img {
+    align-self: center;
+    width: 40px;
+}

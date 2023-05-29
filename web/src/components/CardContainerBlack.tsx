@@ -8,9 +8,6 @@ interface CardContainerBlackProps{
 }
 
 export default function CardContainerBlack({children, closeCard}:CardContainerBlackProps) {
-
-  
-
   return (
     <div className="background-container" onClick={() => {closeCard()}}>
       {children}
