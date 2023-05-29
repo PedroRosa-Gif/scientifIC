@@ -13,7 +13,7 @@ import ButtonSign from "../components/ButtonSign";
 // Assets Imports
 import UserIcon from "../assets/icons/user_icon.svg";
 import PassIcon from "../assets/icons/pass_icon.svg";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
 
 export default function Login() {
@@ -43,7 +43,7 @@ export default function Login() {
           <TextInput
             onChange={(e) => setUser(e.target.value)}
             icon={UserIcon}
-            placeholder="Usuário"
+            placeholder="Email"
             type="text"
           />
           <TextInput
@@ -60,7 +60,9 @@ export default function Login() {
           <ButtonSign title={"Entrar"} onClick={() => handleLoginUser()}/>
         </div>
         <div className="div-create-account">
-          <span>Não possui conta? <b>Cadastre-se</b></span>
+          <NavLink to={"/cadastro"} className="link">
+            <span>Não possui conta? <b>Cadastre-se</b></span>
+          </NavLink>
         </div>
       </section>
     </ContainerSign>

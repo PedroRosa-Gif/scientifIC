@@ -1,4 +1,4 @@
-import "./LandingStudyCard.css";
+import "../styles/LandingStudyCard.css";
 
 export interface ILandingStudyCardProps {
     title: string;

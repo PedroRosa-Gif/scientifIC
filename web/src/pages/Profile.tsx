@@ -6,6 +6,7 @@ import IconProfile from "../components/IconProfile";
 import EditProfile from '../components/TopicsProfile/EditProfile';
 import ListCandidacy from '../components/TopicsProfile/ListCandidacy';
 import ListAreas from '../components/TopicsProfile/ListAreas';
+import Notifier from '../components/Notifier';
 
 // CSS import
 import "../styles/Profile.css";
@@ -20,11 +21,13 @@ import { AuthContext } from "../contexts/auth";
 
 export default function Profile() {
   const { userInfos, setUserInfos } = useContext(AuthContext);
+  const [message, setMessage] = useState<string[]>();
+  const [showNotifications, setShowNotifications] = useState<boolean>();
   const [index, setIndex] = useState(0);
   const topics = [
-    <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} />,
-    <ListCandidacy userInfos={userInfos} />,
-    <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} />
+    <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
+    <ListCandidacy userInfos={userInfos} setMessage={setMessage} setShowNotifications={setShowNotifications}  />,
+    <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />
   ];
 
   useEffect(() => {
@@ -39,6 +42,7 @@ export default function Profile() {
         <Logo namePlanet={"greenPlanet"} colorFont={true} />
         <IconProfile />
       </header>
+      { showNotifications && <Notifier notifications={message} show={showNotifications} setShow={setShowNotifications} /> }
       <div className="container-profile">
         <div className="div-align-photo-profile">
           <div className="div-photo-profile">

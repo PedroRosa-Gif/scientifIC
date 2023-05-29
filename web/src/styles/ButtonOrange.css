@@ -1,0 +1,23 @@
+.btn_form_orange {
+    background: #F14436;
+    height: 45px;
+    border: 1px solid #D0E0EF;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    padding: 0 5px;
+    text-align: center;
+}
+
+.btn_form_orange:hover {
+    background: #db281b;
+}
+
+.btn_form_orange p{
+    font-family: 'Lato';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    color: #FFFFFF;
+    padding: 0;
+}

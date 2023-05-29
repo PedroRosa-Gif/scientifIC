@@ -13,6 +13,7 @@ import BackIcon from "../assets/icons/back_icon.svg";
 import SelectInput from "../components/SelectInput";
 import IUser from "../interfaces/IUser";
 import { createUser } from "../apis/user.endpoint";
+import { NavLink } from "react-router-dom";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -39,8 +40,9 @@ export default function SignUp() {
       name,
       lastName,
       ra,
-      birthdate: birthdate,
       interestAreas: [""],
+      birthdate: birthdate,
+      institute: "",
       type: userType,
     }
     
@@ -116,14 +118,14 @@ export default function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
               icon={PassIcon}
               placeholder="Senha"
-              type="text"
+              type="password"
             />
             <TextInput
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               icon={PassIcon}
               placeholder="Confirme sua senha"
-              type="text"
+              type="password"
             />
             <SelectInput icon={PassIcon} onChange={(e) => setUserType(parseInt(e.target.value))}>
               <option value="1">Estudante</option>
@@ -135,7 +137,9 @@ export default function SignUp() {
           </div>
         }
         <div className="div-create-account">
-          <span>Já possui conta? <b>Faça login</b></span>
+          <NavLink to={"/login"} className="link">
+            <span>Já possui conta? <b>Faça login</b></span>
+          </NavLink>
         </div>
       </section>
     </ContainerSign>

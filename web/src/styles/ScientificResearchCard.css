@@ -1,0 +1,21 @@
+span{
+  padding-right: 10px;
+}
+
+div.flex{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+div.flex div.infos{
+  margin: 10px 0 24px;
+  display: flex;
+  gap: 15px;
+}
+
+div.flex div.infos p{
+  background-color: rgb(235, 235, 235);
+  padding: 2px;
+  border-radius: 4px;
+}

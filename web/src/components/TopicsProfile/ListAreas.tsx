@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import "../../styles/ListAreas.css";
 
@@ -6,6 +6,7 @@ import { allAreas } from "../../utils/constants/allAreas.contants";
 
 import Topic from "../Topic";
 import ButtonProfile from "../ButtonProfile";
+import VerifyPopup from "../VerifyPopup";
 
 import AddIcon from "../../assets/icons/add_icon.svg";
 import ExitIcon from "../../assets/icons/back_icon.svg";
@@ -16,11 +17,14 @@ import { editUser } from "../../apis/user.endpoint";
 
 interface IProfile {
 	userInfos: IUser | null;
-	setUserInfos: Function;  
+	setUserInfos: Dispatch<SetStateAction<IUser>>;
+  setMessage: Dispatch<SetStateAction<string[]>>;
+  setShowNotifications: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
+export default function ListAreas({ userInfos, setUserInfos, setMessage, setShowNotifications }:IProfile) {
 	const [areas, setAreas] = useState<string[]>(userInfos?.interestAreas || []);
+  const [verifyPopup, setVerifyPopup] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>("");
 
 	function addArea() {
@@ -38,12 +42,24 @@ export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
 
   async function saveAreas() {
     const newInfoData = { ...userInfos, interestAreas: areas } as IUser;
-    await editUser(userInfos!.email, newInfoData);
+    const res = await editUser(userInfos!.email, newInfoData);
     setUserInfos(newInfoData);
+
+    if (res.status === 200) {
+      setUserInfos(newInfoData);
+      setMessage(["Áreas salvas com sucesso!"]);
+      setShowNotifications(true);
+    } else {
+      setMessage(["Não foi possivel salvar suas áreas!"]);
+      setShowNotifications(true);
+    }
   }
 
   return (
     <div className="ListAreas">
+      {
+        verifyPopup && <VerifyPopup setVerifyPopup={setVerifyPopup} handleAction={saveAreas} object={null} message={"Ao editar suas informações, os campos modificados serão gravados no seu registro e não será possivel retornar ao valor anterior. Deseja continuar?"} title={"Editar Informações"} />
+      }
 			<div className="body-list-areas">
 				<div className="div-header-list-areas">
 					<span>Minhas áreas</span>
@@ -53,7 +69,7 @@ export default function ListAreas({ userInfos, setUserInfos }:IProfile) {
 						title={"Salvar"}
 						alt={"Ícone de salvar"}
 						src={EditIcon}
-						onClick={() => saveAreas()}
+						onClick={() => setVerifyPopup(true)}
 					/>
 				</div>
 				</div>
