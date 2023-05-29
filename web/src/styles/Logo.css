@@ -1,0 +1,30 @@
+.div_logo_default {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    height: fit-content;
+}
+
+.div_image_default, .div_title_default {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+}
+
+.div_image_default {
+    width: 80px;
+}
+
+.div_image_default img {
+    margin: 0 auto;
+    width: 60px
+}
+
+.div_title_default {
+    width: 150px;
+}

@@ -16,6 +16,29 @@ export const applyToScientificResearch = async (req: Request, res: Response) => 
     	applicationId: application._id.toString()
 	});
 }
+export const getApplications = async (req:Request, res:Response) => {
+  const { id } = req.body;
+
+  const scientificResearchApplicationService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
+  
+  const applications = await scientificResearchApplicationService.getApplications(id);
+  
+  res.status(200).send({
+    applications: applications
+  });
+}
+
+export const cancelCandidacy = async (req:Request, res:Response) => {
+  const { id } = req.body;
+
+  const scientificResearchApplicationService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
+  
+  await scientificResearchApplicationService.cancelCandidacy(id);
+  
+  res.status(200).send({
+    message: "candidatura removida",
+  });
+}
 
 export const getApplicationsByResearchQuery = async (req: Request, res: Response) => {
 	const idResearch = req.query["idResearch"] as string;

@@ -49,6 +49,23 @@ class ScientificResearchApplicationService {
     return await this.ApplicationModel.create(newApplication);
   }
 
+  async getApplications(id:string) {
+    const populate = [{
+      path : "studentId",
+    }, {
+      path: "scientificResearchId",
+      populate : {
+        path : "advisorId",
+      }
+    }];
+
+		return await this.ApplicationModel.find({ studentId: id }).populate(populate).exec();
+  }
+
+  async cancelCandidacy(id:string) {
+    await this.ApplicationModel.deleteOne({ _id: id });
+  }
+
   async getApplicationsOfResearch(idResearch: string, search: string) {
     const populate = {
 			path: 'studentId',

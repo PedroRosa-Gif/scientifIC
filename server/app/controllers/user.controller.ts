@@ -27,3 +27,14 @@ export const login = async (req:Request, res:Response) => {
         userInfos: result.userInfos
     });
 }
+
+export const edit = async (req:Request, res:Response) => {
+  const { id, userInfos } = req.body;
+
+  const userService = UserService.getInstance(User);
+
+  await userService.edit(id, userInfos);
+  res.status(200).send({
+    message: "Edição de perfil concluída!",
+  })
+}

@@ -40,7 +40,7 @@ export default function SignUp() {
       name,
       lastName,
       ra,
-      birthdate: new Date(birthdate),
+      birthdate: birthdate,
       institute: "",
       interestAreas: [""],
       type: userType,
@@ -97,7 +97,7 @@ export default function SignUp() {
               value={birthdate}
               onChange={(e) => setBirthday(e.target.value)}
               icon={UserIcon}
-              placeholder="Nome"
+              placeholder="Data de Nascimento"
               type="date"
             />
             <div className="div-button-login">

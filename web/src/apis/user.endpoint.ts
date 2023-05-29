@@ -16,3 +16,12 @@ export const createUser = async (userInfos:IUser) => {
   const res = await axios.post("http://localhost:8000/user/create", userInfos);
   return res;
 }
+
+export const editUser = async (id:string, userInfos:IUser) => {
+  const res = await axios.put("http://localhost:8000/user/edit", {
+    id: id,
+    userInfos: userInfos
+  });
+
+  return res;
+}

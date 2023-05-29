@@ -75,6 +75,18 @@ class UserService {
     
       return { userInfos: userInfos, message: "Login realizado com sucesso!", token: token };
   }
+
+  async edit(id:string, usersInfo:IUser) {
+  
+    if (id !== usersInfo.email) {
+      const user = await this.UserModel.findOne({ "email": usersInfo.email });
+    
+      if (user !== null)
+        throw new Error("Email inválido!");
+    }
+  
+    await this.UserModel.updateOne({ "email": id }, usersInfo);
+  }
 }
 
 
