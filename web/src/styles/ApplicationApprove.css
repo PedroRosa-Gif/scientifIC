@@ -1,0 +1,35 @@
+div.confirmation-card {
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    padding: 20px;
+    width: 30%;
+}
+
+div.confirmation-card div.buttons-confirmation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+div.confirmation-card div.buttons-confirmation button {
+    padding: 5px 10px;
+    font-weight: 700;
+    font-size: 14px;  
+    color: white;
+    border: none;
+    background: #F14436;
+    border-radius: 4px;  
+    cursor: pointer;
+}
+
+div.confirmation-card div.buttons-confirmation button.cancel {
+    background: black;
+}
+
+div.confirmation-card div.buttons-confirmation button:hover {
+    opacity: 0.8;
+}

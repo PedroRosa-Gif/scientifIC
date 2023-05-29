@@ -17,10 +17,18 @@ export const getICs = async (search:string, area:string[], institute:string, sta
   return res;
 }
 
-export const getApplicationsFromResearch = async (idReseach: string, idUser: string) => {
-  console.log(idUser);
-  
+export const assignStudent = async (idResearch: string, idStudent: string, idAdvisor: string) => {
+  const res = await axios.get(`http://localhost:8000/scientific-research/assign/${idResearch}`, {
+    params: {
+      idAdvisor: idAdvisor,
+      idStudent: idStudent
+    }
+  });
 
+  return res;
+}
+
+export const getApplicationsFromResearch = async (idReseach: string, idUser: string) => {
   const res = await axios.get(`http://localhost:8000/scientific-research/applications?idResearch=${idReseach}&idUser=${idUser}`);
 
   return res;

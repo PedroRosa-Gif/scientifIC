@@ -1,12 +1,14 @@
 import IScientificResearchApplication from "../interfaces/IScientificResearchApplication";
+import IUser from "../interfaces/IUser";
 
 import "../styles/ApplicationResearchCard.css";
 
 interface IApplicationResearchCard {
     application: IScientificResearchApplication;
+    setInfoToConfirm: (student: IUser) => void;
 }
 
-function ApplicationResearchCard({ application }: IApplicationResearchCard) {
+function ApplicationResearchCard({ application, setInfoToConfirm }: IApplicationResearchCard) {
     return (
         <div className="application-card">
             {typeof application.studentId !== "string" ?
@@ -19,7 +21,7 @@ function ApplicationResearchCard({ application }: IApplicationResearchCard) {
                     <h5>Motivação: {application.motivation}</h5>
                 </article>
                 <aside>
-                    <button>Escolher Aluno</button>
+                    <button onClick={() => setInfoToConfirm(application.studentId as IUser)}>Escolher Aluno</button>
                 </aside>
                 </>
                 : 

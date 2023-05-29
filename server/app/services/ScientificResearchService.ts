@@ -4,12 +4,14 @@ import IScientificResearch from "../interfaces/IScientificResearch";
 import IUser from "../interfaces/IUser";
 import UserService from "./UserService";
 import UserType from "../utils/enums/UserType";
+import { ObjectId } from "mongodb";
+import ResearchStatus from "../utils/enums/ResearchStatus";
 
 class ScientificResearchService {
 
-  private static instance: ScientificResearchService;
+  	private static instance: ScientificResearchService;
 	private scientificResearchModel: Model<IScientificResearch>;
-  private userService:UserService;
+  	private userService:UserService;
 
 	private constructor(ScientificResearchServiceModel:Model<IScientificResearch>, userModel:Model<IUser>) {
 		this.scientificResearchModel = ScientificResearchServiceModel;
@@ -100,11 +102,11 @@ class ScientificResearchService {
 		return "";
 	}
 
-	async getThemes(){
+	async getThemes() {
 		return await this.scientificResearchModel.find({}, { theme: 1, _id: 0 }).distinct('theme');
 	}
 
-	async findById(id: string){
+	async findById(id: string) {
 		return await this.scientificResearchModel.findById(id);
 	}
 
@@ -115,6 +117,30 @@ class ScientificResearchService {
 			throw new Error("Você não possui acesso a essa IC");
 		
 		return research;
+	}
+
+	async assignStudent(id: string, studentId: string, advisorId: string) {
+		const research = await this.findById(id);
+
+		if (research === null) {
+			throw new Error("IC não existe");
+		}
+
+		if (research?.advisorId.toString() !== advisorId) 
+			throw new Error("Você não possui acesso a essa IC");
+
+		const student = await this.userService.findById(studentId);
+
+		if (student === null) 
+			throw new Error("Aluno não cadastrado");
+
+		if (student.type !== 1) 
+			throw new Error("Não é possível selecionar este usuário. Seu cadastro consta como professor");
+			
+		await this.scientificResearchModel.updateOne(
+			{ _id: new ObjectId(id) }, 
+ 			{ $set: { studentId: studentId, status: ResearchStatus.initialStep } }
+		);
 	}
 }
 
