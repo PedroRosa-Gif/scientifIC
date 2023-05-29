@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/BaseHeader.css";
+import IconProfile from "./IconProfile";
 
 interface IHeader {
 	icon: string;
@@ -15,7 +16,9 @@ function BaseHeader(props: IHeader) {
 				<h1 onClick={() => navigate("/")} style={{ cursor: 'pointer' }} title="Ir para o Início">Scientif<strong>IC</strong></h1>
 			</article>
 			<aside>
-				<button onClick={() => navigate("/perfil")} style={{ cursor: 'pointer' }} title="Seu perfil">Perfil</button>
+				<button onClick={() => navigate("/perfil")} style={{ cursor: 'pointer' }} title="Seu perfil">
+					<IconProfile />
+				</button>
 			</aside> 
 		</header>
 	);
