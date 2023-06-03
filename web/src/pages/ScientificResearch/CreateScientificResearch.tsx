@@ -24,7 +24,7 @@ function CreateScientificResearch() {
 					if (userInfos === null) 
 						return navigate("/login");
 
-					research.advisorId = userInfos.email;
+					research.advisorId = userInfos._id;
 
 					createScientificResearch(research)
 						.then((res: AxiosResponse) => {

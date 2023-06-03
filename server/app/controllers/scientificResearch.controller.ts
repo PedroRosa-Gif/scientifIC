@@ -72,10 +72,6 @@ export const create = async (req: Request, res: Response) => {
 
 	const newResearch = req.body as IScientificResearch;
 
-	const user = await userService.findByEmail(newResearch.advisorId);
-
-	newResearch.advisorId = user?._id.toString()!;
-
 	const createdResearch = await scientificResearchService.create(newResearch);
 
 	res.status(201).send({
