@@ -1,32 +1,18 @@
-import { useRef, useContext } from "react";
-
-import { NavLink, useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 import ideas from "../assets/imgs/ideas.png";
 import lamp from "../assets/imgs/lamp.png";
 import unicamp from "../assets/imgs/unicamp.png";
 
-import Authorized from "../components/Authorized";
-
-import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard";
-
 import "../styles/LandingPage.css";
-import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
+import ICsCardArea from "../components/ICsCardArea";
+import AuthorizedMenu from "../components/AuthorizedMenu";
 
 function LandingPage() {
   const brandRef = useRef<HTMLDivElement | null>(null);
   const studiesRef = useRef<HTMLDivElement | null>(null);
   const ideasRef = useRef<HTMLDivElement | null>(null);
-  
-  const { signed, setUserInfos } = useContext(AuthContext);
-  const navigate = useNavigate()
-
-  const tempDataForCard: ILandingStudyCardProps[] = [
-    { title: "Plantas", text: "Voçê sabia que é possível utilizar a seiva das plantas para produzir remédios. Saiba como uma medicina mais natural ajuda a humanindade." },
-    { title: "Engenharia", text: "Como funciona as asas de um Avião? Quais materiais são usados na sua construção? Conheça você também alguns tópicos sobre aviação." },
-    { title: "Tecnologia", text: "Recursos como Chat GPT estão crescendo e tornando-se mais famosos e usuais. Entenda como seus conceitos ajudam no nosso dia a dia." }
-  ];
 
   return (
     <main className="container">
@@ -49,24 +35,7 @@ function LandingPage() {
                   A Ideia
                 </button>
               </div>
-              <Authorized 
-                isAuthorized={signed}
-                authorize={
-                  <div className="nav-user">
-                    <button onClick={() => {
-                      setUserInfos(null);
-                      navigate("/");
-                    }}>Logout</button>
-                    <button onClick={() => navigate("/perfil")}>Perfil</button>
-                  </div>
-                }
-                notAuthorize={
-                  <div className="nav-user">
-                    <NavLink to={"/cadastro"} className="link"><button>Cadastrar</button></NavLink>
-                    <NavLink to={"/login"} className="link"><button>Entrar</button></NavLink>
-                  </div>
-                }
-              />
+              <AuthorizedMenu/>
             </div>
           </div>
         </nav>
@@ -85,25 +54,7 @@ function LandingPage() {
           </div>
         </div>
         <div>
-          <section ref={studiesRef}>
-            <div className="cards-landing-area">
-              <h1>Iniciações e Estudos</h1>
-              <ul className="cards-landing-list">
-                {tempDataForCard.map(card => (
-                  <li key={card.title}>
-                    <LandingStudyCard title={card.title} text={card.text} />
-                  </li>
-                ))}
-              </ul>
-              <div className="cards-see-more-area">
-                <NavLink to={"/iniciacoes-cientificas"} className="link">
-                  <button className="cards-see-more">
-                    Veja Mais
-                  </button>
-                </NavLink>
-              </div>
-            </div>
-          </section>
+          <ICsCardArea/>
           <section ref={ideasRef}>
             <div className="idea-area">
               <img src={unicamp} alt="Unicamp" />

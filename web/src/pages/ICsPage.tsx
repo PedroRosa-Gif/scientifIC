@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import Authorized from "../components/Authorized";
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
 import TextInput from "../components/TextInput";
@@ -24,6 +23,7 @@ import { getICs } from "../apis/scientificResearch.endpoint";
 import Notifier from "../components/Notifier";
 import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
 import { allStatus } from "../utils/constants/allStatus.constants";
+import AuthorizedMenu from "../components/AuthorizedMenu";
 
 function ICsPage() {
 
@@ -44,8 +44,7 @@ function ICsPage() {
 
   const [refresh, setRefresh] = useState(true);
 
-  const { signed, setUserInfos, userInfos } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { signed, userInfos } = useContext(AuthContext);
 
   const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
 
@@ -115,24 +114,7 @@ function ICsPage() {
               <h1>Scientif<strong>IC</strong></h1>
             </div>
             <div className="nav-content">
-              <Authorized 
-                isAuthorized={signed}
-                authorize={
-                  <div className="nav-user">
-                    <button onClick={() => {
-                      setUserInfos(null);
-                      navigate("/");
-                    }}>Logout</button>
-                    <button onClick={() => navigate("/perfil")}>Perfil</button>
-                  </div>
-                }
-                notAuthorize={
-                  <div className="nav-user">
-                    <NavLink to={"/cadastro"} className="link"><button>Cadastrar</button></NavLink>
-                    <NavLink to={"/login"} className="link"><button>Entrar</button></NavLink>
-                  </div>
-                }
-              />
+              <AuthorizedMenu/>
             </div>
           </div>
         </nav>
