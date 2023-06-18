@@ -32,7 +32,6 @@ export default function Profile() {
 
   useEffect(() => {
     const pointer = document.getElementById("pointer") as HTMLDivElement;
-
     pointer.style.cssText = `margin-left: calc(289px * ${index});`;
   }, [index]);
 

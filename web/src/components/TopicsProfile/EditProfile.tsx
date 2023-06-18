@@ -11,7 +11,7 @@ import EditIcon from "../../assets/icons/edit_icon.svg";
 import IUser from "../../interfaces/IUser";
 import { fieldsProfile } from "../../utils/constants/fieldsProfile.constants";
 import { editUser } from "../../apis/user.endpoint";
-import { stringToDateInput } from "../../utils/handleFormatString";
+import { stringToDateInput } from "../../utils/helpers/handleFormatString";
 
 interface IProfile {
   userInfos: IUser | null;

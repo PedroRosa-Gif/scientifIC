@@ -15,6 +15,7 @@ import UserIcon from "../assets/icons/user_icon.svg";
 import PassIcon from "../assets/icons/pass_icon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
+import { AccessToken } from "../utils/helpers/AcessToken";
 
 export default function Login() {
   const [user, setUser] = useState("");
@@ -26,6 +27,8 @@ export default function Login() {
   async function handleLoginUser() {
     try {
       const result = await handleLogin(user, password);
+
+      AccessToken.setAccessToken(result.data.token);
       setUserInfos(result.data.userInfos);
       navigate("/perfil");
     } catch (error) {

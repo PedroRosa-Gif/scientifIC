@@ -25,3 +25,17 @@ export const editUser = async (id:string, userInfos:IUser) => {
 
   return res;
 }
+
+export const checkAutentication = async (token:string) => {
+
+  const res = await axios.get("http://localhost:8000/user/checkAuthorization", {
+    headers: {
+      Authorization: `${token}`,
+    },
+  })
+
+  console.log(res);
+  
+
+  return res;
+}
