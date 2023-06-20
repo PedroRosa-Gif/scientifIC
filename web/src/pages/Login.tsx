@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { handleLogin } from "../apis/user.endpoint";
 
 // CSS import
@@ -16,13 +16,28 @@ import PassIcon from "../assets/icons/pass_icon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
 import { AccessToken } from "../utils/helpers/AcessToken";
+import Notifier from "../components/Notifier";
 
-export default function Login() {
+interface LoginProps{
+  error?:string
+}
+
+export default function Login({error}:LoginProps) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
 
+	const [showNotifications, setShowNotifications] = useState<boolean>(false);
+	const [notifications, setNotifications] = useState<string[]>([]);
+
+  const navigate = useNavigate()
   const { setUserInfos } = useContext(AuthContext);
+
+  useEffect(()=>{
+    if(error !== undefined && error !== ""){
+      setShowNotifications(true);
+      setNotifications([error]);
+    }
+  }, [])
 
   async function handleLoginUser() {
     try {
@@ -32,12 +47,14 @@ export default function Login() {
       setUserInfos(result.data.userInfos);
       navigate("/perfil");
     } catch (error) {
-      console.log(error);
+      setShowNotifications(true);
+      setNotifications([error.response.data.message])
     }
   }
 
   return (
     <ContainerSign>
+      {showNotifications && <Notifier notifications={notifications} show={showNotifications} setShow={setShowNotifications} />}
       <section className="login">
         <div className="header-login">
           <span>Login</span>

@@ -10,7 +10,7 @@ export class AccessToken {
     return localStorage.getItem("accessToken");
   }
 
-  static clearAccessToken(){
+  static clearAccessInformation(){
     localStorage.removeItem("userInfos");
     localStorage.removeItem("accessToken");
   }

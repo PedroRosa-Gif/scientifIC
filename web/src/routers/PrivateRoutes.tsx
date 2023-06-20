@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { isAuthenticated } from "../utils/helpers/isAuthenticated";
+import Login from "../pages/Login";
 
 export function PrivateRoutes() {
   const [authenticated, setAuthenticated] = useState(undefined);
@@ -15,5 +16,5 @@ export function PrivateRoutes() {
   }, []);
 
   if(authenticated != undefined)
-    return( authenticated ? <Outlet/> : <Navigate to="/login"/>)
+    return( authenticated.result ? <Outlet/> : <Login error={authenticated.message}/>)
 }

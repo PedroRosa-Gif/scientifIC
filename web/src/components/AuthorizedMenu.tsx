@@ -17,7 +17,7 @@ function AuthorizedMenu() {
         <div className="nav-user">
           <button onClick={() => {
             setUserInfos(null);
-            AccessToken.clearAccessToken();
+            AccessToken.clearAccessInformation();
             navigate("/");
           }}>Logout</button>
           <button onClick={() => navigate("/perfil")}>Perfil</button>
