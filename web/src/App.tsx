@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import ICsPage from './pages/ICsPage';
 import CreateScientificResearch from './pages/ScientificResearch/CreateScientificResearch';
 import ScientificResearchApplications from './pages/ScientificResearch/ScientificResearchApplications';
+import OnGoingScientificResearch from './pages/ScientificResearch/OnGoingScientificResearch';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/cadastro' element={<SignUp />} />
         <Route path='/perfil' element={<Profile />} />
         <Route path='/iniciacoes-cientificas' element={<ICsPage />} />
+        <Route path='/iniciacoes-cientificas/minhas/:idResearch' element={<OnGoingScientificResearch />} />
         <Route path='/iniciacoes-cientificas/criar' element={<CreateScientificResearch />} />
         <Route path='/iniciacoes-cientificas/candidaturas/:idResearch' element={<ScientificResearchApplications />} />
       </Routes>
