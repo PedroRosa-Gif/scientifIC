@@ -9,6 +9,9 @@ import SelectAreas from "../../components/SelectAreas";
 import { allAreas } from "../../utils/constants/allAreas.constants";
 import { allStatus } from "../../utils/constants/allStatus.constants";
 import BaseSelectInput from "../../components/BaseSelectInput";
+import EventsResearch from "../../components/EventsResearch";
+import IScientificResearchEvent from "../../interfaces/IScientificResearchEvent";
+import CardNewEvent from "../../components/CardNewEvent";
 
 const userMock: IUser = {
 	name: 'Gabriel',
@@ -29,6 +32,30 @@ const teacherMock: IUser = {
 	institute: 'IC',
 	type: 1
 }
+
+const events: IScientificResearchEvent[] = [
+	{ 
+		title: 'Titulo da atualização',
+		content: 'Contéudo da atualização',
+		createdDate: new Date(),
+		createdUser: 'gabriel.gomes',
+		idResearch: '1234'
+ 	},
+	 { 
+		title: 'Titulo da atualização',
+		content: 'Contéudo da atualização',
+		createdDate: new Date(),
+		createdUser: 'gabriel.gomes',
+		idResearch: '1234'
+ 	},
+	 { 
+		title: 'Titulo da atualização',
+		content: 'Contéudo da atualização',
+		createdDate: new Date(),
+		createdUser: 'gabriel.gomes',
+		idResearch: '1234'
+ 	}
+]
 
 const status: { display: string; value: number; }[] = [
 	{ display: "Aberto para candidaturas", value: 0 },
@@ -51,19 +78,20 @@ function OnGoingScientificResearch() {
 				<section className="mine-research-title">
 					<article>
 						<h1>Titulo / Tema</h1>
-						<div>
-							<span>Status</span>
+						<div className="details-reseach">
+							<span className="status-indicator">Status</span>
 							<p>Criado em: --/--/----</p>
 						</div>
 					</article>
 					<div className="actions">
 						<button type="button" onClick={backPage}>Voltar</button>
-						<button type="button">Editar</button>
+						<button type="button" className="edit">Editar</button>
 					</div>
 				</section>
 				<section className="mine-reseach-body">
-					<article>
-							Eventos
+					<article className="event-main-area">
+						<CardNewEvent />
+						<EventsResearch events={events} />
 					</article>
 					<aside>
 						<div className="assign-users">

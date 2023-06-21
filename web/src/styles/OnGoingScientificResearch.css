@@ -1,3 +1,8 @@
+:root {
+    --submit-bg: #d1352a;
+    --submit-hover-bg: #BF2619;
+}
+
 main.mine-research-container {
     display: flex;
     flex-direction: column;
@@ -20,8 +25,10 @@ main.mine-research-container * {
 section.mine-research-title {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+
+    margin-bottom: 20px;
 }
 
 section.mine-research-title article {
@@ -51,11 +58,36 @@ section.mine-research-title button {
     cursor: pointer;
 }
 
+section.mine-research-title button:hover {
+    opacity: 0.8;
+}
+
+section.mine-research-title button.edit {
+    border: none;
+    background: var(--submit-bg);
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section.mine-research-title button.edit:hover {
+    background: var(--submit-hover-bg);
+}
+
 section.mine-reseach-body {
     width: 100%;
     display: grid;
-    gap: 20px;
-    grid-template-columns: 70% 28%;
+    gap: 70px;
+    grid-template-columns: 70% 26%;
+}
+
+section.mine-reseach-body article {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 section.mine-reseach-body aside {
@@ -78,4 +110,33 @@ section.mine-reseach-body aside div.form-column {
 
 section.mine-reseach-body aside :is(div.base-input.select, div.base-input.select select) {
     width: 100%;
+}
+
+div.details-reseach {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+div.details-reseach p {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+span.status-indicator {
+    background: #A81F1F;
+    border: 1px solid #791212;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: fit-content;
+
+    padding: 5px 30px;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
 }
