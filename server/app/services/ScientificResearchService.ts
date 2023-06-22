@@ -10,9 +10,9 @@ import { applyPagination } from "../utils/helpers/applyPagination";
 
 class ScientificResearchService {
 
-  private static instance: ScientificResearchService;
+  	private static instance: ScientificResearchService;
 	private scientificResearchModel: Model<IScientificResearch>;
-  private userService:UserService;
+  	private userService:UserService;
 
 	private constructor(ScientificResearchServiceModel:Model<IScientificResearch>, userModel:Model<IUser>) {
 		this.scientificResearchModel = ScientificResearchServiceModel;
