@@ -1,7 +1,8 @@
 interface IScientificResearchEvent {
+    _id: string;
     title: string;
     content: string;
-    createdDate: Date;
+    createdAt: Date;
     createdUser: string;
     idResearch: string;
 }
