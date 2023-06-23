@@ -2,6 +2,8 @@ import { Model } from "mongoose";
 import IScientificResearchEvent from "../interfaces/IScientificResearchEvent";
 import UserService from "./UserService";
 import ScientificResearchService from "./ScientificResearchService";
+import IUser from "../interfaces/IUser";
+import IScientificResearch from "../interfaces/IScientificResearch";
 
 class ScientificResearchEventService {
   private static instance: ScientificResearchEventService;
@@ -9,19 +11,18 @@ class ScientificResearchEventService {
   private userService: UserService;
   private scientificResearchService: ScientificResearchService;
 
-  private constructor(EventModel: Model<IScientificResearchEvent>, userService: UserService, scientificResearchService: ScientificResearchService) {
+  private constructor(EventModel: Model<IScientificResearchEvent>, user: Model<IUser>, scientificResearch: Model<IScientificResearch>) {
     this.EventModel = EventModel;
-    this.userService = userService;
-    this.scientificResearchService = scientificResearchService;
+    this.userService = UserService.getInstance(user);
+    this.scientificResearchService = ScientificResearchService.getInstance(scientificResearch, user);
   }
 
   public static getInstance(
 		ScientificResearchEventServiceModel: Model<IScientificResearchEvent>,
-    userService: UserService,
-    scientificResearchService: ScientificResearchService
+    user: Model<IUser>, scientificResearch: Model<IScientificResearch>
   ): ScientificResearchEventService {
     if (!ScientificResearchEventService.instance) {
-      ScientificResearchEventService.instance = new ScientificResearchEventService(ScientificResearchEventServiceModel, userService, scientificResearchService);
+      ScientificResearchEventService.instance = new ScientificResearchEventService(ScientificResearchEventServiceModel, user, scientificResearch);
     }
 
     return ScientificResearchEventService.instance;

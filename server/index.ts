@@ -5,6 +5,7 @@ import { errorHandling } from "./app/middleware/errorHandling";
 import acessControlOrigin from "./app/config/cors";
 import scientificResearchRoutes from "./app/routes/scientificResearch.routes";
 import scientificResearchApplicationRoutes from "./app/routes/scientificResearchApplication.routes";
+import scientificResearchEventRoutes from "./app/routes/scientificResearchEvent.routes";
 
 connectDb();
 
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/user", userRoutes);
 app.use("/scientific-research", scientificResearchRoutes);
 app.use("/scientific-research-application", scientificResearchApplicationRoutes);
+app.use("/scientific-research-event", scientificResearchEventRoutes);
+
 
 app.listen(port, () => {
   console.log(`now listening on port ${port}`);
