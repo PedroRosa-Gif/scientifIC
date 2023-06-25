@@ -22,9 +22,10 @@ export default function ListCandidacy({ userInfos, setMessage, setShowNotificati
   const [applications, setApplications] = useState([]);
   const [verifyPopup, setVerifyPopup] = useState<boolean>(false);
   const [selectedIc, setSelectedIc] = useState<string>();
+  const [filter, setFilter] = useState("title");
 
   async function handleGetApplications() {
-    const appRes = await getApplications(userInfos!._id as string);
+    const appRes = await getApplications(userInfos!._id as string, filter);
 
     setApplications(appRes.data.applications);
   }
@@ -55,7 +56,7 @@ export default function ListCandidacy({ userInfos, setMessage, setShowNotificati
 
   useEffect(() => {
     handleGetApplications();
-  }, []);
+  }, [filter]);
 
   return (
     <div className="ListCandidacy">
@@ -65,6 +66,16 @@ export default function ListCandidacy({ userInfos, setMessage, setShowNotificati
       { 
         applications.length > 0 ? (
           <div className="body-list-candidacy">
+            <div className="div-align-filter-candidacy">
+              <div className="div-filter-candidacy">
+                <span>Ordenar por:</span>
+                <select onChange={(e) => setFilter(e.target.value)}>
+                  <option value={"title"}>Título</option>
+                  <option value={"advisorId"}>Orientador</option>
+                  <option value={"status"}>Situação</option>
+                </select>
+              </div>
+            </div>
             <div className="header-table-list-candidacy">
               <span className=" title-first-list-candidacy">Titulo</span>
               <span>Orientador</span>

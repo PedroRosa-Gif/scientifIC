@@ -48,7 +48,7 @@ class ScientificResearchApplicationService {
     return await this.ApplicationModel.create(newApplication);
   }
 
-  async getApplications(id:string) {
+  async getApplications(id:string, filter: string) {
     const populate = [{
       path : "studentId",
     }, {
@@ -58,7 +58,7 @@ class ScientificResearchApplicationService {
       }
     }];
 
-		return await this.ApplicationModel.find({ studentId: id }).populate(populate).exec();
+		return await this.ApplicationModel.find({ studentId: id }).populate(populate).sort(filter).exec();
   }
 
   async cancelCandidacy(id:string) {

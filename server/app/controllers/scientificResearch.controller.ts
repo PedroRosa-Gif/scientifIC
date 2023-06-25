@@ -54,3 +54,17 @@ export const create = async (req: Request, res: Response) => {
 		researchId: createdResearch._id.toString()
 	});
 }
+
+export const getMyICs = async (req: Request, res: Response) => {
+  const query = req.query;
+  const filter = (query.filter as string);
+  const id = (query.id as string);
+
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const allMyScientificResearch = await scientificResearchService.getMyICs(filter, id);
+
+  res.status(200).send({
+    allMyScientificResearch: allMyScientificResearch
+  });
+}

@@ -62,6 +62,16 @@ class ScientificResearchService {
 		return allICsWithPagination;
 	}
 
+	async getMyICs(filter: string, id: string) {
+		const populate = [{
+			path : "studentId",
+		}, {
+			path: "advisorId",
+		}];
+
+		return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
+	}
+
 	async create(newResearch: IScientificResearch){
 		let validationMessage = await this.validateResearch(newResearch);
 

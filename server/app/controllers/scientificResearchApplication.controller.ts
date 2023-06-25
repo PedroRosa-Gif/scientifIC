@@ -18,11 +18,11 @@ export const applyToScientificResearch = async (req: Request, res: Response) => 
 }
 
 export const getApplications = async (req:Request, res:Response) => {
-  const { id } = req.body;
+  const { id, filter } = req.body;
 
   const scientificResearchApplicationService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
   
-  const applications = await scientificResearchApplicationService.getApplications(id);
+  const applications = await scientificResearchApplicationService.getApplications(id, filter);
   
   res.status(200).send({
     applications: applications

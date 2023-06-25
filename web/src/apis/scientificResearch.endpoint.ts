@@ -29,3 +29,13 @@ export const getAllThemes = async () => {
 
   return res;
 }
+
+export const getMyICs = async (filter:string, id:string) => {
+  const res = await axios.get("http://localhost:8000/scientific-research/getMyICs", {
+    params: {
+      filter,
+      id
+    }
+  });
+  return res;
+}
