@@ -47,13 +47,11 @@ function ICsPage() {
   const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
 
   function previousPage() {
-    setCurrentPage(currentPage - 1)
-    console.log(currentPage - 1);
+    setCurrentPage(currentPage - 1);
   }
 
   function nextPage() {
-    setCurrentPage(currentPage + 1)
-    console.log(currentPage + 1);
+    setCurrentPage(currentPage + 1);
   }
 
   function resetFilters(){

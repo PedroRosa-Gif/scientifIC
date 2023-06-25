@@ -22,8 +22,6 @@ export const getICs = async (req:Request, res:Response) => {
     totalPerPage: parseInt(query.totalPerPage as string),
     currentPage: parseInt(query.currentPage as string)
   }
-  console.log(filters);
-  
 
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
 

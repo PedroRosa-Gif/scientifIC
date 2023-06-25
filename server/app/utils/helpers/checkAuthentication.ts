@@ -7,7 +7,6 @@ dotenv.config();
 export const checkAuthentication = (req: Request, res: Response) => {
   try {
     const decode = jwt.verify(req.headers.authorization!, process.env.JWT_KEY || "senha123");
-    console.log(decode);
     res.status(200).send()
   } catch (error) {
     return res.status(200).send({
