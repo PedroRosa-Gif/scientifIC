@@ -12,10 +12,11 @@ export const applyToAScientificResearch = async (scientificResearchId:string, st
   return res;
 }
 
-export const getApplications = async (id:string) => {
+export const getApplications = async (id:string, filter: string) => {
 
   const res = await axios.post("http://localhost:8000/scientific-research-application/getApplications", {
     id: id,
+    filter: filter,
   });
 
   return res;
