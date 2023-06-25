@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
 import { AccessToken } from '../utils/helpers/AcessToken';
-import { redirect } from "react-router-dom";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8000',

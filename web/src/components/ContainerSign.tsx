@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 
 // Assets imports
 import UnicampLogo from "../assets/imgs/logo-unicamp-black.png";
-import Rectangle from "../assets/imgs/Rectangle 4.png";
 
 // CSS import
 import "../styles/ContainerSign.css";

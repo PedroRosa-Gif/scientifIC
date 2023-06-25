@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
@@ -7,8 +6,6 @@ import TextInput from "../components/TextInput";
 
 import "../styles/LandingPage.css";
 import "../styles/ICsPage.css";
-
-import logoAzul from "../assets/imgs/logo-azul.png";
 
 import SearchIcon from "../assets/icons/search_icon.svg";
 import IScientificResearch from "../interfaces/IScientificResearch";

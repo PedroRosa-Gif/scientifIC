@@ -93,11 +93,9 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    padding: 10px;
-    padding-left: 10px;
     gap: 80px;
+    padding: 10px;
 }
-
 
 .div-topics-profile button {
     font-family: 'Lato';
@@ -110,7 +108,7 @@
     outline: none;
     border: none;
     cursor: pointer;
-    width: 209px;
+    width: 25%;
     height: 50px;
     transition: all 100ms ease-in-out;
 }
@@ -127,7 +125,7 @@
 }
 
 .pointer-topic {
-    width: 229px;
+    width: calc(25% - 42px);
     height: 2px;
     background: #1482F5;
     transition: all 200ms ease-in-out;

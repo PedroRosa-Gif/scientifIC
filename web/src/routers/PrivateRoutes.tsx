@@ -15,6 +15,6 @@ export function PrivateRoutes() {
     checkAuthentication();
   }, []);
 
-  if(authenticated != undefined)
+  if(authenticated !== undefined)
     return( authenticated.result ? <Outlet/> : <Login error={authenticated.message}/>)
 }
