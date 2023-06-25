@@ -6,6 +6,7 @@ import Rectangle from "../assets/imgs/Rectangle 4.png";
 
 // CSS import
 import "../styles/ContainerSign.css";
+import Logo from "./Logo";
 
 interface ISign {
   children: ReactNode
@@ -16,12 +17,7 @@ export default function ContainerSign({ children }:ISign) {
     <main className="container-linear">
       <div className="container-sign">
         <header className="header-sign">
-          <div className="div-logo">
-            <img src={Rectangle} alt="Logo do sistema" />
-            <span>
-              ScientifIC
-            </span>
-          </div>
+          <Logo namePlanet={"pinkPlanet"} colorFont={false} />
           <div className="div-unicamp">
             <img src={UnicampLogo} alt="Ícone da Unicamp" />
           </div>

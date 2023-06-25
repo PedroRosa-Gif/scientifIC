@@ -26,7 +26,7 @@ export async function isAuthenticated(){
   AccessToken.clearAccessInformation();
   return {
     result: false,
-    message: "Você precisa logar para acessar a página"
+    message: "Erro na autenticação! Faça login!"
   };
 }
 

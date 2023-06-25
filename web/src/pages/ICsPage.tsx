@@ -24,6 +24,7 @@ import Notifier from "../components/Notifier";
 import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
 import { allStatus } from "../utils/constants/allStatus.constants";
 import AuthorizedMenu from "../components/AuthorizedMenu";
+import Logo from "../components/Logo";
 
 function ICsPage() {
 
@@ -107,12 +108,7 @@ function ICsPage() {
       <header>
         <nav>
           <div className="nav-landing-page">
-            <div className="nav-brand">
-              <NavLink to={"/"} className="link">
-                <img src={logoAzul} alt="LOGO" />
-              </NavLink>
-              <h1>Scientif<strong>IC</strong></h1>
-            </div>
+            <Logo namePlanet={"pinkPlanet"} colorFont={true} />
             <div className="nav-content">
               <AuthorizedMenu/>
             </div>

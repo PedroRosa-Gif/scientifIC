@@ -37,7 +37,7 @@ export default function Login({error}:LoginProps) {
       setShowNotifications(true);
       setNotifications([error]);
     }
-  }, [])
+  }, [error])
 
   async function handleLoginUser() {
     try {

@@ -1,5 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
 import { AccessToken } from '../utils/helpers/AcessToken';
+import { redirect } from "react-router-dom";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8000',
@@ -15,6 +16,19 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      AccessToken.clearAccessInformation();
+      window.location.href = "/perfil";
+    }
     return Promise.reject(error);
   }
 );
