@@ -7,18 +7,21 @@ import SignUp from './pages/SignUp';
 import ICsPage from './pages/ICsPage';
 import CreateScientificResearch from './pages/ScientificResearch/CreateScientificResearch';
 import ScientificResearchApplications from './pages/ScientificResearch/ScientificResearchApplications';
+import { PrivateRoutes } from './routers/PrivateRoutes';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={<LandingPage />}/>
         <Route path='/login' element={<Login />} />
         <Route path='/cadastro' element={<SignUp />} />
-        <Route path='/perfil' element={<Profile />} />
         <Route path='/iniciacoes-cientificas' element={<ICsPage />} />
-        <Route path='/iniciacoes-cientificas/criar' element={<CreateScientificResearch />} />
-        <Route path='/iniciacoes-cientificas/candidaturas/:idResearch' element={<ScientificResearchApplications />} />
+        <Route element={<PrivateRoutes/>}>
+          <Route path="/perfil" element={<Profile />} />
+          <Route path='/iniciacoes-cientificas/criar' element={<CreateScientificResearch />} />
+          <Route path='/iniciacoes-cientificas/candidaturas/:idResearch' element={<ScientificResearchApplications />} />
+        </Route>
       </Routes>
     </Router>
   );

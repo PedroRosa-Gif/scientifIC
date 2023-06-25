@@ -5,6 +5,8 @@
     justify-content: space-evenly;
     padding: 10px;
     height: fit-content;
+
+    cursor: pointer;
 }
 
 .div_image_default, .div_title_default {
