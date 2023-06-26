@@ -22,32 +22,26 @@ main.mine-research-container * {
         sans-serif;
 }
 
-section.mine-research-title {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    margin-bottom: 20px;
-}
-
-section.mine-research-title article {
+article.event-main-area article.title-research {
     display: grid;
     gap: 5px;
 }
 
-section.mine-research-title article h1 {
+article.event-main-area article.title-research h1 {
     font-weight: 700;
     font-size: 32px;
     color: black;
 }
 
-section.mine-research-title div.actions {
+form.on-going div.actions {
     display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
-section.mine-research-title button {
+form.on-going div.actions button {
     border: none;
     background: black;
     font-weight: 700;
@@ -58,11 +52,11 @@ section.mine-research-title button {
     cursor: pointer;
 }
 
-section.mine-research-title button:hover {
+form.on-going div.actions button:hover {
     opacity: 0.8;
 }
 
-section.mine-research-title button.edit {
+form.on-going div.actions button.edit {
     border: none;
     background: var(--submit-bg);
     font-weight: 700;
@@ -73,7 +67,7 @@ section.mine-research-title button.edit {
     cursor: pointer;
 }
 
-section.mine-research-title button.edit:hover {
+form.on-going div.actions button.edit:hover {
     background: var(--submit-hover-bg);
 }
 
@@ -90,7 +84,7 @@ section.mine-reseach-body article {
     gap: 30px;
 }
 
-section.mine-reseach-body aside {
+section.mine-reseach-body aside form.on-going {
     display: flex;
     gap: 40px;
     flex-direction: column;

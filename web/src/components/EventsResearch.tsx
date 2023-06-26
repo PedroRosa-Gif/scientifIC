@@ -9,12 +9,18 @@ interface IEventsResearchProps {
 
 function EventsResearch({ events }: IEventsResearchProps) {
     return(
-        <BaseList list={events} customEmpty={<></>}>
+        <BaseList list={events} customEmpty={
             <ul className="events-list">
-                {events?.map((event, key) => (
+                <li>
+                    <div className="event-header"><strong>Sem eventos</strong></div>
+                </li>
+            </ul>
+        }>
+            <ul className="events-list">
+                {events && events?.map((event, key) => (
                     <li key={event.title + key}>
                         <div className="event-header">
-                            <strong>{event.title}</strong> em {new Date(event.createdDate).toLocaleDateString("pt-br")} por: {event.createdUser}
+                            <strong>{event.title}</strong> em {new Date(event.createdAt).toLocaleDateString("pt-br")} por: {event.createdUser}
                         </div>
                         {event.content && <p>{event.content}</p>}
                     </li>

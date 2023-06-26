@@ -29,7 +29,9 @@ class ScientificResearchEventService {
   }
 
   public async getEventsByResearch(idResearch: string) : Promise<IScientificResearchEvent[]> {
-    return await this.EventModel.find().where({ idResearch: idResearch });
+    if (this.scientificResearchService.findById(idResearch) == null) throw new Error("IC não existe");
+  
+    return await this.EventModel.find({ idResearch: idResearch }).sort({ createdAt: -1 });
   }
 
   public async create(newEvent: IScientificResearchEvent, idUser: string) {

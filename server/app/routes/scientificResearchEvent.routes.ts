@@ -5,6 +5,6 @@ import { create, getAllEventsFromResearch } from "../controllers/scientificResea
 const scientificResearchEventRoutes = express.Router();
 
 scientificResearchEventRoutes.post("/:idUser", resolver(create));
-scientificResearchEventRoutes.post("/:idResearch", resolver(getAllEventsFromResearch));
+scientificResearchEventRoutes.get("/:idResearch", resolver(getAllEventsFromResearch));
 
 export default scientificResearchEventRoutes;

@@ -8,7 +8,7 @@ import ScientificResearchEventService from "../services/ScientificResearchEventS
 export const create = async (req: Request, res: Response) => {
 	const scientificResearchEventService = ScientificResearchEventService.getInstance(ScientificResearchEvent, User, ScientificResearch);
 
-	const idUser = req.query["idUser"] as string;
+	const idUser = req.params["idUser"] as string;
 	const newEvent = req.body as IScientificResearchEvent;
 
 	await scientificResearchEventService.create(newEvent, idUser);
@@ -21,11 +21,11 @@ export const create = async (req: Request, res: Response) => {
 export const getAllEventsFromResearch = async (req: Request, res: Response) => {
 	const scientificResearchEventService = ScientificResearchEventService.getInstance(ScientificResearchEvent, User, ScientificResearch);
 
-	const idResearch = req.query["idResearch"] as string;
+	const idResearch = req.params["idResearch"] as string;
 
-	const events = scientificResearchEventService.getEventsByResearch(idResearch);
+	const events = await scientificResearchEventService.getEventsByResearch(idResearch);
 
 	res.status(200).send({
-		events: events
+		events
 	});
 }
