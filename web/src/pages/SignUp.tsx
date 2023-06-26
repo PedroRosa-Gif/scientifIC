@@ -47,7 +47,6 @@ export default function SignUp() {
     }
     
     const result = await createUser(userInfos);
-    console.log(result);
   }
 
   function previousPage(){

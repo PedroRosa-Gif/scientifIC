@@ -67,7 +67,7 @@ class UserService {
       },
       process.env.JWT_KEY || "senha123",
       {
-          expiresIn: "1h",
+          expiresIn: "12h",
       });
 
       let userInfos = JSON.parse(JSON.stringify(user));

@@ -7,6 +7,7 @@ import EditProfile from '../components/TopicsProfile/EditProfile';
 import ListCandidacy from '../components/TopicsProfile/ListCandidacy';
 import ListAreas from '../components/TopicsProfile/ListAreas';
 import Notifier from '../components/Notifier';
+import ListMyICs from '../components/TopicsProfile/ListMyICs';
 
 // CSS import
 import "../styles/Profile.css";
@@ -27,13 +28,14 @@ export default function Profile() {
   const topics = [
     <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
     <ListCandidacy userInfos={userInfos} setMessage={setMessage} setShowNotifications={setShowNotifications}  />,
-    <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />
+    <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
+    <ListMyICs userInfos={userInfos}  />,
   ];
 
   useEffect(() => {
     const pointer = document.getElementById("pointer") as HTMLDivElement;
 
-    pointer.style.cssText = `margin-left: calc(289px * ${index});`;
+    pointer.style.cssText = `margin-left: calc((25% + 14px) * ${index});`;
   }, [index]);
 
   return (
@@ -63,6 +65,7 @@ export default function Profile() {
               <button onClick={() => setIndex(0)}>Informações</button>
               <button onClick={() => setIndex(1)}>Candidaturas</button>
               <button onClick={() => setIndex(2)}>Áreas de interesse</button>
+              <button onClick={() => setIndex(3)}>Minhas IC's</button>
             </div>
             <div className="div_pointer_topic">
               <div className="pointer-topic" id="pointer" />

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
@@ -7,8 +6,6 @@ import TextInput from "../components/TextInput";
 
 import "../styles/LandingPage.css";
 import "../styles/ICsPage.css";
-
-import logoAzul from "../assets/imgs/logo-azul.png";
 
 import SearchIcon from "../assets/icons/search_icon.svg";
 import IScientificResearch from "../interfaces/IScientificResearch";
@@ -24,6 +21,7 @@ import Notifier from "../components/Notifier";
 import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
 import { allStatus } from "../utils/constants/allStatus.constants";
 import AuthorizedMenu from "../components/AuthorizedMenu";
+import Logo from "../components/Logo";
 
 function ICsPage() {
 
@@ -49,13 +47,11 @@ function ICsPage() {
   const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
 
   function previousPage() {
-    setCurrentPage(currentPage - 1)
-    console.log(currentPage - 1);
+    setCurrentPage(currentPage - 1);
   }
 
   function nextPage() {
-    setCurrentPage(currentPage + 1)
-    console.log(currentPage + 1);
+    setCurrentPage(currentPage + 1);
   }
 
   function resetFilters(){
@@ -107,12 +103,7 @@ function ICsPage() {
       <header>
         <nav>
           <div className="nav-landing-page">
-            <div className="nav-brand">
-              <NavLink to={"/"} className="link">
-                <img src={logoAzul} alt="LOGO" />
-              </NavLink>
-              <h1>Scientif<strong>IC</strong></h1>
-            </div>
+            <Logo namePlanet={"pinkPlanet"} colorFont={true} />
             <div className="nav-content">
               <AuthorizedMenu/>
             </div>
