@@ -8,7 +8,7 @@ export const getEventsFromReseach = async (idResearch:string) => {
 }
   
 export const createEvent = async (idUser: string, event: IScientificResearchEvent) => {
-	const res = await axiosInstance.post(`/scientific-research-event/${idUser}`, event);
+	const res = await axiosInstance.post(`/scientific-research-event/create`, event);
 
 	return res;
 }

@@ -70,6 +70,7 @@ describe('Apply to a Scientific Research', () => {
     linkToMore: "",
     scholarShip: 2040.98,
     isShipToDefine: false,
+    isCanceled: false,
     advisorId: "",
     studentId: "",
     createdAt: new Date(),

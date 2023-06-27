@@ -9,6 +9,7 @@ interface IScientificResearch {
 
   scholarShip: number;
   isShipToDefine: boolean;
+  isCanceled: boolean;
 
   dateToBegin: Date;
   forecastFinish: Date;

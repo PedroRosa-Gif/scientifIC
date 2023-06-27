@@ -18,7 +18,19 @@ export const getICs = async (search:string, area:string[], institute:string, sta
 }
 
 export const getResearch = async (idResearch: string, idUser: string) => {
-  const res = await axiosInstance.get(`/scientific-research/getResearch?idResearch=${idResearch}&idUser=${idUser}`);
+  const res = await axiosInstance.get(`/scientific-research/getResearch?idResearch=${idResearch}`);
+
+  return res;
+}
+
+export const toggleCanceled = async (idResearch: string) => {
+  const res = await axiosInstance.get(`/scientific-research/canceled/${idResearch}`);
+
+  return res;
+}
+
+export const getOnlyResearch = async (idResearch: string, idUser: string) => {
+  const res = await axiosInstance.get(`/scientific-research/getOnlyResearch?idResearch=${idResearch}`);
 
   return res;
 }
@@ -26,7 +38,6 @@ export const getResearch = async (idResearch: string, idUser: string) => {
 export const assignStudent = async (idResearch: string, idStudent: string, idAdvisor: string) => {
   const res = await axiosInstance.get(`/scientific-research/assign/${idResearch}`, {
     params: {
-      idAdvisor: idAdvisor,
       idStudent: idStudent
     }
   });
@@ -46,8 +57,14 @@ export const createScientificResearch = async (research: IScientificResearch) =>
   return res;
 }
 
-export const editScientificResearch = async (idReseach: string, research: IScientificResearch) => {
+export const editScientificResearch = async (idReseach: string, research: IScientificResearch, idUser: string) => {
   const res = await axiosInstance.put(`/scientific-research/${idReseach}`, research);
+
+  return res;
+}
+
+export const deleteScientificResearch = async (idResearch: string) => {
+  const res = await axiosInstance.delete(`/scientific-research/${idResearch}`);
 
   return res;
 }

@@ -56,6 +56,8 @@ export default function ListAreas({ userInfos, setUserInfos, setMessage, setShow
       setMessage(["Não foi possivel salvar suas áreas!"]);
       setShowNotifications(true);
     }
+
+	setVerifyPopup(false);
   }
 
   return (

@@ -57,6 +57,7 @@ class UserService {
       if (!result) throw new Error("Senha incorreta!");
 
       const token = jwt.sign({
+          _id: user._id,
           email: user.email,
           name: user.name,
           lastName: user.lastName,
