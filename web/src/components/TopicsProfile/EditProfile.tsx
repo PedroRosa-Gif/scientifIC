@@ -11,7 +11,9 @@ import EditIcon from "../../assets/icons/edit_icon.svg";
 import IUser from "../../interfaces/IUser";
 import { fieldsProfile } from "../../utils/constants/fieldsProfile.constants";
 import { editUser } from "../../apis/user.endpoint";
-import { stringToDateInput } from "../../utils/handleFormatString";
+import { stringToDateInput } from "../../utils/helpers/handleFormatString";
+import { AccessToken } from "../../utils/helpers/AcessToken";
+import { useNavigate } from "react-router-dom";
 
 interface IProfile {
   userInfos: IUser | null;
@@ -23,6 +25,7 @@ interface IProfile {
 export default function EditProfile({ userInfos, setUserInfos, setMessage, setShowNotifications }:IProfile) {
   const [user, setUser] = useState<IUser>({ ...userInfos, birthdate: stringToDateInput(userInfos!.birthdate) } as IUser);
   const [verifyPopup, setVerifyPopup] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   async function handleEditUser() {
     const res = await editUser(userInfos!.email, user);
@@ -75,7 +78,11 @@ export default function EditProfile({ userInfos, setUserInfos, setMessage, setSh
           title={"Sair"}
           alt={"Ícone de sair"}
           src={ExitIcon}
-          onClick={() => alert('RedButton')}
+          onClick={() => {
+            setUserInfos(null);
+            AccessToken.clearAccessInformation();
+            navigate("/");
+          }}
         />
         <ButtonProfile 
           typeStyle={true}

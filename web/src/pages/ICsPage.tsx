@@ -1,15 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 
-import Authorized from "../components/Authorized";
 import { AuthContext } from "../contexts/auth";
 import Footer from "../components/Footer";
 import TextInput from "../components/TextInput";
 
 import "../styles/LandingPage.css";
 import "../styles/ICsPage.css";
-
-import logoAzul from "../assets/imgs/logo-azul.png";
 
 import SearchIcon from "../assets/icons/search_icon.svg";
 import IScientificResearch from "../interfaces/IScientificResearch";
@@ -24,6 +20,8 @@ import { getICs } from "../apis/scientificResearch.endpoint";
 import Notifier from "../components/Notifier";
 import ApplyToAScientifResearchCard from "../components/ApplyToScientificResearchCard";
 import { allStatus } from "../utils/constants/allStatus.constants";
+import AuthorizedMenu from "../components/AuthorizedMenu";
+import Logo from "../components/Logo";
 
 function ICsPage() {
 
@@ -44,19 +42,16 @@ function ICsPage() {
 
   const [refresh, setRefresh] = useState(true);
 
-  const { signed, setUserInfos } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { signed, userInfos } = useContext(AuthContext);
 
   const [allFiltedICs, setAllFiltedICs] = useState<IScientificResearch[]>([]);
 
   function previousPage() {
-    setCurrentPage(currentPage - 1)
-    console.log(currentPage - 1);
+    setCurrentPage(currentPage - 1);
   }
 
   function nextPage() {
-    setCurrentPage(currentPage + 1)
-    console.log(currentPage + 1);
+    setCurrentPage(currentPage + 1);
   }
 
   function resetFilters(){
@@ -70,6 +65,26 @@ function ICsPage() {
 
     setCurrentPage(1)
     setRefresh(!refresh)
+  }
+
+  function applyMyInterestAreas() {
+    
+    if(userInfos.interestAreas === undefined || userInfos.interestAreas.length === 0){
+      setNotifications(["Você precisa primeiro setar suas áreas de interesse em seu perfil"]);
+      setShowNotifications(true);
+    }
+    else{
+      setSearch("")
+      setInstitute("")
+      setStatus(1)
+      setIsShipToDefine("")
+
+      setAreaSelected("")
+      setAllAreasSelected(userInfos.interestAreas)
+
+      setCurrentPage(1)
+      setRefresh(!refresh)
+    }
   }
 
   async function getFiltedICs() {
@@ -88,31 +103,9 @@ function ICsPage() {
       <header>
         <nav>
           <div className="nav-landing-page">
-            <div className="nav-brand">
-              <NavLink to={"/"} className="link">
-                <img src={logoAzul} alt="LOGO" />
-              </NavLink>
-              <h1>Scientif<strong>IC</strong></h1>
-            </div>
+            <Logo namePlanet={"pinkPlanet"} colorFont={true} />
             <div className="nav-content">
-              <Authorized 
-                isAuthorized={signed}
-                authorize={
-                  <div className="nav-user">
-                    <button onClick={() => {
-                      setUserInfos(null);
-                      navigate("/");
-                    }}>Logout</button>
-                    <button>Perfil</button>
-                  </div>
-                }
-                notAuthorize={
-                  <div className="nav-user">
-                    <NavLink to={"/cadastro"} className="link"><button>Cadastrar</button></NavLink>
-                    <NavLink to={"/login"} className="link"><button>Entrar</button></NavLink>
-                  </div>
-                }
-              />
+              <AuthorizedMenu/>
             </div>
           </div>
         </nav>
@@ -140,7 +133,7 @@ function ICsPage() {
                 <option value="">Status</option>
                 {
                   allStatus.map((status, index) => {
-                    return <option value={index + 1}>{status}</option>
+                    return <option key={index} value={index + 1}>{status}</option>
                   })
                 }
               </SelectInput>
@@ -216,6 +209,7 @@ function ICsPage() {
                 { signed ? 
                   <ButtonOrange 
                     title={"Filtrar por minhas áreas de interesse"}
+                    onClick={applyMyInterestAreas}
                   /> 
                   : <></>
                 }

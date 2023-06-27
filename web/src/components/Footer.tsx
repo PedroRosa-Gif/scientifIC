@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import icLogo from "../assets/imgs/ic_logo.jpg";
 import unicampLogo from "../assets/imgs/logo-unicamp-white.png";
 
@@ -11,7 +12,7 @@ function Footer() {
           <h2>Navegação</h2>
           <div className="footer-options">
             <span>Participe</span>
-            <span>Crie seu estudo</span>
+            <NavLink to={"/iniciacoes-cientificas/criar"}><span>Crie seu estudo</span></NavLink>
             <span>Quem Somos?</span>
           </div>
         </section>

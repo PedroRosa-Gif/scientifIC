@@ -26,7 +26,7 @@
     font-family: 'Lato';
     font-style: normal;
     font-weight: 600;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 43px;
     color: #000000;
 }
@@ -37,8 +37,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-
-    margin: 20px 0;
+    margin: 0;
 }
 
 .div-button-login, .div-create-account {
@@ -54,8 +53,7 @@
     font-family: 'Lato';
     font-style: normal;
     font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
+    font-size: 20px;
     text-decoration-line: underline;
     color: #000000;
     text-align: center;

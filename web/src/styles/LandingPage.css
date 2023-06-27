@@ -79,7 +79,7 @@ nav div.nav-items button {
     border: none;
 
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration-line: underline;
     color: var(--white);
 
@@ -148,7 +148,7 @@ div.text-brand-landing-area {
 }
 div.text-brand-landing-area h1 {
     font-weight: 800;
-    font-size: 46px;
+    font-size: 40px;
 
     color: var(--white);
 
@@ -160,7 +160,7 @@ div.text-brand-landing-area h3 {
 
     text-shadow: 0 0 5px var(--black-twenty-percent);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
 
     color: var(--white);
 }
@@ -214,7 +214,7 @@ section div.cards-landing-area {
 
 section div.cards-landing-area h1 {
     font-weight: 700;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 section ul.cards-landing-list {
@@ -252,7 +252,7 @@ section button.cards-see-more {
     border-radius: 8px;
 
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--white);
 }
 
@@ -266,7 +266,7 @@ section button.cards-see-more:hover {
 
 section div.idea-area {
     width: 100%;
-    padding: 70px 10%;
+    padding: 70px 40px;
 
     display: flex;
     gap: 50px;
@@ -290,13 +290,13 @@ section div.idea-content {
 
 section div.idea-content h1 {
     font-weight: 800;
-    font-size: 60px;    
+    font-size: 40px;    
     color: var(--white);
 }
 
 section div.idea-content p {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     color: var(--white);
 }
 
@@ -331,7 +331,7 @@ section.footer-column {
 
 section.footer-column h3 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 section.footer-column.logos {
@@ -366,8 +366,7 @@ div.footer-options {
 }
 
 div.footer-options span {
-    font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* END: Footer Styles */

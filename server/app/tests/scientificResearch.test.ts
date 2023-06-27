@@ -8,9 +8,12 @@ import IFiltersScientificResearch from '../interfaces/IFiltersScientificResearch
 import ScientificResearchService from "../services/ScientificResearchService";
 import UserType from '../utils/enums/UserType';
 import ResearchStatus from '../utils/enums/ResearchStatus';
+import { scientificResearchApplicationSchema } from '../models/scientificResearchApplication.model';
+import IScientificResearchApplication from '../interfaces/IScientificResearchApplication';
 
 let mongoServer: MongoMemoryServer;
 let UserModelMock: Model<IUser>;
+let ScientificResearchApplicationModelMock: Model<IScientificResearchApplication>;
 let ScientificResearchModelMock: Model<IScientificResearch>;
 
 let scientificResearch1:IScientificResearch;
@@ -25,6 +28,7 @@ beforeAll(async () => {
   
   await mongoose.connect(uri);
   UserModelMock = mongoose.model<IUser>("User", userSchema);
+  ScientificResearchApplicationModelMock = mongoose.model<IScientificResearchApplication>("ScientificResearchApplication", scientificResearchApplicationSchema);
   ScientificResearchModelMock = mongoose.model("ScientificResearch", scientificResearchSchema);
 
   scientificResearchService = ScientificResearchService.getInstance(ScientificResearchModelMock, UserModelMock);
@@ -308,3 +312,95 @@ describe('Create Scientific Research', () => {
 		await expect(scientificResearchService.create(scientificResearch)).resolves.not.toThrow();
 	});
 });
+
+describe('Assign to Student', () => {
+  const teacher:IUser = {
+    email: "teacher@gmail.com",
+    password: "senha123",
+    name: "Usuário",
+    lastName: "2",
+    ra: "123",
+    birthdate: new Date(),
+    type: UserType.Teacher,
+    institute: ''
+  };
+  
+  const student:IUser = {
+    email: "student@gmail.com",
+    password: "senha123",
+    name: "Usuário",
+    lastName: "2",
+    ra: "123",
+    birthdate: new Date(),
+    type: UserType.Student,
+    institute: ''
+  };
+  
+  const scientificResearch: IScientificResearch = {
+    theme: 'Economia de pequeno comercio',
+    title: 'Economics',
+    abstract: 'Uma pequena pesquisa de como funciona...',
+    status: ResearchStatus.acceptingStudents,
+    dateToBegin: new Date(),
+    forecastFinish: new Date(),
+    desireSkills: ["ChatGPT"],
+    areas: ["Sociedade", "Economia"],
+    linkToMore: "",
+    scholarShip: 2040.98,
+    isShipToDefine: false,
+    advisorId: "",
+    studentId: "",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+
+  const applicationToResearch: IScientificResearchApplication = {
+    createdAt: new Date(),
+    motivation: 'TEste',
+    scientificResearchId: "",
+    studentId: ""
+  }
+
+
+  
+	beforeEach(async () => {
+		await UserModelMock.create(teacher);
+    const createdStudent = await UserModelMock.create(student);
+
+		let advisor = await UserModelMock.findOne({ email: teacher.email });
+		scientificResearch.advisorId = advisor?._id.toString()!;
+
+    teacher._id = advisor?._id.toString()!;
+
+    const research = await ScientificResearchModelMock.create(scientificResearch);
+
+    applicationToResearch.scientificResearchId = research._id.toString();
+    applicationToResearch.studentId = createdStudent._id?.toString()!;
+
+    student._id = createdStudent._id.toString();
+
+    await ScientificResearchApplicationModelMock.create(applicationToResearch);
+	})
+
+	afterEach(async () => {
+		await UserModelMock.deleteMany({});
+    await ScientificResearchApplicationModelMock.deleteMany({});
+		await ScientificResearchModelMock.deleteMany({});
+	});
+
+  it('Assign with student account', async () => {
+		await expect(scientificResearchService.assignStudent(applicationToResearch.scientificResearchId, applicationToResearch.studentId, student._id!)).rejects.toThrowError("Você não possui acesso a essa IC");
+	});
+
+  it('Assign a teacher to research', async () => {
+		let newApplication: IScientificResearchApplication = {
+				...applicationToResearch,
+				studentId: teacher._id!
+		};
+		await expect(scientificResearchService.assignStudent(newApplication.scientificResearchId, newApplication.studentId, teacher._id!)).rejects.toThrowError("Não é possível selecionar este usuário. Seu cadastro consta como professor");
+	});
+
+  it('Assign successfully', async () => {
+		await expect(scientificResearchService.assignStudent(applicationToResearch.scientificResearchId, applicationToResearch.studentId, teacher._id!)).resolves.not.toThrow();
+	});
+})

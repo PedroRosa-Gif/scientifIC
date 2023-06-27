@@ -4,12 +4,15 @@ import IScientificResearch from "../interfaces/IScientificResearch";
 import IUser from "../interfaces/IUser";
 import UserService from "./UserService";
 import UserType from "../utils/enums/UserType";
+import { ObjectId } from "mongodb";
+import ResearchStatus from "../utils/enums/ResearchStatus";
+import { applyPagination } from "../utils/helpers/applyPagination";
 
 class ScientificResearchService {
 
-  private static instance: ScientificResearchService;
+  	private static instance: ScientificResearchService;
 	private scientificResearchModel: Model<IScientificResearch>;
-  private userService:UserService;
+  	private userService:UserService;
 
 	private constructor(ScientificResearchServiceModel:Model<IScientificResearch>, userModel:Model<IUser>) {
 		this.scientificResearchModel = ScientificResearchServiceModel;
@@ -27,21 +30,28 @@ class ScientificResearchService {
     return ScientificResearchService.instance;
   }
 
-	async getICs({search, totalPerPage, currentPage, institute, area, status, isShipToDefine}:IFiltersScientificResearch){
-
+	private createObjectToFindICs(search:string, area:string[], status:number, isShipToDefine:string){
+		
 		const objectFind:any = {
-		$or: [{title: new RegExp(search, "i") },
-		{theme: new RegExp(search, "i") }]
+			$or: [{title: new RegExp(search, "i") },
+			{theme: new RegExp(search, "i") }]
 		}
 
 		if (area.length > 0 && area.length > 0) 
-		objectFind.areas = { $in: area };
+			objectFind.areas = { $in: area };
 
 		if (status != 0) 
-		objectFind.status = status;
+			objectFind.status = status;
 
 		if (isShipToDefine != "") 
-		objectFind.isShipToDefine = (isShipToDefine == "true");
+			objectFind.isShipToDefine = (isShipToDefine == "true");
+
+		return objectFind
+	}
+
+	async getICs({search, totalPerPage, currentPage, institute, area, status, isShipToDefine}:IFiltersScientificResearch){
+
+		const objectFind = this.createObjectToFindICs(search, area, status, isShipToDefine);
 
 		const populate = {
 			path: 'advisorId',
@@ -50,16 +60,19 @@ class ScientificResearchService {
 		}
 
 		let allScientificResearch = await this.scientificResearchModel.find(objectFind).populate(populate).sort("-updatedAt").exec();
+		const filteredScientificResearch = this.filterICsByAdvisor(allScientificResearch);
 
-		allScientificResearch = allScientificResearch.filter((ic:IScientificResearch) => {
+		return applyPagination(filteredScientificResearch, currentPage, totalPerPage);
+	}
+
+	private filterICsByAdvisor(allScientificResearch:IScientificResearch[]): IScientificResearch[]{
+
+		const filteredScientificResearch = allScientificResearch.filter((ic:IScientificResearch) => {
 			if(ic.advisorId !== null)
-			return ic;
-		})
+				return ic;
+		});
 
-		const pageIndex = (currentPage - 1) * totalPerPage
-		const allICsWithPagination = allScientificResearch.slice(pageIndex, pageIndex + totalPerPage);
-
-		return allICsWithPagination;
+		return filteredScientificResearch;
 	}
 
 	async getMyICs(filter: string, id: string, type: string) {
@@ -73,6 +86,17 @@ class ScientificResearchService {
 			return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
 
 		return await this.scientificResearchModel.find({ advisorId: id }).populate(populate).sort(filter).exec();
+	}
+
+	async update(idResearch: string, research: IScientificResearch) {
+		let validationMessage = await this.validateResearch(research);
+
+		if (validationMessage.length > 0) throw new Error(validationMessage);
+
+		await this.scientificResearchModel.updateOne(
+			{ _id: new ObjectId(idResearch) }, 
+ 			{ $set: research }
+		);
 	}
 
 	async create(newResearch: IScientificResearch){
@@ -113,13 +137,55 @@ class ScientificResearchService {
 		return "";
 	}
 
-	async getThemes(){
+	async getThemes() {
 		return await this.scientificResearchModel.find({}, { theme: 1, _id: 0 }).distinct('theme');
 	}
 
-	async findById(id: string){
+	async findById(id: string) {
 		return await this.scientificResearchModel.findById(id);
+	}
+
+	async findByIdOnlyTeacher(id: string, advisorId: string) {
+		const research = await this.findById(id);
+
+		if (research?.advisorId.toString() !== advisorId) 
+			throw new Error("Você não possui acesso a essa IC");
+		
+		return research;
+	}
+
+	async findByIdOnlyTeacherOrStudent(id: string, userId: string) {
+		const research = await this.findById(id);
+
+		if (!(research?.advisorId.toString() === userId || research?.studentId.toString() === userId))
+			throw new Error("Você não possui acesso a essa IC");
+		
+		return research;
+	}
+
+	async assignStudent(id: string, studentId: string, advisorId: string) {
+		const research = await this.findById(id);
+
+		if (research === null) {
+			throw new Error("IC não existe");
+		}
+
+		if (research?.advisorId.toString() !== advisorId) 
+			throw new Error("Você não possui acesso a essa IC");
+
+		const student = await this.userService.findById(studentId);
+
+		if (student === null) 
+			throw new Error("Aluno não cadastrado");
+
+		if (student.type !== 1) 
+			throw new Error("Não é possível selecionar este usuário. Seu cadastro consta como professor");
+			
+		await this.scientificResearchModel.updateOne(
+			{ _id: new ObjectId(id) }, 
+ 			{ $set: { studentId: studentId, status: ResearchStatus.initialStep } }
+		);
 	}
 }
 
-export default ScientificResearchService
+export default ScientificResearchService;

@@ -1,9 +1,9 @@
-import axios from "axios";
 import IScientificResearch from "../interfaces/IScientificResearch";
+import axiosInstance from "./axiosInstance";
 
 export const getICs = async (search:string, area:string[], institute:string, status:number, isShipToDefine:string, currentPage:number) => {
 
-  const res = await axios.get("http://localhost:8000/scientific-research/", {
+  const res = await axiosInstance.get("/scientific-research/", {
     params: {
       search,
       institute,
@@ -17,21 +17,49 @@ export const getICs = async (search:string, area:string[], institute:string, sta
   return res;
 }
 
+export const getResearch = async (idResearch: string, idUser: string) => {
+  const res = await axiosInstance.get(`/scientific-research/getResearch?idResearch=${idResearch}&idUser=${idUser}`);
+
+  return res;
+}
+
+export const assignStudent = async (idResearch: string, idStudent: string, idAdvisor: string) => {
+  const res = await axiosInstance.get(`/scientific-research/assign/${idResearch}`, {
+    params: {
+      idAdvisor: idAdvisor,
+      idStudent: idStudent
+    }
+  });
+
+  return res;
+}
+
+export const getApplicationsFromResearch = async (idReseach: string, idUser: string) => {
+  const res = await axiosInstance.get(`/scientific-research/applications?idResearch=${idReseach}&idUser=${idUser}`);
+
+  return res;
+}
 
 export const createScientificResearch = async (research: IScientificResearch) => {
-  const res = await axios.post("http://localhost:8000/scientific-research/", research);
+  const res = await axiosInstance.post("/scientific-research/", research);
+
+  return res;
+}
+
+export const editScientificResearch = async (idReseach: string, research: IScientificResearch) => {
+  const res = await axiosInstance.put(`/scientific-research/${idReseach}`, research);
 
   return res;
 }
 
 export const getAllThemes = async () => {
-  const res = await axios.get("http://localhost:8000/scientific-research/themes");
+  const res = await axiosInstance.get("/scientific-research/themes");
 
   return res;
 }
 
 export const getMyICs = async (filter:string, id:string, type: number) => {
-  const res = await axios.get("http://localhost:8000/scientific-research/getMyICs", {
+  const res = await axiosInstance.get("/scientific-research/getMyICs", {
     params: {
       filter,
       id: id,

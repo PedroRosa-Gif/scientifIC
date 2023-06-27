@@ -50,7 +50,6 @@ export default function Profile() {
     <main className="container-linear">
       <header className="header">
         <Logo namePlanet={"greenPlanet"} colorFont={true} />
-        <IconProfile />
       </header>
       { showNotifications && <Notifier notifications={message} show={showNotifications} setShow={setShowNotifications} /> }
       <div className="container-profile">
