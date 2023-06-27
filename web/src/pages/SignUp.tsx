@@ -14,6 +14,7 @@ import SelectInput from "../components/SelectInput";
 import IUser from "../interfaces/IUser";
 import { createUser } from "../apis/user.endpoint";
 import { NavLink } from "react-router-dom";
+import Notifier from "../components/Notifier";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -25,6 +26,9 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userType, setUserType] = useState(1);
 
+	const [showNotifications, setShowNotifications] = useState<boolean>(false);
+	const [notifications, setNotifications] = useState<string[]>([]);
+  
   const [currentPhase, setCurrentPhase] = useState(0);
 
   async function handleCreateUser() {
@@ -45,8 +49,15 @@ export default function SignUp() {
       interestAreas: [""],
       type: userType,
     }
-    
-    const result = await createUser(userInfos);
+
+    try {
+      const result = await createUser(userInfos);
+      setShowNotifications(true);
+      setNotifications([result.data.message])
+    } catch (error) {
+      setShowNotifications(true);
+      setNotifications([error.response.data.message])
+    }
   }
 
   function previousPage(){
@@ -58,6 +69,7 @@ export default function SignUp() {
 
   return (
     <ContainerSign>
+      {showNotifications && <Notifier notifications={notifications} show={showNotifications} setShow={setShowNotifications} />}
       <section className="login">
         {currentPhase === 1 ?
           <button className="button-back-page">

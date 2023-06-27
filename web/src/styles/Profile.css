@@ -39,7 +39,6 @@
 }
 
 .div-info-user-profile {
-    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;

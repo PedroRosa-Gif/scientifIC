@@ -8,6 +8,7 @@ import "../styles/LandingPage.css";
 import Footer from "../components/Footer";
 import ICsCardArea from "../components/ICsCardArea";
 import AuthorizedMenu from "../components/AuthorizedMenu";
+import Logo from "../components/Logo";
 
 function LandingPage() {
   const brandRef = useRef<HTMLDivElement | null>(null);
@@ -19,10 +20,7 @@ function LandingPage() {
       <header>
         <nav>
           <div className="nav-landing-page">
-            <div className="nav-brand">
-              <div className="nav-icon" />
-              <h1>Scientif<strong>IC</strong></h1>
-            </div>
+            <Logo namePlanet={"bluePlanet"} colorFont={true} />
             <div className="nav-content">
               <div className="nav-items">
                 <button onClick={() => brandRef.current?.scrollIntoView({ behavior: 'smooth' })}>
@@ -54,7 +52,7 @@ function LandingPage() {
           </div>
         </div>
         <div>
-          <ICsCardArea/>
+          <ICsCardArea reference={studiesRef}/>
           <section ref={ideasRef}>
             <div className="idea-area">
               <img src={unicamp} alt="Unicamp" />

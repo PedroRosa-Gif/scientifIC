@@ -1,25 +1,45 @@
-import { useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import { NavLink } from "react-router-dom";
 import LandingStudyCard, { ILandingStudyCardProps } from "../components/LandingStudyCard";
+import { getICs } from "../apis/scientificResearch.endpoint";
+import IScientificResearch from "../interfaces/IScientificResearch";
 
-function ICsCardArea() {
+interface ICsCardAreaProps{
+  reference: MutableRefObject<HTMLDivElement>;
+}
 
-  const studiesRef = useRef<HTMLDivElement | null>(null);
+function ICsCardArea({ reference }: ICsCardAreaProps) {
 
-  const tempDataForCard: ILandingStudyCardProps[] = [
-    { title: "Plantas", text: "Voçê sabia que é possível utilizar a seiva das plantas para produzir remédios. Saiba como uma medicina mais natural ajuda a humanindade." },
-    { title: "Engenharia", text: "Como funciona as asas de um Avião? Quais materiais são usados na sua construção? Conheça você também alguns tópicos sobre aviação." },
-    { title: "Tecnologia", text: "Recursos como Chat GPT estão crescendo e tornando-se mais famosos e usuais. Entenda como seus conceitos ajudam no nosso dia a dia." }
-  ];
+  const [icsForCards, setICsForCards] = useState<ILandingStudyCardProps[]>([]);
+
+  async function getFiltedICs() {
+    const result = await getICs("", [], "", 0, "", 1);
+    const allICs = result.data.allScientificResearch;
+    
+    const ics:ILandingStudyCardProps[] = [];
+    for (let index = 0; index < 3; index++) {
+      const ic = allICs[index] as IScientificResearch;
+      ics.push({
+        title: ic.theme,
+        text: ic.abstract
+      })
+    }
+
+    setICsForCards(ics)
+  }
+
+  useEffect(() => {
+    getFiltedICs()
+  }, [])
 
   return (
-    <section ref={studiesRef}>
+    <section ref={reference}>
       <div className="cards-landing-area">
         <h1>Iniciações e Estudos</h1>
         <ul className="cards-landing-list">
-          {tempDataForCard.map(card => (
-            <li key={card.title}>
+          {icsForCards.map((card, index) => (
+            <li key={index}>
               <LandingStudyCard title={card.title} text={card.text} />
             </li>
           ))}

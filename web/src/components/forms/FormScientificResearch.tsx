@@ -27,7 +27,7 @@ const baseModel: IScientificResearch = {
 	advisorId: '',
 	areas: [],
 	desireSkills: [],
-	status: 0,
+	status: 1,
 	isShipToDefine: false,
 	dateToBegin: new Date(),
 	dateToBeginStr: new Date().toLocaleDateString("sv-SE"),
@@ -48,8 +48,8 @@ function FormScientificResearch(props: IFormScientificResearch) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-			if (props.model)
-					setScifyResearch(props.model);
+		if (props.model)
+			setScifyResearch(props.model);
 	}, [props.model]);
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
