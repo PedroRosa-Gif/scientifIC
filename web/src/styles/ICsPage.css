@@ -1,7 +1,9 @@
 section div.cards-landing-area.ics{
   padding: 50px 0;
   box-shadow: none;
+  min-height: 80vh;
 }
+
 
 div.container-filters-results{
   display: flex;
