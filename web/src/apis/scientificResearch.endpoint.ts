@@ -23,6 +23,12 @@ export const getResearch = async (idResearch: string, idUser: string) => {
   return res;
 }
 
+export const getOnlyResearch = async (idResearch: string, idUser: string) => {
+  const res = await axiosInstance.get(`/scientific-research/getOnlyResearch?idResearch=${idResearch}&idUser=${idUser}`);
+
+  return res;
+}
+
 export const assignStudent = async (idResearch: string, idStudent: string, idAdvisor: string) => {
   const res = await axiosInstance.get(`/scientific-research/assign/${idResearch}`, {
     params: {

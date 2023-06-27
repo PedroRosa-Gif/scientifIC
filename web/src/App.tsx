@@ -9,6 +9,7 @@ import CreateScientificResearch from './pages/ScientificResearch/CreateScientifi
 import ScientificResearchApplications from './pages/ScientificResearch/ScientificResearchApplications';
 import OnGoingScientificResearch from './pages/ScientificResearch/OnGoingScientificResearch';
 import { PrivateRoutes } from './routers/PrivateRoutes';
+import EditScientificResearch from './pages/ScientificResearch/EditScientificResearch';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route element={<PrivateRoutes/>}>
           <Route path="/perfil" element={<Profile />} />
           <Route path='/iniciacoes-cientificas/criar' element={<CreateScientificResearch />} />
+          <Route path='/iniciacoes-cientificas/editar/:idResearch' element={<EditScientificResearch />} />
           <Route path='/iniciacoes-cientificas/candidaturas/:idResearch' element={<ScientificResearchApplications />} />
           <Route path='/iniciacoes-cientificas/minhas/:idResearch' element={<OnGoingScientificResearch />} />
         </Route>

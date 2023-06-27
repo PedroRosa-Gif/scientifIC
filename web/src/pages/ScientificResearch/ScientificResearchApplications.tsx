@@ -68,6 +68,10 @@ function ScientificResearchApplications() {
 			});
 	}
 
+	const handleEdit = () => {
+		navigate(`/iniciacoes-cientificas/editar/${idResearch}`);
+	}
+
 	const backPage = () => {
 		navigate(-1);
 	}
@@ -119,7 +123,7 @@ function ScientificResearchApplications() {
 								onChange={(e) => updateApplications(e.target.value)}
 							/>
 							<div className="buttons">
-								<button>Editar</button>
+								<button onClick={handleEdit}>Editar</button>
 								<button className="delete">Excluir</button>
 							</div>
 						</aside>

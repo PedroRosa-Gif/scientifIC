@@ -16,6 +16,7 @@ function CreateScientificResearch() {
 		<ContainerResearch>
 			<FormScientificResearch 
 				title="Cadastrar Oportunidade de IC"
+				submitButton="CADASTRAR"
 				onSubmit={(data, reset, notify) => {
 					let research: IScientificResearch = ({ ...data });
 					research.dateToBegin = new Date(data.dateToBeginStr!);

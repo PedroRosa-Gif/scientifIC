@@ -92,6 +92,19 @@ export const getOnGoingResearch = async (req: Request, res: Response) => {
 	});
 }
 
+export const getOnlyResearch = async (req: Request, res: Response) => {
+  const idResearch = req.query["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
+ 
+  const researchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const research = await researchService.findByIdOnlyTeacherOrStudent(idResearch, idUser);
+
+  res.status(200).send({
+    research: research
+  });
+}
+
 export const create = async (req: Request, res: Response) => {
 
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
@@ -113,8 +126,6 @@ export const edit = async (req: Request, res: Response) => {
 	const research = req.body as IScientificResearch;
   
 	await scientificResearchService.update(idResearch, research);
-
-  console.log(research);
 
 	res.status(201).send({
 		message: 'IC alterada com sucesso'

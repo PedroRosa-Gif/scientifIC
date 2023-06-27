@@ -16,6 +16,7 @@ import PostLoadScientificResearch from "../postLoads/PostLoadScientificResearch"
 
 interface IFormScientificResearch {
 	title: string;
+	submitButton: string;
 	model?: IScientificResearch;
 	onSubmit: (data: IScientificResearch, reset: () => void, notify: (message: string) => void) => void;
 }
@@ -92,100 +93,100 @@ function FormScientificResearch(props: IFormScientificResearch) {
 								<h1>{props.title}</h1>
 								<div className="dash-under" />
 						</article>
-						<button type="button" onClick={backPage}>CANCELAR</button>
+						<button type="button" onClick={backPage}>Voltar</button>
 					</section>
 					<section className="form-body">
 						<div className="form-row">
 								<BaseDataList 
-										type="text" label="Tema"
-										value={scifyResearch.theme}
-										onChange={(e) => setScifyResearch(prev => ({ ...prev, theme: e.target.value }))}
-										id="theme" name="theme" list="themes"
-										placeholder="Insira ou selecione tema de sua oportunidade de IC..."
-										options={load.themes}
+									type="text" label="Tema"
+									value={scifyResearch.theme}
+									onChange={(e) => setScifyResearch(prev => ({ ...prev, theme: e.target.value }))}
+									id="theme" name="theme" list="themes"
+									placeholder="Insira ou selecione tema de sua oportunidade de IC..."
+									options={load.themes}
 								/>
 								<BaseTextInput 
-										type="text" label="Título"
-										value={scifyResearch.title}
-										onChange={(e) => setScifyResearch(prev => ({ ...prev, title: e.target.value }))}
-										id="title" name="title"
-										placeholder="Insira o título de sua oportunidade de IC..." 
+									type="text" label="Título"
+									value={scifyResearch.title}
+									onChange={(e) => setScifyResearch(prev => ({ ...prev, title: e.target.value }))}
+									id="title" name="title"
+									placeholder="Insira o título de sua oportunidade de IC..." 
 								/>
 						</div>
 						<div className="form-row">
 								<BaseTextInput 
-										type="text" label="Link sobre o Projeto"
-										value={scifyResearch.linkToMore}
-										onChange={(e) => setScifyResearch(prev => ({ ...prev, linkToMore: e.target.value }))}
-										id="link" name="link"
-										placeholder="Insira um link sobre a ideia da IC..." 
+									type="text" label="Link sobre o Projeto"
+									value={scifyResearch.linkToMore}
+									onChange={(e) => setScifyResearch(prev => ({ ...prev, linkToMore: e.target.value }))}
+									id="link" name="link"
+									placeholder="Insira um link sobre a ideia da IC..." 
 								/>
 								<BaseSelectInput 
-										label="Status do Projeto"
-										id="status" name="status"
-										options={load.statusOpts}
-										value={scifyResearch.status}
-										onChange={(e) => setScifyResearch(prev => ({ ...prev, status: parseInt(e.target.value) }))}
+									label="Status do Projeto"
+									id="status" name="status"
+									options={load.statusOpts}
+									value={scifyResearch.status}
+									onChange={(e) => setScifyResearch(prev => ({ ...prev, status: parseInt(e.target.value) }))}
 								/>
 						</div>
 						<div className="form-row">
 								<TextAreaInput 
-										label="Resumo" id="abstract"
-										value={scifyResearch.abstract}
-										onChange={(e) => setScifyResearch(prev => ({ ...prev, abstract: e.target.value }))} 
-										name="abstract"
-										placeholder="Insira um breve resumo da iniciação ciêntifica a ser produzida..."
+									label="Resumo" id="abstract"
+									value={scifyResearch.abstract}
+									onChange={(e) => setScifyResearch(prev => ({ ...prev, abstract: e.target.value }))} 
+									name="abstract"
+									placeholder="Insira um breve resumo da iniciação ciêntifica a ser produzida..."
 								/>
 						</div>
 						<div className="form-row">
 								<article className="skills-container">
-										<SkillList label="Habilidade Desejada" 
-												placeholder="Insira uma habilidade desejada..."
-												id="desireSkills" baseSkills={scifyResearch.desireSkills}
-												setList={(newSkills) => setScifyResearch(prev => ({ ...prev, desireSkills: newSkills }))}
-										/>
+									<SkillList label="Habilidade Desejada" 
+										placeholder="Insira uma habilidade desejada..."
+										id="desireSkills" baseSkills={scifyResearch.desireSkills}
+										setList={(newSkills) => setScifyResearch(prev => ({ ...prev, desireSkills: newSkills }))}
+									/>
 								</article>
 								<aside className="side-container">
-										<div className="form-row scholar-ship">
-												<BaseTextInput label="Valor da Bolsa"
-														type="number" id="scholarship"
-														name="scholarship"
-														placeholder="Insira o valor da bolsa..."
-														value={scifyResearch.scholarShip}
-														onChange={(e) => setScifyResearch(prev => ({ ...prev, scholarShip: parseFloat(e.target.value) }))} 
-												/>
-												<BaseCheckBox label="A DEFINIR"
-														id="isToDefine"
-														name="isToDefine"
-														checked={scifyResearch.isShipToDefine}
-														onChange={(e) => setScifyResearch(prev => ({ ...prev, isShipToDefine: !prev.isShipToDefine }))} 
-												/>
-										</div>  
-										<div className="form-row">
-												<BaseTextInput label="Início"
-														type="date" id="dateToBegin"
-														name="dateToBegin"
-														placeholder="MM/yyyy"
-														value={scifyResearch.dateToBeginStr}
-														onChange={(e) => setScifyResearch(prev => ({ ...prev, dateToBeginStr: e.target.value }))} 
-												/>
-												<BaseTextInput label="Previsão de Finalização"
-														type="date" id="forecastFinish"
-														name="forecastFinish"
-														placeholder="MM/yyyy"
-														value={scifyResearch.forecastFinishStr}
-														onChange={(e) => setScifyResearch(prev => ({ ...prev, forecastFinishStr: e.target.value }))} 
-												/>   
-										</div>
-										<SelectAreas
-												baseAreas={scifyResearch.areas} 
-												setSelectedAreas={(newAreas) => setScifyResearch(prev => ({ ...prev, areas: newAreas }))} 
+									<div className="form-row scholar-ship">
+										<BaseTextInput label="Valor da Bolsa"
+											type="number" id="scholarship"
+											name="scholarship"
+											placeholder="Insira o valor da bolsa..."
+											value={scifyResearch.scholarShip}
+											onChange={(e) => setScifyResearch(prev => ({ ...prev, scholarShip: parseFloat(e.target.value) }))} 
 										/>
+										<BaseCheckBox label="A DEFINIR"
+											id="isToDefine"
+											name="isToDefine"
+											checked={scifyResearch.isShipToDefine}
+											onChange={(e) => setScifyResearch(prev => ({ ...prev, isShipToDefine: !prev.isShipToDefine }))} 
+										/>
+									</div>  
+									<div className="form-row">
+										<BaseTextInput label="Início"
+											type="date" id="dateToBegin"
+											name="dateToBegin"
+											placeholder="MM/yyyy"
+											value={scifyResearch.dateToBeginStr}
+											onChange={(e) => setScifyResearch(prev => ({ ...prev, dateToBeginStr: e.target.value }))} 
+										/>
+										<BaseTextInput label="Previsão de Finalização"
+											type="date" id="forecastFinish"
+											name="forecastFinish"
+											placeholder="MM/yyyy"
+											value={scifyResearch.forecastFinishStr}
+											onChange={(e) => setScifyResearch(prev => ({ ...prev, forecastFinishStr: e.target.value }))} 
+										/>   
+									</div>
+									<SelectAreas
+										baseAreas={scifyResearch.areas} 
+										setSelectedAreas={(newAreas) => setScifyResearch(prev => ({ ...prev, areas: newAreas }))} 
+									/>
 								</aside>
 						</div>
 					</section>
 					<section className="form-submit">
-						<button>CADASTRAR</button>
+						<button>{props.submitButton}</button>
 					</section>
 				</form>
 				</>
