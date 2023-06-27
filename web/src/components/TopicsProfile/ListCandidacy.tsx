@@ -98,9 +98,13 @@ export default function ListCandidacy({ userInfos, setMessage, setShowNotificati
                         <span>{handleSituation(a.scientificResearchId.studentId)}</span>
                       </div>
                       <div className="div-align-info-list-candidacy last-list-candidacy">
-                        <button className="cancel-btn-profile" onClick={() => { setSelectedIc(a._id); setVerifyPopup(true); }}>
-                          <img src={CancelIcon} alt="Ícone de cancelar inscrição" />
-                        </button>
+                        {
+                          handleSituation(a.scientificResearchId.studentId) !== "Aprovado" ? (
+                            <button className="cancel-btn-profile" onClick={() => { setSelectedIc(a._id); setVerifyPopup(true); }}>
+                              <img src={CancelIcon} alt="Ícone de cancelar inscrição" />
+                            </button>
+                          ) : null
+                        }
                       </div>
                     </div>
                   )

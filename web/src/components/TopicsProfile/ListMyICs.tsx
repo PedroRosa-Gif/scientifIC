@@ -56,7 +56,6 @@ export default function ListMyICs({ userInfos }:IProfile) {
                 <span>Ordenar por:</span>
                 <select onChange={(e) => setFilter(e.target.value)}>
                   <option value={"title"}>Título</option>
-                  <option value={"advisorId"}>Orientador</option>
                   <option value={"-updatedAt"}>Data de modificação</option>
                 </select>
               </div>

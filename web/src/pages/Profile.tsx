@@ -53,20 +53,20 @@ export default function Profile() {
       </header>
       { showNotifications && <Notifier notifications={message} show={showNotifications} setShow={setShowNotifications} /> }
       <div className="container-profile">
-        <div className="div-align-photo-profile">
-          <div className="div-photo-profile">
-            <img src={PhotoProfile} alt="Foto de perfil" className="photo-profile" />
-          </div>
-          <div className="div-info-user-profile">
-            <span className="name-user-profile">
-              Olá {userInfos!.name} {userInfos!.lastName}!
-            </span>
-            <span className="email-user-profile">
-              {userInfos!.email}
-            </span>
-          </div>
-        </div>
         <div className="div-body-profile">
+          <div className="div-align-photo-profile">
+            <div className="div-photo-profile">
+              <img src={PhotoProfile} alt="Foto de perfil" className="photo-profile" />
+            </div>
+            <div className="div-info-user-profile">
+              <span className="name-user-profile">
+                Olá {userInfos!.name} {userInfos!.lastName}!
+              </span>
+              <span className="email-user-profile">
+                {userInfos!.email}
+              </span>
+            </div>
+          </div>
           <div className="div-align-topics-profile">
             <div className="div-topics-profile">
               {
