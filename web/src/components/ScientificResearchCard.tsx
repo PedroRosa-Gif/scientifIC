@@ -35,7 +35,7 @@ function ScientificResearchCard({ic, setNotifications, setShowNotifications, set
   }
 
   return (
-    <div>
+    <div className="scientific-research-card">
       <h2>{(ic.title !== "") ? ic.title : ic.theme}</h2>
       {
         ic.areas.map((area,index) => {

@@ -73,9 +73,6 @@ export default function Login({error}:LoginProps) {
             type="password"
           />
         </div>
-        <div className="div-forgot-password">
-          <ForgotPassword link={""} />
-        </div>
         <div className="div-button-login">
           <ButtonSign title={"Entrar"} onClick={() => handleLoginUser()}/>
         </div>
