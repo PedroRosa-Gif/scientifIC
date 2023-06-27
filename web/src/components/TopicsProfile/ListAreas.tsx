@@ -14,6 +14,8 @@ import EditIcon from "../../assets/icons/edit_icon.svg";
 import IUser from "../../interfaces/IUser";
 
 import { editUser } from "../../apis/user.endpoint";
+import { AccessToken } from "../../utils/helpers/AcessToken";
+import { useNavigate } from "react-router-dom";
 
 interface IProfile {
 	userInfos: IUser | null;
@@ -26,7 +28,8 @@ export default function ListAreas({ userInfos, setUserInfos, setMessage, setShow
 	const [areas, setAreas] = useState<string[]>(userInfos?.interestAreas || []);
   const [verifyPopup, setVerifyPopup] = useState<boolean>(false);
 	const [search, setSearch] = useState<string>("");
-
+  const navigate = useNavigate();
+	
 	function addArea() {
 		if (!areas.includes(search)) {
 			areas.push(search);
@@ -108,7 +111,11 @@ export default function ListAreas({ userInfos, setUserInfos, setMessage, setShow
 					title={"Sair"}
 					alt={"Ícone de sair"}
 					src={ExitIcon}
-					onClick={() => alert('RedButton')}
+					onClick={() => {
+            setUserInfos(null);
+            AccessToken.clearAccessInformation();
+            navigate("/");
+          }}
 				/>
 			</div>
     </div>

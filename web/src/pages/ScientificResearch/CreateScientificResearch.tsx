@@ -30,6 +30,7 @@ function CreateScientificResearch() {
 					createScientificResearch(research)
 						.then((res: AxiosResponse) => {
 							reset();
+							console.log(res);
 							navigate(`/iniciacoes-cientificas/candidaturas/${res.data.researchId}`, { replace: true });
 						})
 						.catch(function(errors) {

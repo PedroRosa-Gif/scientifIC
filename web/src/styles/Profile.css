@@ -39,7 +39,6 @@
 }
 
 .div-info-user-profile {
-    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,7 +107,7 @@
     outline: none;
     border: none;
     cursor: pointer;
-    width: 25%;
+    width: 226px;
     height: 50px;
     transition: all 100ms ease-in-out;
 }
@@ -125,7 +124,7 @@
 }
 
 .pointer-topic {
-    width: calc(25% - 42px);
+    width: calc(226px + 20px);
     height: 2px;
     background: #1482F5;
     transition: all 200ms ease-in-out;

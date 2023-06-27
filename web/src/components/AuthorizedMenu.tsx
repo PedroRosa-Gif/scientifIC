@@ -8,7 +8,7 @@ import { AccessToken } from "../utils/helpers/AcessToken";
 
 function AuthorizedMenu() {
   const { signed, setUserInfos } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Authorized 

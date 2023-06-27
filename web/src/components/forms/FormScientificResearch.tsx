@@ -50,8 +50,8 @@ function FormScientificResearch(props: IFormScientificResearch) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-			if (props.model)
-					setScifyResearch(props.model);
+		if (props.model)
+			setScifyResearch(props.model);
 	}, [props.model]);
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

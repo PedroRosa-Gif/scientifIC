@@ -1,5 +1,4 @@
 .div_logo_default {
-    width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -24,7 +23,7 @@
 
 .div_image_default img {
     margin: 0 auto;
-    width: 60px
+    width: 60px;
 }
 
 .div_title_default {
