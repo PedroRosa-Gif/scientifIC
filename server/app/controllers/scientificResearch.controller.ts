@@ -78,6 +78,12 @@ export const getOnGoingResearch = async (req: Request, res: Response) => {
   const userService = UserService.getInstance(User);
 
   const teacher = await userService.findById(research.advisorId);
+
+  if (research.studentId.length === 0) {
+    res.status(409).send({ message: 'Nenhum estudante assignado' });
+    return;
+  }
+  
   const student = await userService.findById(research.studentId);
 
   const eventService = ScientificResearchEventService.getInstance(ScientificResearchEvent, User, ScientificResearch);
@@ -110,7 +116,10 @@ export const create = async (req: Request, res: Response) => {
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
 
 	const newResearch = req.body as IScientificResearch;
+  const idUser = req.query["idUser"] as string;
 
+  newResearch.advisorId = idUser;
+ 
 	const createdResearch = await scientificResearchService.create(newResearch);
 
 	res.status(201).send({
@@ -123,13 +132,27 @@ export const edit = async (req: Request, res: Response) => {
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
 
   const idResearch = req.params["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
 	const research = req.body as IScientificResearch;
   
-	await scientificResearchService.update(idResearch, research);
+	await scientificResearchService.update(idResearch, research, idUser);
 
 	res.status(201).send({
 		message: 'IC alterada com sucesso'
 	});
+}
+
+export const deleteResearch = async (req: Request, res: Response) => {
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const idResearch = req.params["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
+
+  await scientificResearchService.deleteResearch(idResearch, idUser);
+
+  res.status(200).send({
+    message: 'IC excluída com sucesso'
+  });
 }
 
 export const getMyICs = async (req: Request, res: Response) => {
@@ -148,7 +171,7 @@ export const getMyICs = async (req: Request, res: Response) => {
 
 export const assignStudent = async (req: Request, res: Response) => {
   const idResearch = req.params["idResearch"] as string;
-  const idAdvisor = req.query["idAdvisor"] as string;
+  const idAdvisor = req.query["idUser"] as string;
   const idStudent = req.query["idStudent"] as string;
 
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
@@ -158,4 +181,18 @@ export const assignStudent = async (req: Request, res: Response) => {
   res.status(201).send({
 		message: "IC assignada com sucesso ao aluno"
 	});
+}
+
+export const toggleCanceled = async (req: Request, res: Response) => {
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const idResearch = req.params["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
+
+  let canceled = await scientificResearchService.toggleCanceled(idResearch, idUser);
+
+  res.status(200).send({
+    message: 'Operação concluída com sucesso',
+    newCanceled: canceled
+  })
 }

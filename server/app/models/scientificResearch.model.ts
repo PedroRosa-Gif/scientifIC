@@ -11,6 +11,8 @@ export const scientificResearchSchema = new Schema<IScientificResearch>({
   scholarShip: { type: Number },
   isShipToDefine: { type: Boolean, required: true },
 
+  isCanceled: { type: Boolean, required: true },
+
   dateToBegin: { type: Date, required: true },
   forecastFinish: { type: Date },
 

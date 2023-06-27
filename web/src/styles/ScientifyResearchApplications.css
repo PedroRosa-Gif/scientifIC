@@ -80,6 +80,11 @@ section.applications-area {
     gap: 30px;
 }
 
+main.applications-container article.actions-header-app {
+    display: flex;
+    gap: 20px;
+}
+
 section.applications-area article.applications-list {
     display: flex;
     flex-direction: column;
@@ -116,7 +121,7 @@ section.applications-area aside div.buttons {
     align-items: center;
 }
 
-section.applications-area aside button {
+section.applications-area aside div.buttons button {
     border: 2px solid var(--button-bg-hover);
     width: 100%;
     background: var(--button-bg);
@@ -128,12 +133,12 @@ section.applications-area aside button {
     cursor: pointer;
 }
 
-section.applications-area aside button.delete {
+section.applications-area aside div.buttons button.delete {
     color: var(--button-bg);
     background: white;
 }
 
-section.applications-area aside button:hover {
+section.applications-area aside div.buttons button:hover {
     color: white;
     background: var(--button-bg-hover);
 }

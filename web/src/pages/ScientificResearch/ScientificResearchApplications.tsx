@@ -8,7 +8,7 @@ import SearchIcon from "../../assets/icons/search_icon.svg";
 import "../../styles/ScientifyResearchApplications.css";
 import TextInput from "../../components/TextInput";
 import { useEffect, useContext, useState } from "react";
-import { getApplicationsFromResearch } from "../../apis/scientificResearch.endpoint";
+import { deleteScientificResearch, getApplicationsFromResearch, toggleCanceled } from "../../apis/scientificResearch.endpoint";
 import { AuthContext } from "../../contexts/auth";
 import { AxiosResponse } from "axios";
 import IScientificResearch from "../../interfaces/IScientificResearch";
@@ -18,6 +18,8 @@ import ApplicationResearchCard from "../../components/ApplicationResearchCard";
 import { getApplicationsByResearchQuery } from "../../apis/scientificResearchApplication.endpoint";
 import Notifier from "../../components/Notifier";
 import ApplicationApprove from "../../components/ApplicationApprove";
+import ErrorBox from "../../components/ErrorBox";
+import CancelICButton from "../../components/CancelICButton";
 
 function ScientificResearchApplications() {
 	const { userInfos } = useContext(AuthContext);
@@ -53,6 +55,10 @@ function ScientificResearchApplications() {
 				setErrors(undefined);
 			})
 			.catch(function (errors) {
+				if (errors.response.status === 409) {
+					navigate(`/iniciacoes-cientificas/minhas/${idResearch}`);
+				}
+
 				setErrors("Sem permissão: " + errors.response.data.message);
 			});
 	}
@@ -72,8 +78,33 @@ function ScientificResearchApplications() {
 		navigate(`/iniciacoes-cientificas/editar/${idResearch}`);
 	}
 
+	const handleDelete = () => {
+		deleteScientificResearch(idResearch)
+			.then((res: AxiosResponse) => {
+				navigate("/perfil");
+			})
+			.catch(function (err) {
+				setNotifications([err.response.data.message]);
+				setShowNotify(true);
+			})
+	}
+
 	const backPage = () => {
 		navigate(-1);
+	}
+
+	const clickToCancel = async () => {
+		toggleCanceled(research._id)
+			.then((res: AxiosResponse) => {
+				setResearch(prev => ({ ...prev, isCanceled: res.data.newCanceled }));
+
+				setNotifications([res.data.message]);
+				setShowNotify(true);
+			})
+			.catch(function (err) {
+				setNotifications([err.response.data.message]);
+				setShowNotify(true);
+			})
 	}
 
 	return (
@@ -85,7 +116,12 @@ function ScientificResearchApplications() {
 							<h1>{research ? "Tema: " + research.theme + " / " + (research.title ? research.title : "Sem Título") : "Carregando..." }</h1>
 							<div className="dash-under" />
 						</article>
-						<button type="button" onClick={backPage}>Voltar</button>
+						<article className="actions-header-app">
+							{research && research.isCanceled && 
+								<span className="status-indicator" style={{ background: 'black' }}>Cancelado</span>
+							}
+							<button type="button" onClick={backPage}>Voltar</button>
+						</article>
 					</section>
 					<section className="overview-applications">
 						<span>Criado em: {research ? new Date(research.createdAt).toLocaleDateString("pt-br") : "-"}</span>
@@ -124,8 +160,9 @@ function ScientificResearchApplications() {
 							/>
 							<div className="buttons">
 								<button onClick={handleEdit}>Editar</button>
-								<button className="delete">Excluir</button>
+								<button onClick={handleDelete} className="delete">Excluir</button>
 							</div>
+							<CancelICButton isCanceled={research ? research.isCanceled : false} onClick={clickToCancel} />
 						</aside>
 					</section> 
 
@@ -135,6 +172,7 @@ function ScientificResearchApplications() {
 							research={research}
 							student={selectedStudent}
 							setNotifications={setNotifications}
+							setShowNotify={setShowNotify}
 							setShowConfirmation={setShowCard}
 						/>
 					}
@@ -142,7 +180,7 @@ function ScientificResearchApplications() {
 				</main>
 				:
 				<main className="applications-container">
-					<h1>{errors}</h1>
+					<ErrorBox message={errors} />
 				</main>
 			}
 		</ContainerResearch>

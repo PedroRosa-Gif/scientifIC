@@ -1,0 +1,28 @@
+button.cancel-ic {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.466);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.cancel-ic img {
+    width: 20px;
+    height: 20px;
+}
+
+button.cancel-ic.to-open {
+    background: rgb(117, 150, 26);
+}
+
+button.cancel-ic:hover {
+    box-shadow: 0 1px 4px 4px rgba(0, 0, 0, 0.1);
+}

@@ -41,7 +41,7 @@ function EditScientificResearch() {
 					if (userInfos === null) 
 						return navigate("/login");
 
-					editScientificResearch(idResearch, research)
+					editScientificResearch(idResearch, research, userInfos._id)
 						.then((res: AxiosResponse) => {
 							notify(res.data.message);
 						})

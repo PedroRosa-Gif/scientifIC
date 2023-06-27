@@ -13,11 +13,12 @@ interface IApplicationApprove {
 	idResearch: string;
 	setShowConfirmation: (closes: boolean) => void;
 	setNotifications: (message: string[]) => void;
+	setShowNotify: (show: boolean) => void;
 	research: IScientificResearch;
 	student: IUser | undefined;
 }
 
-function ApplicationApprove({ idResearch, setShowConfirmation, setNotifications, research, student }: IApplicationApprove) {
+function ApplicationApprove({ idResearch, setShowConfirmation, setNotifications, setShowNotify, research, student }: IApplicationApprove) {
 	const navigate = useNavigate();
 	const { userInfos } = useContext(AuthContext);
 
@@ -27,12 +28,15 @@ function ApplicationApprove({ idResearch, setShowConfirmation, setNotifications,
 		await assignStudent(idResearch, student._id, userInfos._id)
 			.then((response: AxiosResponse) => {
 				if (response.status === 201) { 
-					navigate("/iniciacoes-cientificas");
-				} else
+					navigate(`/iniciacoes-cientificas/minhas/${idResearch}`);
+				} else {
 					setNotifications(["Algo de errado aconteceu..."]);
+					setShowNotify(true);
+				}
 			})
 			.catch(function(error) {
 				setNotifications([error.response.data.message]);
+				setShowNotify(true);
 			})
 	}
 

@@ -11,7 +11,7 @@ function UserBox({ user }: IUserBoxProps) {
     <div className="user-box">
       <span className="img"></span>
       <div className="user-box-infos">
-        <h5>Nome do { user.type == 1 ? 'Professor' : 'Aluno' }</h5>
+        <h5>Nome do { user.type === 2 ? 'Professor' : 'Aluno' }</h5>
         <h4>{user.name} {user.lastName}</h4>
       </div>
     </div>

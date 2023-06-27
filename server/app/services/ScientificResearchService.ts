@@ -85,7 +85,11 @@ class ScientificResearchService {
 		return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
 	}
 
-	async update(idResearch: string, research: IScientificResearch) {
+	async update(idResearch: string, research: IScientificResearch, idUser: string) {
+		let auxResearch = await this.scientificResearchModel.findById(idResearch);
+
+		if (auxResearch?.advisorId !== idUser && auxResearch?.studentId !== idUser) throw new Error("Usuário não autorizado");
+
 		let validationMessage = await this.validateResearch(research);
 
 		if (validationMessage.length > 0) throw new Error(validationMessage);
@@ -101,6 +105,7 @@ class ScientificResearchService {
 
 		if (validationMessage.length > 0) throw new Error(validationMessage);
 
+		newResearch.isCanceled = false;
 		newResearch.createdAt = new Date();
 		newResearch.updatedAt = new Date();
 
@@ -134,6 +139,16 @@ class ScientificResearchService {
 		return "";
 	}
 
+	async deleteResearch(idResearch: string, idAdvisor: string) {
+		var research = await this.scientificResearchModel.findById(idResearch);
+
+		if (!research) throw new Error('Não foi possível encontrar esta IC');
+
+		if (research.advisorId != idAdvisor) throw new Error('Usuário não autorizado');
+
+		await this.scientificResearchModel.deleteOne({ _id: research._id });
+	}
+
 	async getThemes() {
 		return await this.scientificResearchModel.find({}, { theme: 1, _id: 0 }).distinct('theme');
 	}
@@ -144,6 +159,9 @@ class ScientificResearchService {
 
 	async findByIdOnlyTeacher(id: string, advisorId: string) {
 		const research = await this.findById(id);
+
+		if (!research || research === null) 
+			throw new Error("IC não existe");
 
 		if (research?.advisorId.toString() !== advisorId) 
 			throw new Error("Você não possui acesso a essa IC");
@@ -177,11 +195,30 @@ class ScientificResearchService {
 
 		if (student.type !== 1) 
 			throw new Error("Não é possível selecionar este usuário. Seu cadastro consta como professor");
+
+		if (research.isCanceled)
+			throw new Error("O projeto está cancelado, para assignar um aluno deve habilitá-lo.");
 			
 		await this.scientificResearchModel.updateOne(
 			{ _id: new ObjectId(id) }, 
  			{ $set: { studentId: studentId, status: ResearchStatus.initialStep } }
 		);
+	}
+
+	async toggleCanceled(idResearch: string, idUser: string) {
+		var research = await this.scientificResearchModel.findById(idResearch);
+
+		if (research?.advisorId !== idUser && research?.studentId != idUser) 
+			throw new Error('Usuário não autorizado');
+
+		let newCanceled: boolean = research.isCanceled !== undefined ? !research.isCanceled : true;
+		
+		await this.scientificResearchModel.updateOne(
+			{ _id: new ObjectId(idResearch) }, 
+ 			{ $set: { isCanceled: newCanceled } }
+		);
+
+		return newCanceled;
 	}
 }
 
