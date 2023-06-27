@@ -18,7 +18,7 @@ export default function ListMyICs({ userInfos }:IProfile) {
   const [filter, setFilter] = useState("title");
 
   async function handleGetApplications() {
-    const appRes = await getMyICs(filter, userInfos!._id);
+    const appRes = await getMyICs(filter, userInfos!._id, userInfos.type);
 
     setIcs(appRes.data.allMyScientificResearch);
   }

@@ -58,11 +58,12 @@ export const getAllThemes = async () => {
   return res;
 }
 
-export const getMyICs = async (filter:string, id:string) => {
-  const res = await axiosInstance.get("http://localhost:8000/scientific-research/getMyICs", {
+export const getMyICs = async (filter:string, id:string, type: number) => {
+  const res = await axiosInstance.get("/scientific-research/getMyICs", {
     params: {
       filter,
-      id
+      id: id,
+      type: type === 1 ? "student" : "advisor",
     }
   });
   return res;

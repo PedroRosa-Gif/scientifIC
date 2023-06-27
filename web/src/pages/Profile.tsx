@@ -20,22 +20,30 @@ import UnicampIcon from "../assets/icons/unicamp_icon.svg";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
 
+import { topicsProfile } from '../utils/constants/topicsProfile.constants';
+
 export default function Profile() {
   const { userInfos, setUserInfos } = useContext(AuthContext);
   const [message, setMessage] = useState<string[]>();
   const [showNotifications, setShowNotifications] = useState<boolean>();
   const [index, setIndex] = useState(0);
-  const topics = [
+  const actionsStudent = [
     <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
     <ListCandidacy userInfos={userInfos} setMessage={setMessage} setShowNotifications={setShowNotifications}  />,
     <ListAreas userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
-    <ListMyICs userInfos={userInfos}  />,
+    <ListMyICs userInfos={userInfos} />,
   ];
+  const actionsAdvisor = [
+    <EditProfile userInfos={userInfos} setUserInfos={setUserInfos} setMessage={setMessage} setShowNotifications={setShowNotifications} />,
+    <ListMyICs userInfos={userInfos} />,
+  ];
+
+  const actionsProfile = [actionsStudent, actionsAdvisor];
 
   useEffect(() => {
     const pointer = document.getElementById("pointer") as HTMLDivElement;
 
-    pointer.style.cssText = `margin-left: calc((25% + 14px) * ${index});`;
+    pointer.style.cssText = `margin-left: calc(302px * ${index});`;
   }, [index]);
 
   return (
@@ -61,10 +69,13 @@ export default function Profile() {
         <div className="div-body-profile">
           <div className="div-align-topics-profile">
             <div className="div-topics-profile">
-              <button onClick={() => setIndex(0)}>Informações</button>
-              <button onClick={() => setIndex(1)}>Candidaturas</button>
-              <button onClick={() => setIndex(2)}>Áreas de interesse</button>
-              <button onClick={() => setIndex(3)}>Minhas IC's</button>
+              {
+                topicsProfile[userInfos!.type - 1].map((topic, index) => {
+                  return (
+                    <button onClick={() => setIndex(index)}>{topic}</button>
+                  );
+                })
+              }
             </div>
             <div className="div_pointer_topic">
               <div className="pointer-topic" id="pointer" />
@@ -72,7 +83,7 @@ export default function Profile() {
           </div>
           <div className="div-align-content-profile">
             <div className="div-content-profile">
-              { topics[index] }
+              { actionsProfile[userInfos!.type - 1][index] }
             </div>
           </div>
         </div>

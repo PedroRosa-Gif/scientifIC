@@ -75,14 +75,17 @@ class ScientificResearchService {
 		return filteredScientificResearch;
 	}
 
-	async getMyICs(filter: string, id: string) {
+	async getMyICs(filter: string, id: string, type: string) {
 		const populate = [{
 			path : "studentId",
 		}, {
 			path: "advisorId",
 		}];
 
-		return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
+		if (type === "student")
+			return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
+
+		return await this.scientificResearchModel.find({ advisorId: id }).populate(populate).sort(filter).exec();
 	}
 
 	async update(idResearch: string, research: IScientificResearch) {
