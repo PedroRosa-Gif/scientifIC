@@ -34,7 +34,8 @@ export const getMyICs = async (filter:string, id:string, type: number) => {
   const res = await axios.get("http://localhost:8000/scientific-research/getMyICs", {
     params: {
       filter,
-      id: type === 1 ? "student" : "advisor"
+      id: id,
+      type: type === 1 ? "student" : "advisor",
     }
   });
   return res;
