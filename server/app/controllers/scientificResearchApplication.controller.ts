@@ -44,7 +44,7 @@ export const getApplicationsByResearchQuery = async (req: Request, res: Response
 	const idResearch = req.query["idResearch"] as string;
 	const search = req.query["search"] as string;
 
-	const applicationsService = await ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
+	const applicationsService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
 
 	const applications = await applicationsService.getApplicationsOfResearch(idResearch, search);
 

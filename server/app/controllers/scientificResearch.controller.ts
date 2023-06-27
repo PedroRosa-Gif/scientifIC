@@ -7,6 +7,8 @@ import User from "../models/user.model";
 import UserService from "../services/UserService";
 import ScientificResearchApplicationService from "../services/ScientificResearchApplicationService";
 import ScientificResearchApplication from "../models/scientificResearchApplication.model";
+import ScientificResearchEventService from "../services/ScientificResearchEventService";
+import ScientificResearchEvent from "../models/scientificResearchEvent.model";
 
 export const getICs = async (req:Request, res:Response) => {
 
@@ -65,10 +67,34 @@ export const getResearchApplications = async (req: Request, res: Response) => {
 	});
 }
 
+export const getOnGoingResearch = async (req: Request, res: Response) => {
+  const idResearch = req.query["idResearch"] as string;
+  const idUser = req.query["idUser"] as string;
+ 
+  const researchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const research = await researchService.findByIdOnlyTeacherOrStudent(idResearch, idUser);
+
+  const userService = UserService.getInstance(User);
+
+  const teacher = await userService.findById(research.advisorId);
+  const student = await userService.findById(research.studentId);
+
+  const eventService = ScientificResearchEventService.getInstance(ScientificResearchEvent, User, ScientificResearch);
+
+  const events = await eventService.getEventsByResearch(idResearch);
+
+  res.status(200).send({
+		research: research,
+    teacher: teacher,
+    student: student,
+    events: events
+	});
+}
+
 export const create = async (req: Request, res: Response) => {
 
   const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
-  const userService = UserService.getInstance(User);
 
 	const newResearch = req.body as IScientificResearch;
 
@@ -76,6 +102,22 @@ export const create = async (req: Request, res: Response) => {
 
 	res.status(201).send({
 		researchId: createdResearch._id.toString()
+	});
+}
+
+export const edit = async (req: Request, res: Response) => {
+
+  const scientificResearchService = ScientificResearchService.getInstance(ScientificResearch, User);
+
+  const idResearch = req.params["idResearch"] as string;
+	const research = req.body as IScientificResearch;
+  
+	await scientificResearchService.update(idResearch, research);
+
+  console.log(research);
+
+	res.status(201).send({
+		message: 'IC alterada com sucesso'
 	});
 }
 

@@ -10,9 +10,9 @@ import { applyPagination } from "../utils/helpers/applyPagination";
 
 class ScientificResearchService {
 
-  private static instance: ScientificResearchService;
+  	private static instance: ScientificResearchService;
 	private scientificResearchModel: Model<IScientificResearch>;
-  private userService:UserService;
+  	private userService:UserService;
 
 	private constructor(ScientificResearchServiceModel:Model<IScientificResearch>, userModel:Model<IUser>) {
 		this.scientificResearchModel = ScientificResearchServiceModel;
@@ -85,6 +85,17 @@ class ScientificResearchService {
 		return await this.scientificResearchModel.find({ studentId: id }).populate(populate).sort(filter).exec();
 	}
 
+	async update(idResearch: string, research: IScientificResearch) {
+		let validationMessage = await this.validateResearch(research);
+
+		if (validationMessage.length > 0) throw new Error(validationMessage);
+
+		await this.scientificResearchModel.updateOne(
+			{ _id: new ObjectId(idResearch) }, 
+ 			{ $set: research }
+		);
+	}
+
 	async create(newResearch: IScientificResearch){
 		let validationMessage = await this.validateResearch(newResearch);
 
@@ -135,6 +146,15 @@ class ScientificResearchService {
 		const research = await this.findById(id);
 
 		if (research?.advisorId.toString() !== advisorId) 
+			throw new Error("Você não possui acesso a essa IC");
+		
+		return research;
+	}
+
+	async findByIdOnlyTeacherOrStudent(id: string, userId: string) {
+		const research = await this.findById(id);
+
+		if (!(research?.advisorId.toString() === userId || research?.studentId.toString() === userId))
 			throw new Error("Você não possui acesso a essa IC");
 		
 		return research;
