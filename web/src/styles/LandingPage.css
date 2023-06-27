@@ -199,7 +199,7 @@ img.images-landing.ideas {
 section div.cards-landing-area {
     width: 100%;
 
-    padding: 50px 10%;
+    padding: 50px;
 
     background: var(--white);
     border: 1px solid var(--cards-border);

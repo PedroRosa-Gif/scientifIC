@@ -18,13 +18,19 @@ main.study-card-container:hover {
 
 div.study-card-title {
     width: 100%;
+    height: 88px;
     padding: 16px;
     background: var(--card-backgroud);
     border: 1px solid var(--card-title-border);
     border-radius: 8px 8px 0 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 div.study-card-title h3 {
+    text-align: center;
     font-weight: 700;
     font-size: 20px;
     color: var(--white);
