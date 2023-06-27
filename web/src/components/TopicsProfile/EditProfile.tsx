@@ -35,6 +35,8 @@ export default function EditProfile({ userInfos, setUserInfos, setMessage, setSh
       setMessage(["Não foi possivel realizar a alteração!"]);
       setShowNotifications(true);
     }
+
+    setVerifyPopup(false);
   }
 
   function handleCheckFields() {
@@ -48,7 +50,6 @@ export default function EditProfile({ userInfos, setUserInfos, setMessage, setSh
         return;
       }
     }
-    
     setVerifyPopup(true);
   }
 
