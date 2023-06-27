@@ -6,8 +6,12 @@ import ExpandIcon from "../../assets/icons/expand_icon.svg";
 
 import IUser from "../../interfaces/IUser";
 
+import UserType from "../../utils/enums/UserType";
 import { getMyICs } from "../../apis/scientificResearch.endpoint";
 import { ResearchStatusEnum } from "../../utils/enums/ResearchStatus";
+import { useNavigate } from "react-router-dom";
+import ButtonProfile from "../ButtonProfile";
+import EditIcon from "../../assets/icons/edit_icon.svg";
 
 interface IProfile {
   userInfos: IUser | null;
@@ -16,6 +20,8 @@ interface IProfile {
 export default function ListMyICs({ userInfos }:IProfile) {
   const [ics, setIcs] = useState([]);
   const [filter, setFilter] = useState("title");
+
+  const navigate = useNavigate();
 
   async function handleGetApplications() {
     const appRes = await getMyICs(filter, userInfos!._id, userInfos.type);
@@ -37,6 +43,15 @@ export default function ListMyICs({ userInfos }:IProfile) {
         ics && ics.length > 0 ? (
           <div className="body-list-candidacy">
             <div className="div-align-filter-candidacy">
+              {userInfos.type === UserType.Teacher &&
+                <ButtonProfile 
+                  typeStyle={true}
+                  title={"Novo"}
+                  alt={"Ícone de salvar"}
+                  src={EditIcon}
+                  onClick={() => navigate('/iniciacoes-cientificas/criar')}
+                />
+              }
               <div className="div-filter-candidacy">
                 <span>Ordenar por:</span>
                 <select onChange={(e) => setFilter(e.target.value)}>
@@ -68,7 +83,7 @@ export default function ListMyICs({ userInfos }:IProfile) {
                         <span>{handleDateFormat(ic.updatedAt)}</span>
                       </div>
                       <div className="div-align-info-list-candidacy last-list-candidacy">
-                        <button className="expand-btn-profile" onClick={() => alert('Tela da IC:' + ic._id)}>
+                        <button className="expand-btn-profile" onClick={() => navigate(`/iniciacoes-cientificas/minhas/${ic._id}`)}>
                           <img src={ExpandIcon} alt="Ícone de vizualizar inscrição" />
                         </button>
                       </div>
@@ -78,7 +93,19 @@ export default function ListMyICs({ userInfos }:IProfile) {
               }
             </div>
           </div>
-        ) : <span className="no-result-span">Nenhuma iniciação científica encontrada.</span>
+        ) : 
+        <span className="no-result-span">
+          Nenhuma iniciação científica encontrada.
+          {userInfos.type === UserType.Teacher &&
+            <ButtonProfile 
+              typeStyle={true}
+              title={"Novo"}
+              alt={"Ícone de salvar"}
+              src={EditIcon}
+              onClick={() => navigate('/iniciacoes-cientificas/criar')}
+            />
+          }
+        </span>
       }
     </div>
   );

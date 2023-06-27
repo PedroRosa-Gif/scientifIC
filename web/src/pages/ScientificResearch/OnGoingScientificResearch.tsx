@@ -15,6 +15,7 @@ import { getResearch } from "../../apis/scientificResearch.endpoint";
 import { AuthContext } from '../../contexts/auth';
 import { AxiosResponse } from 'axios';
 import ErrorBox from '../../components/ErrorBox';
+import { ResearchStatusEnum } from '../../utils/enums/ResearchStatus';
 
 
 function OnGoingScientificResearch() {
@@ -41,7 +42,7 @@ function OnGoingScientificResearch() {
 				})
 				.catch(function (err) {
 					if (err.response.status === 409) {
-						navigate(`/iniciacoes-cientificas/candidaturas/${idResearch}`);
+						navigate(`/iniciacoes-cientificas/candidaturas/${idResearch}`, { replace: true });
 					}
 					setErrors(err.response.data.message);
 				});
@@ -60,7 +61,7 @@ function OnGoingScientificResearch() {
 								<article className='title-research'>
 									<h1>{research.title} / {research.theme}</h1>
 									<div className="details-reseach">
-										<span className="status-indicator">{allStatus[research.status]}</span>
+										<span className="status-indicator">{ResearchStatusEnum.getStatusString(research.status)}</span>
 										{research.isCanceled && <span className="status-indicator" style={{ background: 'black' }}>Cancelado</span>}
 										<p>Criado em: {new Date(research.createdAt).toLocaleDateString("pt-br")}</p>
 									</div>

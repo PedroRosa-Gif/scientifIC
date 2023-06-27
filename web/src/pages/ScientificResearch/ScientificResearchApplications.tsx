@@ -56,7 +56,7 @@ function ScientificResearchApplications() {
 			})
 			.catch(function (errors) {
 				if (errors.response.status === 409) {
-					navigate(`/iniciacoes-cientificas/minhas/${idResearch}`);
+					navigate(`/iniciacoes-cientificas/minhas/${idResearch}`, { replace: true });
 				}
 
 				setErrors("Sem permissão: " + errors.response.data.message);

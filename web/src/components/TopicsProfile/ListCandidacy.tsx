@@ -98,9 +98,6 @@ export default function ListCandidacy({ userInfos, setMessage, setShowNotificati
                         <span>{handleSituation(a.scientificResearchId.studentId)}</span>
                       </div>
                       <div className="div-align-info-list-candidacy last-list-candidacy">
-                        <button className="expand-btn-profile" onClick={() => alert('Tela da IC:' + a._id)}>
-                          <img src={ExpandIcon} alt="Ícone de vizualizar inscrição" />
-                        </button>
                         <button className="cancel-btn-profile" onClick={() => { setSelectedIc(a._id); setVerifyPopup(true); }}>
                           <img src={CancelIcon} alt="Ícone de cancelar inscrição" />
                         </button>
