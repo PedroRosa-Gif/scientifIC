@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, isValidObjectId } from "mongoose";
 import IScientificResearchApplication from "../interfaces/IScientificResearchApplication";
 import ScientificResearchService from "./ScientificResearchService";
 import UserService from "./UserService";
@@ -62,8 +62,20 @@ class ScientificResearchApplicationService {
 		return await this.ApplicationModel.find({ studentId: id }).populate(populate).sort(filter).exec();
   }
 
-  async cancelCandidacy(id:string) {
-    await this.ApplicationModel.deleteOne({ _id: id });
+  async cancelCandidacy(userId:string, idApp:string) {
+    
+    if (!isValidObjectId(idApp))
+      throw new Error("Cancelamento inválido!");
+    
+    const appInfos = await this.ApplicationModel.findById(idApp);
+
+    if (appInfos === null)
+      throw new Error("Cancelamento inválido!");
+
+    if (appInfos.studentId !== userId)
+      throw new Error("Sem permissão para cancelar!");
+
+    await this.ApplicationModel.deleteOne({ _id: idApp });
   }
 
   async getApplicationsOfResearch(idResearch: string, search: string) {

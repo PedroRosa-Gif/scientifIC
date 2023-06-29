@@ -75,14 +75,14 @@ describe('Apply to a Scientific Research', () => {
     studentId: "",
     createdAt: new Date(),
     updatedAt: new Date()
-  }
+  };
 
   const newApplication:IScientificResearchApplication = {
     scientificResearchId: "",
     studentId: "",
     motivation: "minha motivação",
     createdAt: new Date()
-  }
+  };
 
 	beforeEach(async () => {
 		const teacherInfos = await UserModelMock.create(teacher);
@@ -132,5 +132,24 @@ describe('Apply to a Scientific Research', () => {
   it('Application created sucess', async () => {
 
 		await expect(scientificResearchApplicationService.applyToScientificResearch(newApplication)).resolves.not.toThrow();
+	});
+
+  it('Cancel Application with invalid idApp', async () => {
+
+    const scientificResearchApplicationInfos = await ScientificResearchApplicationModelMock.create(newApplication);
+    await expect(scientificResearchApplicationService.cancelCandidacy(scientificResearchApplicationInfos.studentId, "invalid_id")).rejects.toThrowError("Cancelamento inválido!");
+  });
+  
+  it('Cancel Application with idApp exist but not for idUser', async () => {
+
+    const scientificResearchApplicationInfos = await ScientificResearchApplicationModelMock.create(newApplication);
+		await expect(scientificResearchApplicationService.cancelCandidacy("invalid_id", scientificResearchApplicationInfos._id.toString())).rejects.toThrowError("Sem permissão para cancelar!");
+	});
+
+
+  it('Cancel Application success', async () => {
+
+    const scientificResearchApplicationInfos = await ScientificResearchApplicationModelMock.create(newApplication);
+		await expect(scientificResearchApplicationService.cancelCandidacy(scientificResearchApplicationInfos.studentId, scientificResearchApplicationInfos._id.toString())).resolves.not.toThrow();
 	});
 });

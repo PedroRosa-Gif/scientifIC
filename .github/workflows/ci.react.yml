@@ -21,3 +21,4 @@ jobs:
     - run: ls -la
     - run: cd ./web && npm i
     - run: cd ./web && npm run build && ls -la
+    - run: cd ./web && npm run test && ls -la

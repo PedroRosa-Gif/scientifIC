@@ -30,10 +30,11 @@ export const getApplications = async (req:Request, res:Response) => {
 
 export const cancelCandidacy = async (req:Request, res:Response) => {
   const { id } = req.body;
+  const userId = req.query["idUser"] as string;
 
   const scientificResearchApplicationService = ScientificResearchApplicationService.getInstance(ScientificResearchApplication, User, ScientificResearch);
-  
-  await scientificResearchApplicationService.cancelCandidacy(id);
+
+  await scientificResearchApplicationService.cancelCandidacy(userId, id);
   
   res.status(200).send({
     message: "candidatura removida",
