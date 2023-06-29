@@ -15,6 +15,7 @@ import IUser from "../interfaces/IUser";
 import { createUser } from "../apis/user.endpoint";
 import { NavLink } from "react-router-dom";
 import Notifier from "../components/Notifier";
+import { validadePassword } from "../utils/helpers/validadeSignupFields";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -33,11 +34,6 @@ export default function SignUp() {
 
   async function handleCreateUser() {
 
-    if(password !== confirmPassword){
-      alert("Campo senha e confirmar senha estão diferentes");
-      return
-    }
-
     const userInfos:IUser = {
       email,
       password,
@@ -48,6 +44,14 @@ export default function SignUp() {
       institute: "",
       interestAreas: [""],
       type: userType,
+    }
+
+    const result = validadePassword(password, confirmPassword)
+
+    if(result.result === false){
+      setShowNotifications(true);
+      setNotifications([result.message]);
+      return
     }
 
     try {
